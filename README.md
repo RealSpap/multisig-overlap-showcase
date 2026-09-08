@@ -4,7 +4,7 @@
 ![Status](https://img.shields.io/badge/status-active%20research-brightgreen)
 ![Follow](https://img.shields.io/badge/follow-%40RealSpap-000000?logo=x)
 
-**The headline finding:** 8 named individuals hold multisig signer keys across 2+ unrelated DeFi protocols at once, identified across 41 protocols checked directly on-chain — and 7 of the 8 identities reproduce live from raw blockchain event history alone, not just a point-in-time snapshot. [Full findings below](#findings) · [Live dashboard](https://dune.com/s_pap/multisig-overlap-public) · [Contact for licensing / custom research](https://x.com/RealSpap)
+**The headline finding:** 8 named individuals hold multisig signer keys across 2+ unrelated DeFi protocols at once, identified across 41 protocols checked directly on-chain — and 7 of the 8 identities reproduce live from raw blockchain event history alone, not just a point-in-time snapshot. [Full findings below](#findings) · [Live dashboard](https://dune.com/s_pap/multisig-overlap) · [Contact for licensing / custom research](https://x.com/RealSpap)
 
 Every major DeFi protocol discloses its own emergency/governance multisig signers, usually in its own docs. Nobody aggregates this *across* protocols, so nobody can currently answer "if this one person's key were compromised, how many independent protocols would be affected simultaneously?" This is the origin project behind [multisig-overlap](https://github.com/RealSpap/multisig-overlap-showcase), which applies the same method to Optimism's Superchain.
 
@@ -35,7 +35,7 @@ Three of the eight (Egorov, c2tp, Kazemian) sit together on Prisma Finance's eme
 
 ## Live verification
 
-[dune.com/s_pap/multisig-overlap-public](https://dune.com/s_pap/multisig-overlap-public): a self-computing query that skips the point-in-time snapshot entirely and replays the actual on-chain event history of all 65 Safe contracts, recomputing current ownership fresh every time it runs.
+[dune.com/s_pap/multisig-overlap](https://dune.com/s_pap/multisig-overlap): a self-computing query that skips the point-in-time snapshot entirely and replays the actual on-chain event history of all 65 Safe contracts, recomputing current ownership fresh every time it runs.
 
 7 of the 8 identities reproduce live straight from raw chain data this way. Getting there took two event types: the standard `AddedOwner`/`RemovedOwner` events, plus `SafeSetup`, which Safe v1.3.0+ emits once at creation with the full founding owner list. `AddedOwner` itself is never emitted for owners set at genesis, so without `SafeSetup` a Safe's original signers are invisible to pure event replay. Confirmed directly on Prisma Finance's creation transaction: 2 logs total, one `SafeSetup`, zero `AddedOwner`.
 
