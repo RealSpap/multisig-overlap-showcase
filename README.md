@@ -80,4 +80,4 @@ Every identity claim is backed by a primary-source citation, tracked against a f
 
 ## License
 
-All rights reserved. This repository documents the method and results; the tool itself is available under a commercial license, see above.
+All rights reserved. This repository documents the results; the tool itself is available under a commercial license, see above.
