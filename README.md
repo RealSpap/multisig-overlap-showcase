@@ -71,6 +71,13 @@ The live query's own result table is queryable directly through [Dune's Query AP
 
 Every identity claim is backed by a primary-source citation, tracked against a falsification test and a confidence level, and checked against a mechanical grounding lexical-grounding tool before publication.
 
+## Caveats
+
+- One of the 8 identities (Julien Bouteloup's second seat) and one seat behind another (c2tp.eth's Convex seat) don't reproduce through live event replay: both sit on Safe versions old enough to predate the `SafeSetup` event, so they're confirmed by a direct `getOwners()` read instead, not live event replay. See Live verification above.
+- 41 protocols is a pilot, not a finished survey (see What's checked next). A protocol not listed here hasn't been checked, not confirmed clean.
+- Three of the eight identified signers (Egorov, c2tp, Kazemian) sit together on Prisma Finance's multisig by Prisma's own deliberate, publicly disclosed design choice to recruit established founders for credibility, not a hidden concentration; treating that case the same as the other five would overstate how coordinated the overlap actually is.
+- This is independent research, not an official publication of any protocol named above. Everything above is stated at the confidence level the on-chain data actually supports.
+
 ## License
 
 All rights reserved. This repository documents the method and results; the tool itself is available under a commercial license, see above.
