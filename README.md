@@ -4,9 +4,18 @@
 ![Status](https://img.shields.io/badge/status-active%20research-brightgreen)
 ![Follow](https://img.shields.io/badge/follow-%40RealSpap-000000?logo=x)
 
-**The headline finding:** 8 named individuals hold multisig signer keys across 2+ unrelated DeFi protocols at once, identified across 41 protocols checked directly on-chain — and 7 of the 8 identities reproduce live from raw blockchain event history alone, not just a point-in-time snapshot. [Full findings below](#findings) · [Live dashboard](https://dune.com/s_pap/multisig-overlap) · [Contact for licensing / custom research](https://x.com/RealSpap)
+**The headline finding:** 8 named individuals hold multisig signer keys across 2+ unrelated DeFi protocols at once, identified across 41 protocols checked directly on-chain. 7 of the 8 identities reproduce live from raw blockchain event history alone, not just a point-in-time snapshot. [Full findings below](#findings) · [Live dashboard](https://dune.com/s_pap/multisig-overlap) · [Contact for licensing / custom research](https://x.com/RealSpap)
 
-Every major DeFi protocol discloses its own emergency/governance multisig signers, usually in its own docs. Nobody aggregates this *across* protocols, so nobody can currently answer "if this one person's key were compromised, how many independent protocols would be affected simultaneously?" This is the origin project behind [multisig-overlap](https://github.com/RealSpap/multisig-overlap-showcase), which applies the same method to Optimism's Superchain.
+| | |
+|---|---|
+| **The question** | if one person's emergency key were compromised, how many unrelated DeFi protocols would be affected at once |
+| **Scope checked** | 41 protocols, 65 candidate Gnosis Safe contracts, read directly on-chain |
+| **What stands out** | 8 people hold signer power on 2 or more protocols; 7 of 8 reproduce live from raw event history, not a snapshot |
+| **Proof it runs** | every identity backed by a primary-source citation, checked against a falsification test and a mechanical grounding tool |
+
+Every major DeFi protocol discloses its own emergency and governance multisig signers, usually in its own docs. Nobody aggregates this across protocols, so nobody could previously answer: if this one person's key were compromised, how many independent protocols would be affected at the same time?
+
+Extended to Optimism's Superchain in a follow-up project: [multisig-overlap](https://github.com/RealSpap/multisig-overlap-showcase).
 
 ## Access to the tool
 
@@ -39,7 +48,7 @@ Three of the eight (Egorov, c2tp, Kazemian) sit together on Prisma Finance's eme
 
 7 of the 8 identities reproduce live straight from raw chain data this way. Getting there took two event types: the standard `AddedOwner`/`RemovedOwner` events, plus `SafeSetup`, which Safe v1.3.0+ emits once at creation with the full founding owner list. `AddedOwner` itself is never emitted for owners set at genesis, so without `SafeSetup` a Safe's original signers are invisible to pure event replay. Confirmed directly on Prisma Finance's creation transaction: 2 logs total, one `SafeSetup`, zero `AddedOwner`.
 
-One identity, Julien Bouteloup, doesn't reproduce this way, not because he's any less real (he's confirmed the same way as everyone else, a direct live `getOwners()` read), but because his second seat sits on a Safe running v1.1.1, old enough that its creation transaction emits nothing describing its owners, only a bare `ProxyCreation`. Convex's own multisig has the identical limitation, which is why c2tp.eth's Convex seat also doesn't show up live even though Votium and Prisma both do. Both gaps were confirmed by reading the actual transaction logs on Etherscan, not assumed from a pattern.
+One identity, Julien Bouteloup, doesn't reproduce this way. Not because he's any less real, he's confirmed the same way as everyone else, a direct live `getOwners()` read, but because his second seat sits on a Safe running v1.1.1, old enough that its creation transaction emits nothing describing its owners, only a bare `ProxyCreation`. Convex's own multisig has the identical limitation, which is why c2tp.eth's Convex seat also doesn't show up live even though Votium and Prisma both do. Both gaps were confirmed by reading the actual transaction logs on Etherscan, not assumed from a pattern.
 
 ## Verification
 
