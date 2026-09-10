@@ -206,6 +206,10 @@ Last verified: 2026-09-09
 
 This is independent research, not commissioned, audited, or endorsed by any protocol, chain, or individual named above. Everything stated is held to the confidence level the on-chain data actually supports.
 
+## About
+
+This is part of a small, ongoing program of independent on-chain research, same discipline throughout: primary-source anchors, on-chain reconstruction, corrections issued openly when something's found wrong. The sibling project [onchain-postmortems](https://github.com/RealSpap/onchain-postmortems) applies it to 8 DeFi exploits, correcting 4 already-published press or DefiLlama figures along the way, about $29.5M recomputed from primary sources across those 8 incidents. Ongoing work and dashboards: [Dune](https://dune.com/s_pap), [X](https://x.com/RealSpap).
+
 ## License
 
 All rights reserved. This repository documents the results; the tool itself is available under a commercial license, see above.
