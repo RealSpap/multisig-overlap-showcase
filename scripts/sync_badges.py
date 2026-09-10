@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
 Sync badge-data-mainnet.json, badge-data-mainnet-protocols.json,
-badge-data-superchain.json, and (when present) badge-data-part3.json
-against the numbers that README.md itself actually states, so the
-shields.io badges never silently go stale.
+badge-data-superchain.json, badge-data-part3.json (when present), and
+badge-data-total.json (when present) against the numbers that README.md
+itself actually states, so the shields.io badges never silently go stale.
 
 Deterministic, no LLM, no external API. Pure text parsing + JSON rewrite
 + optional git commit/push.
@@ -11,11 +11,12 @@ Deterministic, no LLM, no external API. Pure text parsing + JSON rewrite
 Source of truth in README.md:
   - Mainnet identity count: the "N addresses hold signer power on 2+
     independent protocols" sentence.
-  - Mainnet / Superchain / Part 3 protocol counts: the "Protocols
-    checked" row of the "At a glance" markdown table, 1st/2nd/3rd data
-    columns respectively. Each column only needs to start with the
-    digits; trailing text like "86 (12 on Arbitrum, 74 across 10
-    further chains)" is fine, only the leading number is used.
+  - Mainnet / Superchain / Part 3 / Total protocol counts: the
+    "Protocols checked" row of the "At a glance" markdown table,
+    1st/2nd/3rd/4th data columns respectively. Each column only needs
+    to start with the digits; trailing text like "86 (12 on Arbitrum,
+    74 across 10 further chains)" is fine, only the leading number is
+    used.
 
 Usage:
   python3 sync_badges.py [--repo-root PATH] [--no-commit] [--no-push] [--dry-run]
@@ -39,6 +40,7 @@ MAINNET_BADGE = "badge-data-mainnet.json"
 MAINNET_PROTOCOLS_BADGE = "badge-data-mainnet-protocols.json"
 SUPERCHAIN_BADGE = "badge-data-superchain.json"
 PART3_BADGE = "badge-data-part3.json"
+TOTAL_BADGE = "badge-data-total.json"
 
 # "8 addresses hold signer power on 2+ independent protocols, ..."
 MAINNET_PATTERN = re.compile(
@@ -69,13 +71,16 @@ class ParsedCounts(NamedTuple):
     mainnet_protocols: str
     superchain_protocols: str
     part3_protocols: Optional[str]
+    total_protocols: Optional[str]
 
 
 def parse_readme(readme_text: str) -> ParsedCounts:
     """Return the counts the badges should reflect.
 
     part3_protocols is None when the table doesn't have a 3rd data
-    column yet (2-part README), which is not an error.
+    column yet (2-part README), which is not an error. total_protocols
+    is None when the table doesn't have a 4th (Total) data column yet,
+    likewise not an error.
     """
     mainnet_match = MAINNET_PATTERN.search(readme_text)
     if not mainnet_match:
@@ -113,9 +118,14 @@ def parse_readme(readme_text: str) -> ParsedCounts:
         )
 
     part3_protocols = _leading_int(cells[2]) if len(cells) > 2 else None
+    total_protocols = _leading_int(cells[3]) if len(cells) > 3 else None
 
     return ParsedCounts(
-        mainnet_identities, mainnet_protocols, superchain_protocols, part3_protocols
+        mainnet_identities,
+        mainnet_protocols,
+        superchain_protocols,
+        part3_protocols,
+        total_protocols,
     )
 
 
@@ -166,6 +176,7 @@ def main() -> int:
     mainnet_protocols_path = repo_root / MAINNET_PROTOCOLS_BADGE
     superchain_path = repo_root / SUPERCHAIN_BADGE
     part3_path = repo_root / PART3_BADGE
+    total_path = repo_root / TOTAL_BADGE
 
     for p in (readme_path, mainnet_path, mainnet_protocols_path, superchain_path):
         if not p.is_file():
@@ -227,6 +238,20 @@ def main() -> int:
             if not args.dry_run:
                 write_badge_message(part3_path, counts.part3_protocols)
             changed_files.append(part3_path)
+
+    # Total (all parts) badge is optional the same way Part 3 is: only
+    # acted on when the README's table has a 4th (Total) data column
+    # AND badge-data-total.json exists. Neither missing is an error.
+    if counts.total_protocols is not None and total_path.is_file():
+        total_current = load_badge_message(total_path)
+        print(f"README says Total protocol count = {counts.total_protocols} "
+              f"(badge currently says {total_current})")
+        if total_current != counts.total_protocols:
+            print(f"MISMATCH: {TOTAL_BADGE} message '{total_current}' "
+                  f"-> '{counts.total_protocols}'")
+            if not args.dry_run:
+                write_badge_message(total_path, counts.total_protocols)
+            changed_files.append(total_path)
 
     if not changed_files:
         print("Badges already match README.md. Nothing to do.")
