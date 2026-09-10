@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Sync badge-data-mainnet.json and badge-data-superchain.json against the
-numbers that README.md itself actually states, so the shields.io badges
-never silently go stale.
+Sync badge-data-mainnet.json, badge-data-superchain.json, and (when
+present) badge-data-part3.json against the numbers that README.md itself
+actually states, so the shields.io badges never silently go stale.
 
 Deterministic, no LLM, no external API. Pure text parsing + JSON rewrite
 + optional git commit/push.
@@ -11,7 +11,12 @@ Source of truth in README.md:
   - Mainnet identity count: the "N addresses hold signer power on 2+
     independent protocols" sentence.
   - Superchain protocol count: the "Protocols checked" row of the
-    "At a glance" markdown table, Superchain column.
+    "At a glance" markdown table, 2nd data column.
+  - Part 3 protocol count (optional, only if the table has a 3rd data
+    column and badge-data-part3.json exists): same row, 3rd column.
+    Each column only needs to start with the digits; trailing text like
+    "60 (12 on Arbitrum, 48 across 7 further chains)" is fine, only the
+    leading number is used.
 
 Usage:
   python3 sync_badges.py [--repo-root PATH] [--no-commit] [--no-push] [--dry-run]
@@ -28,10 +33,12 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from typing import Optional
 
 README_NAME = "README.md"
 MAINNET_BADGE = "badge-data-mainnet.json"
 SUPERCHAIN_BADGE = "badge-data-superchain.json"
+PART3_BADGE = "badge-data-part3.json"
 
 # "8 addresses hold signer power on 2+ independent protocols, ..."
 MAINNET_PATTERN = re.compile(
@@ -39,16 +46,30 @@ MAINNET_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
-# At-a-glance table row: "| Protocols checked | 41 | 79 |"
-# Group 1 = Mainnet column, group 2 = Superchain column.
-SUPERCHAIN_PATTERN = re.compile(
-    r"^\|\s*Protocols checked\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*$",
+# At-a-glance table row, e.g.:
+#   "| Protocols checked | 75 | 79 | 60 (12 on Arbitrum, 48 across 7 further chains) |"
+# Captures everything between the row label and the trailing "|", then
+# each data column is split out and read for its leading number so extra
+# parenthetical detail in a cell doesn't break parsing.
+ROW_PATTERN = re.compile(
+    r"^\|\s*Protocols checked\s*\|(.*)\|\s*$",
     re.IGNORECASE | re.MULTILINE,
 )
 
+LEADING_INT_PATTERN = re.compile(r"\s*(\d+)")
 
-def parse_readme(readme_text: str) -> tuple[str, str]:
-    """Return (mainnet_identity_count, superchain_protocol_count) as strings."""
+
+def _leading_int(cell: str) -> Optional[str]:
+    m = LEADING_INT_PATTERN.match(cell)
+    return m.group(1) if m else None
+
+
+def parse_readme(readme_text: str) -> tuple[str, str, Optional[str]]:
+    """Return (mainnet_identity_count, superchain_protocol_count, part3_protocol_count).
+
+    part3_protocol_count is None when the table doesn't have a 3rd data
+    column yet (2-part README), which is not an error.
+    """
     mainnet_match = MAINNET_PATTERN.search(readme_text)
     if not mainnet_match:
         raise ValueError(
@@ -57,15 +78,29 @@ def parse_readme(readme_text: str) -> tuple[str, str]:
         )
     mainnet_count = mainnet_match.group(1)
 
-    superchain_match = SUPERCHAIN_PATTERN.search(readme_text)
-    if not superchain_match:
+    row_match = ROW_PATTERN.search(readme_text)
+    if not row_match:
         raise ValueError(
             "Could not find the 'Protocols checked' row of the At a "
             "glance table in README.md"
         )
-    superchain_count = superchain_match.group(2)
+    cells = row_match.group(1).split("|")
+    if len(cells) < 2:
+        raise ValueError(
+            "'Protocols checked' row did not have the expected Mainnet "
+            "and Superchain columns"
+        )
 
-    return mainnet_count, superchain_count
+    superchain_count = _leading_int(cells[1])
+    if superchain_count is None:
+        raise ValueError(
+            "Could not parse a Superchain protocol count from the "
+            "'Protocols checked' row"
+        )
+
+    part3_count = _leading_int(cells[2]) if len(cells) > 2 else None
+
+    return mainnet_count, superchain_count, part3_count
 
 
 def load_badge_message(path: Path) -> str:
@@ -113,6 +148,7 @@ def main() -> int:
     readme_path = repo_root / README_NAME
     mainnet_path = repo_root / MAINNET_BADGE
     superchain_path = repo_root / SUPERCHAIN_BADGE
+    part3_path = repo_root / PART3_BADGE
 
     for p in (readme_path, mainnet_path, superchain_path):
         if not p.is_file():
@@ -122,7 +158,7 @@ def main() -> int:
     readme_text = readme_path.read_text(encoding="utf-8")
 
     try:
-        mainnet_expected, superchain_expected = parse_readme(readme_text)
+        mainnet_expected, superchain_expected, part3_expected = parse_readme(readme_text)
     except ValueError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
@@ -150,6 +186,20 @@ def main() -> int:
         if not args.dry_run:
             write_badge_message(superchain_path, superchain_expected)
         changed_files.append(superchain_path)
+
+    # Part 3 badge is optional: only acted on when the README's table
+    # actually has a 3rd data column AND badge-data-part3.json exists.
+    # Neither missing is an error, it just means Part 3 isn't live yet.
+    if part3_expected is not None and part3_path.is_file():
+        part3_current = load_badge_message(part3_path)
+        print(f"README says Part 3 protocol count = {part3_expected} "
+              f"(badge currently says {part3_current})")
+        if part3_current != part3_expected:
+            print(f"MISMATCH: {PART3_BADGE} message '{part3_current}' "
+                  f"-> '{part3_expected}'")
+            if not args.dry_run:
+                write_badge_message(part3_path, part3_expected)
+            changed_files.append(part3_path)
 
     if not changed_files:
         print("Badges already match README.md. Nothing to do.")
