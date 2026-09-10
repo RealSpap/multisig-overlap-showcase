@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-Sync badge-data-mainnet.json, badge-data-superchain.json, and (when
-present) badge-data-part3.json against the numbers that README.md itself
-actually states, so the shields.io badges never silently go stale.
+Sync badge-data-mainnet.json, badge-data-mainnet-protocols.json,
+badge-data-superchain.json, and (when present) badge-data-part3.json
+against the numbers that README.md itself actually states, so the
+shields.io badges never silently go stale.
 
 Deterministic, no LLM, no external API. Pure text parsing + JSON rewrite
 + optional git commit/push.
@@ -10,13 +11,11 @@ Deterministic, no LLM, no external API. Pure text parsing + JSON rewrite
 Source of truth in README.md:
   - Mainnet identity count: the "N addresses hold signer power on 2+
     independent protocols" sentence.
-  - Superchain protocol count: the "Protocols checked" row of the
-    "At a glance" markdown table, 2nd data column.
-  - Part 3 protocol count (optional, only if the table has a 3rd data
-    column and badge-data-part3.json exists): same row, 3rd column.
-    Each column only needs to start with the digits; trailing text like
-    "60 (12 on Arbitrum, 48 across 7 further chains)" is fine, only the
-    leading number is used.
+  - Mainnet / Superchain / Part 3 protocol counts: the "Protocols
+    checked" row of the "At a glance" markdown table, 1st/2nd/3rd data
+    columns respectively. Each column only needs to start with the
+    digits; trailing text like "86 (12 on Arbitrum, 74 across 10
+    further chains)" is fine, only the leading number is used.
 
 Usage:
   python3 sync_badges.py [--repo-root PATH] [--no-commit] [--no-push] [--dry-run]
@@ -33,10 +32,11 @@ import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import NamedTuple, Optional
 
 README_NAME = "README.md"
 MAINNET_BADGE = "badge-data-mainnet.json"
+MAINNET_PROTOCOLS_BADGE = "badge-data-mainnet-protocols.json"
 SUPERCHAIN_BADGE = "badge-data-superchain.json"
 PART3_BADGE = "badge-data-part3.json"
 
@@ -47,7 +47,7 @@ MAINNET_PATTERN = re.compile(
 )
 
 # At-a-glance table row, e.g.:
-#   "| Protocols checked | 75 | 79 | 60 (12 on Arbitrum, 48 across 7 further chains) |"
+#   "| Protocols checked | 132 | 79 | 86 (12 on Arbitrum, 74 across 10 further chains) |"
 # Captures everything between the row label and the trailing "|", then
 # each data column is split out and read for its leading number so extra
 # parenthetical detail in a cell doesn't break parsing.
@@ -64,10 +64,17 @@ def _leading_int(cell: str) -> Optional[str]:
     return m.group(1) if m else None
 
 
-def parse_readme(readme_text: str) -> tuple[str, str, Optional[str]]:
-    """Return (mainnet_identity_count, superchain_protocol_count, part3_protocol_count).
+class ParsedCounts(NamedTuple):
+    mainnet_identities: str
+    mainnet_protocols: str
+    superchain_protocols: str
+    part3_protocols: Optional[str]
 
-    part3_protocol_count is None when the table doesn't have a 3rd data
+
+def parse_readme(readme_text: str) -> ParsedCounts:
+    """Return the counts the badges should reflect.
+
+    part3_protocols is None when the table doesn't have a 3rd data
     column yet (2-part README), which is not an error.
     """
     mainnet_match = MAINNET_PATTERN.search(readme_text)
@@ -76,7 +83,7 @@ def parse_readme(readme_text: str) -> tuple[str, str, Optional[str]]:
             "Could not find the 'N addresses hold signer power on 2+ "
             "independent protocols' sentence in README.md"
         )
-    mainnet_count = mainnet_match.group(1)
+    mainnet_identities = mainnet_match.group(1)
 
     row_match = ROW_PATTERN.search(readme_text)
     if not row_match:
@@ -91,16 +98,25 @@ def parse_readme(readme_text: str) -> tuple[str, str, Optional[str]]:
             "and Superchain columns"
         )
 
-    superchain_count = _leading_int(cells[1])
-    if superchain_count is None:
+    mainnet_protocols = _leading_int(cells[0])
+    if mainnet_protocols is None:
+        raise ValueError(
+            "Could not parse a Mainnet protocol count from the "
+            "'Protocols checked' row"
+        )
+
+    superchain_protocols = _leading_int(cells[1])
+    if superchain_protocols is None:
         raise ValueError(
             "Could not parse a Superchain protocol count from the "
             "'Protocols checked' row"
         )
 
-    part3_count = _leading_int(cells[2]) if len(cells) > 2 else None
+    part3_protocols = _leading_int(cells[2]) if len(cells) > 2 else None
 
-    return mainnet_count, superchain_count, part3_count
+    return ParsedCounts(
+        mainnet_identities, mainnet_protocols, superchain_protocols, part3_protocols
+    )
 
 
 def load_badge_message(path: Path) -> str:
@@ -147,10 +163,11 @@ def main() -> int:
     repo_root = Path(args.repo_root).resolve()
     readme_path = repo_root / README_NAME
     mainnet_path = repo_root / MAINNET_BADGE
+    mainnet_protocols_path = repo_root / MAINNET_PROTOCOLS_BADGE
     superchain_path = repo_root / SUPERCHAIN_BADGE
     part3_path = repo_root / PART3_BADGE
 
-    for p in (readme_path, mainnet_path, superchain_path):
+    for p in (readme_path, mainnet_path, mainnet_protocols_path, superchain_path):
         if not p.is_file():
             print(f"ERROR: expected file not found: {p}", file=sys.stderr)
             return 1
@@ -158,47 +175,57 @@ def main() -> int:
     readme_text = readme_path.read_text(encoding="utf-8")
 
     try:
-        mainnet_expected, superchain_expected, part3_expected = parse_readme(readme_text)
+        counts = parse_readme(readme_text)
     except ValueError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
 
     mainnet_current = load_badge_message(mainnet_path)
+    mainnet_protocols_current = load_badge_message(mainnet_protocols_path)
     superchain_current = load_badge_message(superchain_path)
 
-    print(f"README says mainnet identity count = {mainnet_expected} "
+    print(f"README says mainnet identity count = {counts.mainnet_identities} "
           f"(badge currently says {mainnet_current})")
-    print(f"README says Superchain protocol count = {superchain_expected} "
+    print(f"README says Mainnet protocol count = {counts.mainnet_protocols} "
+          f"(badge currently says {mainnet_protocols_current})")
+    print(f"README says Superchain protocol count = {counts.superchain_protocols} "
           f"(badge currently says {superchain_current})")
 
     changed_files: list[Path] = []
 
-    if mainnet_current != mainnet_expected:
+    if mainnet_current != counts.mainnet_identities:
         print(f"MISMATCH: {MAINNET_BADGE} message '{mainnet_current}' "
-              f"-> '{mainnet_expected}'")
+              f"-> '{counts.mainnet_identities}'")
         if not args.dry_run:
-            write_badge_message(mainnet_path, mainnet_expected)
+            write_badge_message(mainnet_path, counts.mainnet_identities)
         changed_files.append(mainnet_path)
 
-    if superchain_current != superchain_expected:
-        print(f"MISMATCH: {SUPERCHAIN_BADGE} message '{superchain_current}' "
-              f"-> '{superchain_expected}'")
+    if mainnet_protocols_current != counts.mainnet_protocols:
+        print(f"MISMATCH: {MAINNET_PROTOCOLS_BADGE} message "
+              f"'{mainnet_protocols_current}' -> '{counts.mainnet_protocols}'")
         if not args.dry_run:
-            write_badge_message(superchain_path, superchain_expected)
+            write_badge_message(mainnet_protocols_path, counts.mainnet_protocols)
+        changed_files.append(mainnet_protocols_path)
+
+    if superchain_current != counts.superchain_protocols:
+        print(f"MISMATCH: {SUPERCHAIN_BADGE} message '{superchain_current}' "
+              f"-> '{counts.superchain_protocols}'")
+        if not args.dry_run:
+            write_badge_message(superchain_path, counts.superchain_protocols)
         changed_files.append(superchain_path)
 
     # Part 3 badge is optional: only acted on when the README's table
     # actually has a 3rd data column AND badge-data-part3.json exists.
     # Neither missing is an error, it just means Part 3 isn't live yet.
-    if part3_expected is not None and part3_path.is_file():
+    if counts.part3_protocols is not None and part3_path.is_file():
         part3_current = load_badge_message(part3_path)
-        print(f"README says Part 3 protocol count = {part3_expected} "
+        print(f"README says Part 3 protocol count = {counts.part3_protocols} "
               f"(badge currently says {part3_current})")
-        if part3_current != part3_expected:
+        if part3_current != counts.part3_protocols:
             print(f"MISMATCH: {PART3_BADGE} message '{part3_current}' "
-                  f"-> '{part3_expected}'")
+                  f"-> '{counts.part3_protocols}'")
             if not args.dry_run:
-                write_badge_message(part3_path, part3_expected)
+                write_badge_message(part3_path, counts.part3_protocols)
             changed_files.append(part3_path)
 
     if not changed_files:
