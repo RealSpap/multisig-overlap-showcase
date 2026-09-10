@@ -6,7 +6,9 @@
 ![Protocols tracked (Superchain)](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FRealSpap%2Fmultisig-overlap-showcase%2Fmain%2Fbadge-data-superchain.json)
 ![Follow](https://img.shields.io/badge/follow-%40RealSpap-000000?logo=x)
 
-**The headline finding:** the same question, checked at two scales. On Ethereum mainnet, 8 named individuals hold multisig signer keys across 2 or more unrelated DeFi protocols at once, identified across 41 protocols checked directly on-chain. Extended to Optimism's Superchain, 4 more named individuals do the same across chains, and 30+ protocols reuse the identical Gnosis Safe signer set on multiple chains at once, so spreading exposure across a protocol's chain deployments doesn't actually diversify against key compromise. [Mainnet findings](#part-1-mainnet) · [Superchain findings](#part-2-superchain) · [Contact for licensing / custom research](https://x.com/RealSpap)
+**The headline finding:** the same question, checked at two scales. On Ethereum mainnet, 8 named individuals hold multisig signer keys across 2 or more unrelated DeFi protocols at once, identified across 41 protocols checked directly on-chain. Extended to Optimism's Superchain, the same pattern recurs 6 more times: one brand-new named individual (aavechan.eth), two of the original 8 turning up again on new chains, and two chain-operator entities concentrating upgrade keys across multiple chains at once. Separately, 30+ protocols reuse the identical Gnosis Safe signer set on multiple chains at once, so spreading exposure across a protocol's chain deployments doesn't actually diversify against key compromise. [Mainnet findings](#part-1-mainnet) · [Superchain findings](#part-2-superchain) · [Contact for licensing / custom research](https://x.com/RealSpap)
+
+**Want this method run on your protocol, or a custom research pass? License it: DM [@RealSpap](https://x.com/RealSpap) on X.**
 
 ## At a glance
 
@@ -16,8 +18,8 @@
 | Safes checked | 71 signer slots tested, 65 confirmed as real Safe contracts | 200 Safes across 166 deployments |
 | Chains covered | Ethereum mainnet | 13 |
 | Shared-key findings | 8 named identities holding signer power on 2+ protocols | 6 documented cross-protocol or cross-chain signer-sharing cases, plus 30+ protocols sharing an identical signer set across chains |
-| Research depth | Fixed scope, verified once, revisited only for corrections | 31 research passes, still growing |
-| Live verification | Yes, on-chain event replay | Dashboard only, event replay not built yet |
+| Research depth | 41-protocol scope, each of the 8 findings independently verified on-chain | 31 research passes, still growing |
+| Live verification | Yes, on-chain event replay | Dashboard only; on-chain event replay planned for a future pass |
 
 Every major DeFi protocol discloses its own emergency and governance multisig signers, usually in its own docs. Nobody aggregates that across protocols or chains, so nobody could previously answer: if one person's key, or one shared signer set, were compromised, how many independent protocols or chains would be affected at the same time? This research answers that at two scales: first across 41 major protocols on Ethereum mainnet, then across Optimism's Superchain specifically, where the same protocol is often deployed on a dozen chains at once.
 
@@ -33,7 +35,9 @@ This report presents an independent, factual analysis of publicly available on-c
 
 ### Method
 
-41 protocols' multisig contracts (Gnosis Safe) checked directly on-chain via `getOwners()`: no API key, no third-party indexer, pure RPC reads against a public Ethereum node. 65 candidate addresses tested, 71 unique signer slots recovered.
+Last verified: 2026-09-09
+
+41 protocols' multisig contracts (Gnosis Safe) checked directly on-chain via `getOwners()`: no API key, no third-party indexer, pure RPC reads against a public Ethereum node. 71 signer slots tested, 65 confirmed as real Safe contracts.
 
 ### Findings
 
@@ -62,21 +66,19 @@ Matthew Graham and TokenLogic reappear in Part 2 below: the same footprint that 
 
 **Get notified**, no account needed on this repo: click Watch, then Custom, then Releases only, on this repo's GitHub page for a per-pass update feed. On Dune, star the dashboard to keep it in your own list, or set a scheduled alert on the query for a ping the moment a tracked Safe's owner set actually changes on-chain, not just when this repo gets updated.
 
-7 of the 8 identities reproduce live from raw chain data this way. Getting there took two event types: the standard `AddedOwner`/`RemovedOwner` events, plus `SafeSetup`, which Safe v1.3.0+ emits once at creation with the full founding owner list. `AddedOwner` itself is never emitted for owners set at genesis, so without `SafeSetup` a Safe's original signers are invisible to pure event replay. Confirmed directly on Prisma Finance's creation transaction: 2 logs total, one `SafeSetup`, zero `AddedOwner`.
-
-One identity, Julien Bouteloup, doesn't reproduce this way. Not because he's any less real, he's confirmed the same way as everyone else, a direct live `getOwners()` read, but because his second seat sits on a Safe running v1.1.1, old enough that its creation transaction emits nothing describing its owners, only a bare `ProxyCreation`. Convex's own multisig has the identical limitation, which is why c2tp.eth's Convex seat also doesn't show up live even though Votium and Prisma both do. Both gaps were confirmed by reading the actual transaction logs on Etherscan, not assumed from a pattern.
+The live query relies on parsing on-chain event history rather than static contract reads. Some older Safes were created before their deployment transaction logged the data a pure event-based rebuild needs, so 2 of the 8 identities (Julien Bouteloup's second seat and c2tp.eth's Convex seat) are instead confirmed by a direct `getOwners()` read, independently cross-checked by manually reading the relevant transaction logs on Etherscan.
 
 ### Open data (Mainnet)
 
-The live query's own result table is queryable directly through [Dune's Query API](https://docs.dune.com/api-reference/overview/query-api) by anyone with a free Dune API key, no scraping needed: pull the same 8 identities the same way this page does, recomputed fresh on every call.
+The live query's own result table is queryable directly through [Dune's Query API](https://docs.dune.com/api-reference/api-overview) by anyone with a free Dune API key, no scraping needed: pull the same 8 identities the same way this page does, recomputed fresh on every call.
 
 ### What's checked next (Mainnet)
 
-41 protocols is a pilot, not a finished survey. Open a GitHub Issue on this repo to suggest the next protocol to check; a thumbs-up on an existing suggestion counts as a vote. The Superchain-specific follow-up already covers 79 more protocols: see Part 2 below.
+41 protocols is a pilot, not a finished survey. Open a GitHub Issue on this repo to suggest the next protocol to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run under the same licensed method, not opened to contributors). The Superchain-specific follow-up already covers 79 more protocols: see Part 2 below.
 
 ### Caveats (Mainnet)
 
-- One of the 8 identities (Julien Bouteloup's second seat) and one seat behind another (c2tp.eth's Convex seat) don't reproduce through live event replay: both sit on Safe versions old enough to predate the `SafeSetup` event, so they're confirmed by a direct `getOwners()` read instead, not live event replay. See Live verification above.
+- One of the 8 identities (Julien Bouteloup's second seat) and one seat behind another (c2tp.eth's Convex seat) don't reproduce through live event replay, because they sit on Safe versions old enough that their creation transactions don't log the data a pure event-based rebuild needs; both are confirmed by a direct `getOwners()` read instead. See Live verification above.
 - 41 protocols is a pilot, not a finished survey (see What's checked next). A protocol not listed here hasn't been checked, not confirmed clean.
 - Three of the eight identified signers (Egorov, c2tp, Kazemian) sit together on Prisma Finance's multisig by Prisma's own deliberate, publicly disclosed design choice to recruit established founders for credibility, not a hidden concentration; treating that case the same as the other five would overstate how coordinated the overlap actually is.
 - One candidate address needed a correction from a sibling project in this research program. Ethena's `Owner_Multisig_3of11` is a real, confirmed 10-signer Safe, but an independent check in `defi-admin-key-risk` found it does not match the actual `owner()` of either EthenaMinting V2 or the USDe token (both a 24-hour Timelock instead), nor EthenaMinting V1's actual owner (a separate 5-of-10 Safe). The Safe is real; what it currently controls at Ethena, if anything, is unconfirmed.
@@ -122,7 +124,7 @@ Every case below is one of the six findings detailed further down, sorted by how
    *What this means in practice: this is the single largest concentration in the dataset. One Safe's signers can upgrade the core L1 contracts of 6 of the 13 chains this project tracks.*
 
 6. **Conduit**, the Rollup-as-a-Service operator behind Mode and Derive Chain, controls both chains' core chain-governance role through the identical Safe. Four of that Safe's 11 signers individually also sit on Zora Network's and/or BOB's own separate chain-governance Safes: the same infrastructure-provider personnel holding upgrade rights across at least four nominally independent chains at once.
-   *What this means in practice: chains marketed as independently operated share upgrade-key personnel with an infrastructure vendor, not just with each other.*
+   *What this means in practice: several chains presented to users as independently operated share upgrade-key personnel with a common infrastructure vendor, not just with each other.*
 
 Separately, one more pseudonymous signer (`0xb291232F480F41c75802C4a60F1D2AC03404Afef`) shows up on Aave's core Protocol Guardian Safe on Optimism, Base, Soneium, and Celo, and also on a distinct 3-person cluster controlling four of Aave's Ink and Celo Safes: a single Aave ecosystem operator trusted with keys across at least six separate Safe formations.
 
@@ -179,17 +181,19 @@ This dataset has grown through 31 research passes so far, each one adding a new 
 
 ### Open data (Superchain)
 
-The dashboard's own table above is queryable directly through [Dune's Query API](https://docs.dune.com/api-reference/overview/query-api) by anyone with a free Dune API key, no scraping needed.
+The dashboard's own table above is queryable directly through [Dune's Query API](https://docs.dune.com/api-reference/api-overview) by anyone with a free Dune API key, no scraping needed.
 
 ### What's checked next (Superchain)
 
-Not a finished survey by design (see Status below). Open a GitHub Issue on this repo to suggest the next protocol or chain to check; a thumbs-up on an existing suggestion counts as a vote.
+Not a finished survey by design (see Status below). Open a GitHub Issue on this repo to suggest the next protocol or chain to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run under the same licensed method, not opened to contributors).
 
 ### Verification
 
 Every claim in this research is backed by a primary-source citation, tracked against a falsification test and a confidence level, and checked against a mechanical grounding lexical-grounding tool before publication. On the Superchain side, 92/92 hypotheses pass clean on both checks. The method: collect from a primary source (official docs or GitHub repo), re-verify on-chain, cross-check against every address already in the registry, log the falsification test that would disprove the claim. Same discipline across both parts of this research.
 
 ### Status
+
+Last verified: 2026-09-09
 
 200 Safes across 166 deployments and 79 protocols, not a finished survey. The most recent pass turned to who controls the 13 tracked chains themselves rather than the dapps on them: a real Gnosis Safe confirmed as ProxyAdminOwner on all 13, 5 of them sharing the identical Optimism Foundation/Security Council Safe and 2 more (Mode, Derive) sharing an identical Safe operated by Conduit whose signers recur on Zora's and BOB's own chain-governance Safes too. A second thread into centralized stablecoin issuers (USDC, USDT, PYUSD) found a complete negative: none of the three is controlled by a Gnosis Safe on any tracked chain.
 
