@@ -114,7 +114,7 @@ Matthew Graham and TokenLogic reappear in Part 2 below: the same footprint that 
 
 Four of the eight named identities gained a further protocol seat along the way, not shown as separate rows in the case table below since each extends an identity already in the table above rather than introducing a new one: Michael Egorov's seats on Threshold Network and Usual Money (his 4th and 5th protocols), and c2tp.eth's seats on Curve Finance's own Emergency DAO (his 4th protocol) and on Resupply, a protocol co-built by Convex and Yearn (his 5th protocol, tying Egorov's reach).
 
-Beyond the 8 named identities and their extensions, this research has surfaced 26 more shared-infrastructure or signer-overlap cases on mainnet, each a Safe or signer set already tracked elsewhere in this research turning up again, or a new pseudonymous overlap found entirely within mainnet itself:
+Beyond the 8 named identities, this research has surfaced 30 more shared-infrastructure or signer-overlap cases on mainnet. 4 of those are the identity-extension seats already described above; the other 26 are listed below, each a Safe or signer set already tracked elsewhere in this research turning up again, or a new pseudonymous overlap found entirely within mainnet itself:
 
 | Protocol (Mainnet) | What was found | Already tracked as |
 |---|---|---|
