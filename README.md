@@ -11,7 +11,7 @@
 
 **The headline risk:** a single compromised key already controls, or is shared across, dozens of nominally independent DeFi protocols spanning Ethereum mainnet and more than 20 other chains.
 
-The same question, checked at three scales. On Ethereum mainnet, 8 named individuals hold multisig signer keys across 2 or more unrelated DeFi protocols at once, two of them (Michael Egorov and c2tp.eth) now tied at 5 protocols each, identified across 132 protocols checked directly on-chain. Extended to Optimism's Superchain, the same pattern recurs 6 more times: one named individual (aavechan.eth), two of the original 8 turning up again on new chains, and two chain-operator entities concentrating upgrade keys across multiple chains at once. A third extension, onto Arbitrum and 10 more L2s and sidechains, finds an already-tracked signer set or Safe address reappearing on 63 of 86 further protocols checked, including c2tp.eth now confirmed on 4 of these 11 chains. Separately, 30+ protocols reuse the identical Gnosis Safe signer set on multiple chains at once, so spreading exposure across a protocol's chain deployments doesn't actually diversify against key compromise.
+The same question, checked at three scales. On Ethereum mainnet, 8 named individuals hold multisig signer keys across 2 or more unrelated DeFi protocols at once, two of them (Michael Egorov and c2tp.eth) now tied at 5 protocols each, identified across 132 protocols checked directly on-chain. Extended to Optimism's Superchain, the same pattern recurs 7 more times: one named individual (aavechan.eth), two of the original 8 turning up again on new chains, two chain-operator entities concentrating upgrade keys across multiple chains at once, and two more pseudonymous signers, one linking Compound III to Resolv and the other holding keys across seven of Aave's own Superchain Safes. A third extension, onto Arbitrum and 10 more L2s and sidechains, finds an already-tracked signer set or Safe address reappearing on 63 of 86 further protocols checked, including c2tp.eth now confirmed on 4 of these 11 chains. Separately, 30+ protocols reuse the identical Gnosis Safe signer set on multiple chains at once, so spreading exposure across a protocol's chain deployments doesn't actually diversify against key compromise.
 
 ## Contents
 
@@ -19,7 +19,7 @@ The same question, checked at three scales. On Ethereum mainnet, 8 named individ
 - [Who this is for](#who-this-is-for)
 - [At a glance](#at-a-glance)
 - [Part 1: Mainnet](#part-1-mainnet-132-protocols-8-named-identities)
-- [Part 2: Superchain](#part-2-superchain-79-protocols-6-signer-sharing-cases)
+- [Part 2: Superchain](#part-2-superchain-79-protocols-7-signer-sharing-cases)
 - [Part 3: Arbitrum and other L2s](#part-3-arbitrum-and-other-l2s-86-protocols-63-pattern-matches)
   - [Arbitrum](#arbitrum)
   - [Polygon](#polygon)
@@ -59,7 +59,7 @@ Protocol governance teams sizing up their own key concentration against comparab
 | Protocols checked | 132 | 79 | 86 (12 on Arbitrum, 74 across 10 further chains) | 297 |
 | Safes checked | 238 signer slots tested, 194 confirmed as real Safe contracts | 200 Safes across 166 deployments | 120 candidate addresses tested, 88 confirmed as real Safe contracts | 482 confirmed Safe contracts (194 + 200 + 88) |
 | Chains covered | Ethereum mainnet | 13 | 11 (Arbitrum One, Polygon PoS, BNB Chain, Avalanche C-Chain, zkSync Era, Linea, Scroll, Berachain, Mantle, Blast, Sonic) | |
-| Shared-key findings | 8 named identities holding signer power on 2+ protocols (Michael Egorov and c2tp.eth both now reaching 5 protocols), plus 30 more shared-infrastructure and signer-overlap cases | 6 documented cross-protocol or cross-chain signer-sharing cases, plus 30+ protocols sharing an identical signer set across chains | 63 of 86 protocols extend a signer-set or Safe-address pattern already found in Part 1 or Part 2, including 1 named identity (c2tp.eth, now on 4 of these 11 chains) and several same-address patterns reaching 9 or 10 of these 11 chains at once | |
+| Shared-key findings | 8 named identities holding signer power on 2+ protocols (Michael Egorov and c2tp.eth both now reaching 5 protocols), plus 30 more shared-infrastructure and signer-overlap cases | 7 documented cross-protocol or cross-chain signer-sharing cases, plus 30+ protocols sharing an identical signer set across chains | 63 of 86 protocols extend a signer-set or Safe-address pattern already found in Part 1 or Part 2, including 1 named identity (c2tp.eth, now on 4 of these 11 chains) and several same-address patterns reaching 9 or 10 of these 11 chains at once | |
 | Research depth | Grew from an original 41-protocol pilot to 132 protocols across 25 research rounds; every finding independently verified on-chain | 31 research passes, still growing | Three passes: an Arbitrum pilot, a same-day pass across 7 more chains, then a follow-up pass across 3 more second-tier chains (Mantle, Blast, Sonic); explicitly not exhaustive on any of the 11 | |
 | Live verification | Yes, on-chain event replay (covers 69 of the 194 confirmed Safes so far) | Dashboard only; on-chain event replay planned for a future pass | Not built yet | |
 
@@ -180,7 +180,7 @@ Last verified: 2026-09-10.
 - Three of the eight identified signers (Egorov, c2tp, Kazemian) sit together on Prisma Finance's multisig by Prisma's own deliberate, publicly disclosed design choice to recruit established founders for credibility, not a hidden concentration; treating that case the same as the other five would overstate how coordinated the overlap actually is.
 - One candidate address needed a correction from a sibling project in this research program. Ethena's `Owner_Multisig_3of11` is a real, confirmed 10-signer Safe, but an independent check in a sibling research project found it does not match the actual `owner()` of either EthenaMinting V2 or the USDe token (both a 24-hour Timelock instead), nor EthenaMinting V1's actual owner (a separate 5-of-10 Safe). The Safe is real; what it currently controls at Ethena, if anything, is unconfirmed.
 
-## Part 2: Superchain (79 protocols, 6 signer-sharing cases)
+## Part 2: Superchain (79 protocols, 7 signer-sharing cases)
 
 Extension of Part 1 to Optimism's Superchain (OP Mainnet, Base, Mode, Unichain, Ink, Soneium, Lisk, Celo, Zora Network, World Chain, Fraxtal, Derive Chain, and BOB so far). Part 1 asks "does the same person hold emergency keys on multiple, unrelated protocols at once?" This part asks a Superchain-specific variant: "does the same signer set control a protocol's admin multisig on multiple chains at once, and does anyone share keys across genuinely different Superchain protocols?"
 
@@ -190,7 +190,7 @@ Extension of Part 1 to Optimism's Superchain (OP Mainnet, Base, Mode, Unichain, 
 
 ### The exposure leaderboard
 
-Every case below is one of the six findings detailed further down, sorted by how many Safe deployments a single signer, or a single shared Safe, actually touches. These are the numbers already stated in the findings below, just gathered in one place first.
+Every case below is one of the seven findings detailed further down, sorted by how many Safe deployments a single signer, or a single shared Safe, actually touches. These are the numbers already stated in the findings below, just gathered in one place first.
 
 | Rank | Who | Reach | Category |
 |---|---|---|---|
@@ -200,6 +200,7 @@ Every case below is one of the six findings detailed further down, sorted by how
 | 4 | Conduit (RaaS operator) | Signers recur across at least 4 nominally independent chains' own governance Safes | Chain governance |
 | 5 | `aavechan.eth` | 2 protocols (QiDao/Mai Finance, Aave), 3 Safe deployments | Cross-protocol individual |
 | 6 | `0x9A73D57B...` | 2 protocols (Compound III, Resolv), 3 Safe deployments | Cross-protocol individual |
+| 7 | `0xb291232F...` | 1 protocol (Aave), 7 Safe deployments across 5 chains (Protocol Guardian on Optimism, Base, Soneium, and Celo; AFC, Budget Incentive, Ahab, and Alc Safes on Ink and Celo) | Single-protocol concentration |
 
 ### Findings
 
@@ -223,7 +224,8 @@ Every case below is one of the six findings detailed further down, sorted by how
 6. **Conduit**, the Rollup-as-a-Service operator behind Mode and Derive Chain, controls both chains' core chain-governance role through the identical Safe. Four of that Safe's 11 signers individually also sit on Zora Network's and/or BOB's own separate chain-governance Safes: the same infrastructure-provider personnel holding upgrade rights across at least four nominally independent chains at once.
    *What this means in practice: several chains presented to users as independently operated share upgrade-key personnel with a common infrastructure vendor, not just with each other.*
 
-Separately, one more pseudonymous signer (`0xb291232F480F41c75802C4a60F1D2AC03404Afef`) shows up on Aave's core Protocol Guardian Safe on Optimism, Base, Soneium, and Celo, and also on a distinct 3-person cluster controlling four of Aave's Ink and Celo Safes: a single Aave ecosystem operator trusted with keys across at least six separate Safe formations.
+7. `0xb291232F480F41c75802C4a60F1D2AC03404Afef` is a pseudonymous signer confirmed on Aave's own core Protocol Guardian Safe on four chains (Optimism, Base, Soneium, and Celo) and also on a separate 3-person cluster controlling four of Aave's Ink and Celo role-specific Safes (AFC_Safe, Budget_Incentive_Safe, Ahab_Safe, and Alc_Safe): seven distinct Safe formations across five chains, all within Aave alone. Unlike the four cross-protocol cases above, this one never leaves a single protocol: it's one Aave ecosystem operator trusted with keys across nearly every layer of Aave's own Superchain footprint at once.
+   *What this means in practice: a single pseudonymous key now touches seven of Aave's own Superchain Safes across five chains. Even a signer confined to one protocol can still be that protocol's own single point of failure everywhere it's deployed.*
 
 Beyond those cases, the sample also confirms a **Superchain-specific pattern**: several protocols run the exact same signer set across multiple chains at once.
 
