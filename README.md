@@ -204,7 +204,7 @@ This dataset has grown through 31 research passes so far, each one adding a new 
 
 [dune.com/s_pap/multisig-overlap-public](https://dune.com/s_pap/multisig-overlap-public): same findings, same wording as this README.
 
-**Get notified of new passes**, no account needed on this repo: click Watch, then Custom, then Releases only, on this repo's GitHub page. Every research pass gets tagged as a release with the same text as its CHANGELOG entry. On Dune, star the dashboard to have it in your own list, or set a scheduled alert on the query for a ping when a tracked Safe's owner set changes.
+**Get notified of new passes**, no account needed on this repo: click Watch, then Custom, then Releases only, on this repo's GitHub page. Every research pass gets tagged as a release, title and body taken straight from that pass's own commit message. On Dune, star the dashboard to have it in your own list, or set a scheduled alert on the query for a ping when a tracked Safe's owner set changes.
 
 ### Open data (Superchain)
 
