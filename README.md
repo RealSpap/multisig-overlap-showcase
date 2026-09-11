@@ -19,7 +19,7 @@ The same question, checked at three scales. On Ethereum mainnet, 8 named individ
 - [Who this is for](#who-this-is-for)
 - [At a glance](#at-a-glance)
 - [Part 1: Mainnet](#part-1-mainnet-174-protocols-8-named-identities)
-- [Part 2: Superchain](#part-2-superchain-79-protocols-7-signer-sharing-cases)
+- [Part 2: Superchain](#part-2-superchain-80-protocols-7-signer-sharing-cases)
 - [Part 3: Arbitrum and other L2s](#part-3-arbitrum-and-other-l2s-86-protocols-63-pattern-matches)
   - [Arbitrum](#arbitrum)
   - [Polygon](#polygon)
@@ -57,7 +57,7 @@ Protocol governance teams sizing up their own key concentration against comparab
 | | Part 1: Mainnet | Part 2: Superchain | Part 3: Other L2s | Total |
 |---|---|---|---|---|
 | Protocols checked | 174 | 79 | 86 (across 11 chains) | 339 |
-| Safes checked | 331 signer slots tested, 265 confirmed real Safes | 200 Safes across 166 deployments | 120 candidates tested, 88 confirmed real Safes | 553 confirmed Safe contracts |
+| Safes checked | 331 signer slots tested, 265 confirmed real Safes | 202 Safes across 168 deployments | 120 candidates tested, 88 confirmed real Safes | 555 confirmed Safe contracts |
 | Chains covered | Ethereum mainnet | 13 | 11 | 25 |
 | Shared-key findings | 8 named identities on 2+ protocols, plus 48 more shared-infrastructure cases | 7 documented cross-protocol/cross-chain cases, plus 30+ identical-signer-set chains | 63 of 86 protocols extend a pattern already found in Part 1 or Part 2 | |
 | Live event replay | Yes, on-chain | Yes, on-chain (9 of 14 chains) | Yes, on-chain (11 of 11 chains) | |
@@ -133,7 +133,7 @@ The live query's own result table is queryable directly through [Dune's Query AP
 
 ### What's checked next (Mainnet)
 
-174 protocols is a growing survey, not a finished one. Open a GitHub Issue on this repo to suggest the next protocol to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run under the same licensed method, not opened to contributors). The Superchain-specific follow-up already covers 79 more protocols, and a third extension covers 86 more across Arbitrum and 10 other L2s and sidechains: see Part 2 and Part 3 below.
+174 protocols is a growing survey, not a finished one. Open a GitHub Issue on this repo to suggest the next protocol to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run under the same licensed method, not opened to contributors). The Superchain-specific follow-up already covers 80 more protocols, and a third extension covers 86 more across Arbitrum and 10 other L2s and sidechains: see Part 2 and Part 3 below.
 
 ### Verification
 
@@ -152,13 +152,13 @@ Last verified: 2026-09-11.
 - Three of the eight identified signers (Egorov, c2tp, Kazemian) sit together on Prisma Finance's multisig by Prisma's own deliberate, publicly disclosed design choice to recruit established founders for credibility, not a hidden concentration; treating that case the same as the other five would overstate how coordinated the overlap actually is.
 - One candidate address needed a correction from a sibling project in this research program. Ethena's `Owner_Multisig_3of11` is a real, confirmed 10-signer Safe, but an independent check in a sibling research project found it does not match the actual `owner()` of either EthenaMinting V2 or the USDe token (both a 24-hour Timelock instead), nor EthenaMinting V1's actual owner (a separate 5-of-10 Safe). The Safe is real; what it currently controls at Ethena, if anything, is unconfirmed.
 
-## Part 2: Superchain (79 protocols, 7 signer-sharing cases)
+## Part 2: Superchain (80 protocols, 7 signer-sharing cases)
 
 Extension of Part 1 to Optimism's Superchain (OP Mainnet, Base, Mode, Unichain, Ink, Soneium, Lisk, Celo, Zora Network, World Chain, Fraxtal, Derive Chain, and BOB so far). Part 1 asks "does the same person hold emergency keys on multiple, unrelated protocols at once?" This part asks a Superchain-specific variant: "does the same signer set control a protocol's admin multisig on multiple chains at once, and does anyone share keys across genuinely different Superchain protocols?"
 
 ### Method
 
-200 Gnosis Safe multisig contracts across 166 protocol/chain deployments, checked directly on-chain (see [Methodology at a glance](#methodology-at-a-glance) above). This also covers who controls the 13 tracked chains themselves at the L1 (Ethereum mainnet) level, not just the dapps deployed on them: a real Gnosis Safe was confirmed as the ProxyAdminOwner on all 13, with World Chain's separate SystemConfigOwner the sole exception, a bare EOA rather than a Safe.
+202 Gnosis Safe multisig contracts across 168 protocol/chain deployments, checked directly on-chain (see [Methodology at a glance](#methodology-at-a-glance) above). This also covers who controls the 13 tracked chains themselves at the L1 (Ethereum mainnet) level, not just the dapps deployed on them: a real Gnosis Safe was confirmed as the ProxyAdminOwner on all 13, with World Chain's separate SystemConfigOwner the sole exception, a bare EOA rather than a Safe.
 
 ### The exposure leaderboard
 
@@ -202,11 +202,12 @@ Every case below is one of the seven findings detailed further down, sorted by h
 Beyond those cases, the sample also confirms a **Superchain-specific pattern**: several protocols run the exact same signer set across multiple chains at once.
 
 <details>
-<summary>Show all 36 cases</summary>
+<summary>Show all 37 cases</summary>
 
 | Protocol | What was found |
 |---|---|
 | **Silo Finance** | Literally the same Safe contract address deployed on Optimism, Base, and Ink; the Ink instance has one extra owner beyond the 5 shared with the other two |
+| **Lido** | Its Emergency Brakes / CircuitBreaker Committee Safe is the identical 5-signer, 3-of-5 set on both Optimism and Base (different Safe address per chain), holding `DEPOSITS_DISABLER_ROLE` and `WITHDRAWALS_DISABLER_ROLE` on each chain's wstETH bridge, confirmed live on-chain rather than assumed from docs |
 | **Aave V3** | Several Safe contract addresses (Protocol Guardian and four role-specific Safes) deployed identically across up to five chains: Optimism, Base, Soneium, Ink, and Celo |
 | **Beefy Finance** | Same 6 owners now across six separately-deployed Safes: Optimism, Base, Mode, Unichain, Lisk, and Fraxtal (no live Safe on Celo; the address book itself sets it to the zero address) |
 | **Angle Protocol** | Same 3 owners across three separately-deployed Safes: Optimism, Base, and Celo. One of these 3 is the Morpho overlap above |
@@ -261,7 +262,7 @@ A live on-chain event-replay query now also exists for this part: [query 8678613
 
 The dashboard's own table above is queryable directly through [Dune's Query API](https://docs.dune.com/api-reference/api-overview) by anyone with a free Dune API key, no scraping needed.
 
-**Full scope manifest**: [`data/full-scope-manifest-superchain.csv`](data/full-scope-manifest-superchain.csv) lists every one of the 201 candidate addresses actually checked across the 13 Superchain chains and their Ethereum L1 governance roles, not just the signer-sharing cases flagged as findings above, so anyone can confirm the findings are the complete result of the screen rather than a cherry-picked subset.
+**Full scope manifest**: [`data/full-scope-manifest-superchain.csv`](data/full-scope-manifest-superchain.csv) lists every one of the 203 candidate addresses actually checked across the 13 Superchain chains and their Ethereum L1 governance roles, not just the signer-sharing cases flagged as findings above, so anyone can confirm the findings are the complete result of the screen rather than a cherry-picked subset.
 
 ### What's checked next (Superchain)
 
@@ -269,18 +270,18 @@ Not a finished survey by design (see Status below). Open a GitHub Issue on this 
 
 ### Verification
 
-Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. On the Superchain side, 92 of 92 hypotheses currently in the registry pass clean at High confidence.
+Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. On the Superchain side, 93 of 93 hypotheses currently in the registry pass clean at High confidence.
 
 ### Status
 
 Last verified: 2026-09-09.
 
-200 Safes across 166 deployments and 79 protocols, not a finished survey. The most recent pass turned to who controls the 13 tracked chains themselves rather than the dapps on them: a real Gnosis Safe confirmed as ProxyAdminOwner on all 13, 5 of them sharing the identical Optimism Foundation/Security Council Safe and 2 more (Mode, Derive) sharing an identical Safe operated by Conduit whose signers recur on Zora's and BOB's own chain-governance Safes too. A second thread into centralized stablecoin issuers (USDC, USDT, PYUSD) found a complete negative: none of the three is controlled by a Gnosis Safe on any tracked chain.
+202 Safes across 168 deployments and 80 protocols, not a finished survey. The most recent pass turned to who controls the 13 tracked chains themselves rather than the dapps on them: a real Gnosis Safe confirmed as ProxyAdminOwner on all 13, 5 of them sharing the identical Optimism Foundation/Security Council Safe and 2 more (Mode, Derive) sharing an identical Safe operated by Conduit whose signers recur on Zora's and BOB's own chain-governance Safes too. A second thread into centralized stablecoin issuers (USDC, USDT, PYUSD) found a complete negative: none of the three is controlled by a Gnosis Safe on any tracked chain.
 
 ### Caveats (Superchain)
 
 - Point-in-time snapshot across all findings; Safe owner sets, thresholds, and operator-set status can change after this was checked.
-- 200 Safes across 166 deployments and 79 protocols is not a finished survey (see What's checked next); a protocol or chain not listed here hasn't been checked, not confirmed clean.
+- 202 Safes across 168 deployments and 80 protocols is not a finished survey (see What's checked next); a protocol or chain not listed here hasn't been checked, not confirmed clean.
 - Several same-signer-set findings above are expected, not new institutional links, when the same team knowingly operates multiple deployments (for example Zora Inc. operating both Zora the protocol and Zora Network the chain, or Frax operating Fraxtal), each such case is labeled inline as "expected" rather than presented as a surprising finding.
 - A negative result was also checked and is reported here for completeness: none of the three centralized stablecoin issuers checked (USDC, USDT, PYUSD) is controlled by a Gnosis Safe on any tracked chain.
 
