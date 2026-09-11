@@ -159,6 +159,8 @@ The live query relies on parsing on-chain event history rather than static contr
 
 The live query's own result table is queryable directly through [Dune's Query API](https://docs.dune.com/api-reference/api-overview) by anyone with a free Dune API key, no scraping needed: pull the same 8 identities the same way this page does, recomputed fresh on every call.
 
+**Full scope manifest**: [`data/full-scope-manifest-mainnet.csv`](data/full-scope-manifest-mainnet.csv) lists every one of the 268 candidate addresses actually checked on Ethereum mainnet, not just the identities and overlap cases flagged as findings above, so anyone can confirm the findings are the complete result of the screen rather than a cherry-picked subset.
+
 ### What's checked next (Mainnet)
 
 132 protocols is a growing survey, not a finished one. Open a GitHub Issue on this repo to suggest the next protocol to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run under the same licensed method, not opened to contributors). The Superchain-specific follow-up already covers 79 more protocols, and a third extension covers 86 more across Arbitrum and 10 other L2s and sidechains: see Part 2 and Part 3 below.
@@ -286,6 +288,8 @@ This dataset has grown through 31 research passes so far, each one adding a new 
 ### Open data (Superchain)
 
 The dashboard's own table above is queryable directly through [Dune's Query API](https://docs.dune.com/api-reference/api-overview) by anyone with a free Dune API key, no scraping needed.
+
+**Full scope manifest**: [`data/full-scope-manifest-superchain.csv`](data/full-scope-manifest-superchain.csv) lists every one of the 201 candidate addresses actually checked across the 13 Superchain chains and their Ethereum L1 governance roles, not just the signer-sharing cases flagged as findings above, so anyone can confirm the findings are the complete result of the screen rather than a cherry-picked subset.
 
 ### What's checked next (Superchain)
 
@@ -515,6 +519,10 @@ Sonic (formerly Fantom, migrated to a new token and rebranded) produced a more f
 </details>
 
 Two new real Safes never seen before in this research were also confirmed on Sonic with no overlap onto the existing roster: **Shadow Exchange** (the only protocol in this batch to publish its multisig address directly rather than needing an `owner()` derivation, 4 signers) and **SwapX** (its AlgebraFactory owner, 6 signers). Pendle Finance's governanceProxy and Silo Finance's SiloFactory owner produced the same two negative results already recorded for them on Mantle above.
+
+### Open data (Part 3)
+
+**Full scope manifest**: [`data/full-scope-manifest-part3.csv`](data/full-scope-manifest-part3.csv) lists every one of the 120 candidate addresses actually checked across Arbitrum and the 10 other L2s and sidechains, not just the pattern matches and new Safes flagged as findings above, so anyone can confirm the findings are the complete result of the screen rather than a cherry-picked subset.
 
 ### Caveats
 
