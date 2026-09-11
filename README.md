@@ -113,7 +113,7 @@ Three of the eight (Egorov, c2tp, Kazemian) sit together on Prisma Finance's eme
 
 Matthew Graham and TokenLogic reappear in Part 2: the same address also sits on three of Aave's Superchain Safes across Ink and Celo — see Part 2 below for the full cross-chain picture.
 
-Beyond the 8 named identities, this research has surfaced 87 more shared-infrastructure or signer-overlap cases on mainnet, most of which turn out to be Safes already tracked in Part 2 or Part 3 resolving identically on Ethereum too. Full list of all 87 cases: github.com/RealSpap/multisig-overlap-showcase.
+Beyond the 8 named identities, this research has surfaced 87 more shared-infrastructure or signer-overlap cases on mainnet, most of which turn out to be Safes already tracked in Part 2 or Part 3 resolving identically on Ethereum too. Full list of all 87 cases, live: the Part 1 query results table on [dune.com/s_pap/multisig-overlap](https://dune.com/s_pap/multisig-overlap) (query results directly at [dune.com/queries/8632314](https://dune.com/queries/8632314)).
 
 ### Live verification
 
@@ -127,7 +127,7 @@ Live query: [dune.com/s_pap/multisig-overlap](https://dune.com/s_pap/multisig-ov
 
 The live query's own result table is queryable directly through [Dune's Query API](https://docs.dune.com/api-reference/api-overview) by anyone with a free Dune API key, no scraping needed: pull the same 8 identities the same way this page does, recomputed fresh on every call.
 
-**Full scope manifest**: [`data/full-scope-manifest-mainnet.csv`](data/full-scope-manifest-mainnet.csv) lists every one of the 268 candidate addresses actually checked on Ethereum mainnet, not just the identities and overlap cases flagged as findings above, so anyone can confirm the findings are the complete result of the screen rather than a cherry-picked subset.
+**Full scope manifest**: [`data/full-scope-manifest-mainnet.csv`](data/full-scope-manifest-mainnet.csv) lists every one of the 324 candidate addresses actually checked on Ethereum mainnet (258 confirmed as real deployed Safe contracts), not just the identities and overlap cases flagged as findings above, so anyone can confirm the findings are the complete result of the screen rather than a cherry-picked subset.
 
 ### What's checked next (Mainnet)
 
@@ -135,7 +135,7 @@ The live query's own result table is queryable directly through [Dune's Query AP
 
 ### Verification
 
-Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. The mainnet registry holds 39 rows: the 8 identities, 1 correction (see Caveats below), and 30 shared-infrastructure or signer-overlap cases; 38 rows at High confidence and 1 (Sam Kazemian's link to Frax, role-inference rather than a direct name-to-address citation) at Medium confidence.
+Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. The mainnet registry holds 96 rows: the 8 identities, 1 correction (see Caveats below), and 87 shared-infrastructure or signer-overlap cases; 38 rows at High confidence and 1 (Sam Kazemian's link to Frax, role-inference rather than a direct name-to-address citation) at Medium confidence.
 
 ### Status
 
@@ -250,6 +250,8 @@ This dataset has grown through 31 research passes so far, each one adding a new 
 ### Dashboard
 
 [dune.com/s_pap/multisig-overlap-public](https://dune.com/s_pap/multisig-overlap-public): same findings, same wording as this README.
+
+A live on-chain event-replay query now also exists for this part: [query 8678613](https://dune.com/queries/8678613), covering 9 of the 13 Superchain-family chains that currently have a raw-logs schema on Dune (Base, BOB, Celo, Ink, Mode, Optimism, Unichain, and World Chain, plus Ethereum mainnet separately for L1 chain-governance) — the other 5 (Derive, Fraxtal, Lisk, Soneium, Zora) have no indexed logs table on Dune yet and aren't event-replayed.
 
 **Get notified of new passes**, no account needed on this repo: click Watch, then Custom, then Releases only, on this repo's GitHub page. Every research pass gets tagged as a release, title and body taken straight from that pass's own commit message. On Dune, star the dashboard to have it in your own list, or set a scheduled alert on the query for a ping when a tracked Safe's owner set changes.
 
@@ -495,7 +497,7 @@ Two new real Safes never seen before in this research were also confirmed on Son
 ### Caveats
 
 - This is a first, wide pass sized to cover ground quickly rather than to be exhaustive on any single chain: 4 to 12 protocols per chain, against Part 2's 79. The high hit rate (63 of 86) is concentrated in protocols this research already had reason to check closely, since they were chosen partly because a prior overlap made a repeat plausible; a broader, protocol-agnostic pass on any one of these chains might find a different ratio.
-- No live event-replay verification exists yet for any part of Part 3, the same gap Part 2 already carries.
+- A live on-chain event-replay query now exists for Part 3: [query 8679972](https://dune.com/queries/8679972), covering all 11 of Part 3's tracked chains — full raw-logs coverage, unlike Part 2's partial coverage. It confirms 0 rows (no signer holds keys on 2+ different protocols within Part 3 alone), matching the original manual research findings above.
 - Radiant Capital's BNB Chain PoolAdmin finding is a partial signer match (7 of 11), not a full identical set: read it as "shares most of its signers with," not "is the same Safe as."
 - API3's manager multisig address is chain-invariant and was tested directly via `getOwners()` on zkSync Era, Berachain, and Blast specifically, since API3's own deployment registry does not list a folder for any of the three; the address still resolves to a real, matching Safe (fully on Berachain and Blast, partially on zkSync Era), a slightly different sourcing standard than the other chains, where an explicit per-chain deployment file exists.
 - Mantle, Blast, and Sonic were deliberately chosen as second-tier chains, unlike the first 8: real DeFi TVL is thinner and less stable on all three, and Blast in particular is reported as a genuinely weak, low-signal result (2 of 6 protocols tested resolved to a real multisig) rather than forced to look comparable to Mantle or Sonic.
@@ -510,7 +512,7 @@ Every claim in this research follows the same verification discipline described 
 
 Last verified: 2026-09-10.
 
-86 protocols across 11 chains, three passes deep: a pilot on Arbitrum (12 protocols), a same-day pass across seven more chains (48 protocols), then a follow-up pass across three more second-tier chains (26 protocols). Not a finished survey on any of the 11, and no live event-replay verification exists yet for this part, the same gap noted throughout the Caveats above.
+86 protocols across 11 chains, three passes deep: a pilot on Arbitrum (12 protocols), a same-day pass across seven more chains (48 protocols), then a follow-up pass across three more second-tier chains (26 protocols). Not a finished survey on any of the 11; live event-replay verification now exists for this part (see Caveats above).
 
 This is independent research, not commissioned, audited, or endorsed by any protocol, chain, or individual named above. Everything stated is held to the confidence level the on-chain data actually supports.
 
