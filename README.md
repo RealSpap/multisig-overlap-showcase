@@ -135,7 +135,7 @@ The live query's own result table is queryable directly through [Dune's Query AP
 
 ### Verification
 
-Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. The mainnet registry holds 96 rows: the 8 identities, 1 correction (see Caveats below), and 87 shared-infrastructure or signer-overlap cases; 38 rows at High confidence and 1 (Sam Kazemian's link to Frax, role-inference rather than a direct name-to-address citation) at Medium confidence.
+Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. The mainnet registry holds 96 rows: the 8 identities, 1 correction (see Caveats below), and 87 shared-infrastructure or signer-overlap cases. Of the 39 hand-researched rows (the 8 identities plus the correction), 38 are at High confidence and 1 (Sam Kazemian's link to Frax, role-inference rather than a direct name-to-address citation) is at Medium confidence; the 87 shared-infrastructure cases are mechanically derived from the live on-chain query rather than individually confidence-rated.
 
 ### Status
 
