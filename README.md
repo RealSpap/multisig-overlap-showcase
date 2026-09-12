@@ -252,7 +252,7 @@ This dataset has grown through 31 research passes so far, each one adding a new 
 
 ### Dashboard
 
-[dune.com/s_pap/multisig-overlap-public](https://dune.com/s_pap/multisig-overlap-public): same findings, same wording as this README.
+This Part is covered in the [main Multisig Overlap Dune dashboard](https://dune.com/s_pap/multisig-overlap), alongside Parts 1 and 3.
 
 A live on-chain event-replay query now also exists for this part: [query 8678613](https://dune.com/queries/8678613), covering 9 of the 13 Superchain-family chains that currently have a raw-logs schema on Dune (Base, BOB, Celo, Ink, Mode, Optimism, Unichain, and World Chain, plus Ethereum mainnet separately for L1 chain-governance) — the other 5 (Derive, Fraxtal, Lisk, Soneium, Zora) have no indexed logs table on Dune yet and aren't event-replayed.
 
