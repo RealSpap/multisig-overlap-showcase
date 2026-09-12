@@ -56,7 +56,7 @@ Protocol governance teams sizing up their own key concentration against comparab
 
 | | Part 1: Mainnet | Part 2: Superchain | Part 3: Other L2s | Total |
 |---|---|---|---|---|
-| Protocols checked | 174 | 79 | 87 (across 11 chains) | 340 |
+| Protocols checked | 174 | 80 | 87 (across 11 chains) | 341 |
 | Safes checked | 331 signer slots tested, 265 confirmed real Safes | 202 Safes across 168 deployments | 121 candidates tested, 89 confirmed real Safes | 556 confirmed Safe contracts |
 | Chains covered | Ethereum mainnet | 13 | 11 | 25 |
 | Shared-key findings | 8 named identities on 2+ protocols, plus 48 more shared-infrastructure cases | 7 documented cross-protocol/cross-chain cases, plus 30+ identical-signer-set chains | 64 of 87 protocols extend a pattern already found in Part 1 or Part 2 | |
@@ -500,7 +500,7 @@ Two new real Safes never seen before in this research were also confirmed on Son
 
 ### Caveats
 
-- This is a first, wide pass sized to cover ground quickly rather than to be exhaustive on any single chain: 4 to 12 protocols per chain, against Part 2's 79. The high hit rate (64 of 87) is concentrated in protocols this research already had reason to check closely, since they were chosen partly because a prior overlap made a repeat plausible; a broader, protocol-agnostic pass on any one of these chains might find a different ratio.
+- This is a first, wide pass sized to cover ground quickly rather than to be exhaustive on any single chain: 4 to 12 protocols per chain, against Part 2's 80. The high hit rate (64 of 87) is concentrated in protocols this research already had reason to check closely, since they were chosen partly because a prior overlap made a repeat plausible; a broader, protocol-agnostic pass on any one of these chains might find a different ratio.
 - A live on-chain event-replay query now exists for Part 3: [query 8679972](https://dune.com/queries/8679972), covering all 11 of Part 3's tracked chains — full raw-logs coverage, unlike Part 2's partial coverage. It confirms 0 rows (no signer holds keys on 2+ different protocols within Part 3 alone), matching the original manual research findings above.
 - Radiant Capital's BNB Chain PoolAdmin finding is a partial signer match (7 of 11), not a full identical set: read it as "shares most of its signers with," not "is the same Safe as."
 - API3's manager multisig address is chain-invariant and was tested directly via `getOwners()` on zkSync Era, Berachain, and Blast specifically, since API3's own deployment registry does not list a folder for any of the three; the address still resolves to a real, matching Safe (fully on Berachain and Blast, partially on zkSync Era), a slightly different sourcing standard than the other chains, where an explicit per-chain deployment file exists.
