@@ -2,6 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-all%20rights%20reserved-blue)
 ![Status](https://img.shields.io/badge/status-active%20research-brightgreen)
+[![Check your Safe: free tool](https://img.shields.io/badge/check%20your%20safe-free%20tool-orange)](https://realspap.github.io/tools/check-your-safe.html)
 ![Protocols tracked (Mainnet)](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FRealSpap%2Fmultisig-overlap-showcase%2Fmain%2Fbadge-data-mainnet-protocols.json)
 ![Protocols tracked (Superchain)](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FRealSpap%2Fmultisig-overlap-showcase%2Fmain%2Fbadge-data-superchain.json)
 ![Protocols tracked (Part 3)](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FRealSpap%2Fmultisig-overlap-showcase%2Fmain%2Fbadge-data-part3.json)
