@@ -14,7 +14,7 @@
 
 The same question, checked at three scales:
 
-- **Ethereum mainnet**: 8 named individuals hold multisig signer keys across 2 or more unrelated DeFi protocols at once, identified across 174 protocols checked directly on-chain. Two of them, Michael Egorov and c2tp.eth, are now tied at 5 protocols each.
+- **Ethereum mainnet**: 8 named individuals hold multisig signer keys across 2 or more unrelated DeFi protocols at once, identified across 175 protocols checked directly on-chain. Two of them, Michael Egorov and c2tp.eth, are now tied at 5 protocols each.
 - **Optimism's Superchain**: the same pattern recurs 7 more times, with one named individual (aavechan.eth), two of the original 8 turning up again on new chains, two chain-operator entities concentrating upgrade keys across multiple chains at once, and two more pseudonymous signers, one linking Compound III to Resolv and the other holding keys across seven of Aave's own Superchain Safes.
 - **Arbitrum and 10 more L2s and sidechains**: an already-tracked signer set or Safe address reappears on 64 of 87 further protocols checked, including c2tp.eth now confirmed on 4 of these 11 chains.
 
@@ -28,7 +28,7 @@ Live dashboard, click through for the interactive version.
 - [Methodology at a glance](#methodology-at-a-glance)
 - [Who this is for](#who-this-is-for)
 - [At a glance](#at-a-glance)
-- [Part 1: Mainnet](#part-1-mainnet-174-protocols-8-named-identities)
+- [Part 1: Mainnet](#part-1-mainnet-175-protocols-8-named-identities)
 - [Part 2: Superchain](#part-2-superchain-80-protocols-7-signer-sharing-cases)
 - [Part 3: Arbitrum and other L2s](#part-3-arbitrum-and-other-l2s-87-protocols-64-pattern-matches)
   - [Arbitrum](#arbitrum)
@@ -66,13 +66,13 @@ Protocol governance teams sizing up their own key concentration against comparab
 
 | | Part 1: Mainnet | Part 2: Superchain | Part 3: Other L2s | Total |
 |---|---|---|---|---|
-| Protocols checked | 174 | 80 | 87 (across 11 chains) | 341 |
-| Safes checked | 331 signer slots tested, 265 confirmed real Safes | 202 Safes across 168 deployments | 121 candidates tested, 89 confirmed real Safes | 556 confirmed Safe contracts |
+| Protocols checked | 175 | 80 | 87 (across 11 chains) | 342 |
+| Safes checked | 332 signer slots tested, 266 confirmed real Safes | 202 Safes across 168 deployments | 121 candidates tested, 89 confirmed real Safes | 557 confirmed Safe contracts |
 | Chains covered | Ethereum mainnet | 13 | 11 | 25 |
 | Shared-key findings | 8 named identities on 2+ protocols, plus 48 more shared-infrastructure cases | 7 documented cross-protocol/cross-chain cases, plus 30+ identical-signer-set chains | 64 of 87 protocols extend a pattern already found in Part 1 or Part 2 | |
 | Live event replay | Yes, on-chain | Yes, on-chain (9 of 13 chains) | Yes, on-chain (11 of 11 chains) | |
 
-Every major DeFi protocol discloses its own emergency and governance multisig signers, usually in its own docs. Nobody aggregates that across protocols or chains, so nobody could previously answer: if one person's key, or one shared signer set, were compromised, how many independent protocols or chains would be affected at the same time? This research answers that at three scales: first across 174 major protocols on Ethereum mainnet, then across Optimism's Superchain specifically, where the same protocol is often deployed on a dozen chains at once, then a third time on Arbitrum and 10 more L2s and sidechains deliberately outside the Superchain family.
+Every major DeFi protocol discloses its own emergency and governance multisig signers, usually in its own docs. Nobody aggregates that across protocols or chains, so nobody could previously answer: if one person's key, or one shared signer set, were compromised, how many independent protocols or chains would be affected at the same time? This research answers that at three scales: first across 175 major protocols on Ethereum mainnet, then across Optimism's Superchain specifically, where the same protocol is often deployed on a dozen chains at once, then a third time on Arbitrum and 10 more L2s and sidechains deliberately outside the Superchain family.
 
 **Protocols referenced include:** Aave, Curve Finance, Compound III, Lido, Balancer, Yearn, Convex, Morpho Blue, Frax Finance, Chainlink Data Feeds, 1inch, and Beefy Finance.
 
@@ -94,11 +94,11 @@ The verification method behind this research is available under a commercial lic
 
 This report presents an independent, factual analysis of publicly available on-chain data (smart contract code, multisig signer sets, governance transactions) as of the date noted in the Status/Method sections below. Statements about which addresses or individuals hold administrative, multisig, or governance keys are based solely on on-chain records and publicly disclosed information cited inline; they are not allegations of wrongdoing, and no claim of illegal conduct, fraud, or misconduct is made or implied. Concentration of control or key-holder identity is reported as an observed structural fact, not as a moral or legal judgment on the individuals named. Findings reflect a snapshot in time; on-chain configurations, signer sets, and governance parameters can and do change after publication, and this report is not updated automatically to reflect such changes. This is independent research, not commissioned or audited by any protocol discussed, and it does not constitute legal, financial, or investment advice. Any individual or entity named in this report who believes information about them is inaccurate or outdated is invited to contact the author via [X](https://x.com/RealSpap) with supporting evidence; corrections will be issued promptly and transparently. Readers should independently verify all cited addresses, transactions, and figures before relying on them.
 
-## Part 1: Mainnet (174 protocols, 8 named identities)
+## Part 1: Mainnet (175 protocols, 8 named identities)
 
 ### Method
 
-174 protocols' multisig contracts (Gnosis Safe) checked directly on-chain: 331 signer slots tested, 265 confirmed as real Safe contracts. Scope grew from an original 41-protocol pilot to 174 protocols across 28 research rounds, each adding several more protocols and re-running the full cross-reference against every signer already on record.
+175 protocols' multisig contracts (Gnosis Safe) checked directly on-chain: 332 signer slots tested, 266 confirmed as real Safe contracts. Scope grew from an original 41-protocol pilot to 175 protocols across 29 research rounds, each adding several more protocols and re-running the full cross-reference against every signer already on record.
 
 ### Findings
 
@@ -125,6 +125,8 @@ Matthew Graham and TokenLogic reappear in Part 2: the same address also sits on 
 
 A 2026-09-11 same-day follow-up round (round 28, scope grew 171→174 protocols) added three new mainnet protocols. None adds a new named identity, but each adds a new pseudonymous signer-overlap case:
 
+A 2026-09-13 round (round 29, scope grew 174→175 protocols) added Gnosis Chain's canonical bridges: the 8-of-15 Bridge Governor Safe that is both the upgrade owner and the admin owner of the xDai Bridge and the OmniBridge on Ethereum (~$271M TVL). No new mainnet-internal overlap, but one of its 15 owners is aavechan.eth, already tracked below on QiDao/Mai Finance and Aave Safes, now confirmed on a third unrelated protocol; Gnosis Chain's own docs list the Aave-Chan Initiative as one of the 15 governor organizations, so the seat is disclosed, the cross-protocol aggregation is what's new.
+
 - **Spiko** (RWA tokenized money-market funds).
 - **DeFiSaver** (DeFi position automation): its admin signer is also one of Aave's own official Governance Guardian signers.
 - **Veda** (fka Se7en Seas, the BoringVault infrastructure operator behind ether.fi's Liquid vaults and others): two vault-governance signers are also EtherFi and LombardFinance signers respectively, 2 of 5 signers shared on the Lombard case.
@@ -134,12 +136,12 @@ Aave's own Governance Guardian Safe, already tracked cross-chain in Part 2 and P
 Beyond the 8 named identities, this research has surfaced 48 more shared-infrastructure or signer-overlap cases on mainnet, most of which turn out to be Safes already tracked in Part 2 or Part 3 resolving identically on Ethereum too.
 
 - **48**: the hand-curated, individually-documented count in the registry below.
-- **98**: total cross-protocol overlaps the live SQL query mechanically finds on its own within the current 265-Safe scope, 7 of which are name-matched to one of the 8 identities above. The difference is cases the live query catches structurally, such as an identical Safe reused across chains, that the hand-curated registry also documents individually with its own citation.
+- **98**: total cross-protocol overlaps the live SQL query mechanically finds on its own within the current 266-Safe scope, 7 of which are name-matched to one of the 8 identities above. The difference is cases the live query catches structurally, such as an identical Safe reused across chains, that the hand-curated registry also documents individually with its own citation.
 - **Full list, live**: the Part 1 query results table on [dune.com/s_pap/multisig-overlap](https://dune.com/s_pap/multisig-overlap) (query results directly at [dune.com/queries/8632314](https://dune.com/queries/8632314)).
 
 ### Live verification
 
-The table above replays the actual on-chain event history of every Safe contract tracked in the current 174-protocol scope, recomputing current ownership fresh every time it runs. This 2026-09-11 resync closed the gap that used to exist between the live query (previously 65 Safes) and the full research corpus. 2 of the 8 identities (Julien Bouteloup's second seat and c2tp.eth's Convex seat) don't reproduce through live event replay, because they sit on Safe versions old enough their creation transactions don't log the data a pure event-based rebuild needs; both are confirmed instead by a direct `getOwners()` read, independently cross-checked against the relevant transaction logs on Etherscan.
+The table above replays the actual on-chain event history of every Safe contract tracked in the current 175-protocol scope, recomputing current ownership fresh every time it runs. This 2026-09-11 resync closed the gap that used to exist between the live query (previously 65 Safes) and the full research corpus. 2 of the 8 identities (Julien Bouteloup's second seat and c2tp.eth's Convex seat) don't reproduce through live event replay, because they sit on Safe versions old enough their creation transactions don't log the data a pure event-based rebuild needs; both are confirmed instead by a direct `getOwners()` read, independently cross-checked against the relevant transaction logs on Etherscan.
 
 Live query: [dune.com/s_pap/multisig-overlap](https://dune.com/s_pap/multisig-overlap).
 
@@ -149,11 +151,11 @@ Live query: [dune.com/s_pap/multisig-overlap](https://dune.com/s_pap/multisig-ov
 
 The live query's own result table is queryable directly through [Dune's Query API](https://docs.dune.com/api-reference/api-overview) by anyone with a free Dune API key, no scraping needed: pull the same 8 identities the same way this page does, recomputed fresh on every call.
 
-**Full scope manifest**: [`data/full-scope-manifest-mainnet.csv`](data/full-scope-manifest-mainnet.csv) lists every one of the 331 candidate addresses actually checked on Ethereum mainnet (265 confirmed as real deployed Safe contracts), not just the identities and overlap cases flagged as findings above, so anyone can confirm the findings are the complete result of the screen rather than a cherry-picked subset.
+**Full scope manifest**: [`data/full-scope-manifest-mainnet.csv`](data/full-scope-manifest-mainnet.csv) lists every one of the 332 candidate addresses actually checked on Ethereum mainnet (266 confirmed as real deployed Safe contracts), not just the identities and overlap cases flagged as findings above, so anyone can confirm the findings are the complete result of the screen rather than a cherry-picked subset.
 
 ### What's checked next (Mainnet)
 
-174 protocols is a growing survey, not a finished one. Open a GitHub Issue on this repo to suggest the next protocol to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run under the same licensed method, not opened to contributors). The Superchain-specific follow-up already covers 80 more protocols, and a third extension covers 87 more across Arbitrum and 10 other L2s and sidechains: see Part 2 and Part 3 below.
+175 protocols is a growing survey, not a finished one. Open a GitHub Issue on this repo to suggest the next protocol to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run under the same licensed method, not opened to contributors). The Superchain-specific follow-up already covers 80 more protocols, and a third extension covers 87 more across Arbitrum and 10 other L2s and sidechains: see Part 2 and Part 3 below.
 
 ### Verification
 
@@ -161,14 +163,14 @@ Every claim in this research follows the same verification discipline described 
 
 ### Status
 
-Last verified: 2026-09-11.
+Last verified: 2026-09-13.
 
-174 protocols checked, not a finished survey. Scope has grown from an original 41-protocol pilot across 28 research rounds, each one adding new protocols, resolving a previously parked case, or re-running the full cross-reference against every signer already on record.
+175 protocols checked, not a finished survey. Scope has grown from an original 41-protocol pilot across 29 research rounds, each one adding new protocols, resolving a previously parked case, or re-running the full cross-reference against every signer already on record.
 
 ### Caveats (Mainnet)
 
 - One of the 8 identities (Julien Bouteloup's second seat) and one seat behind another (c2tp.eth's Convex seat) don't reproduce through live event replay, because they sit on Safe versions old enough that their creation transactions don't log the data a pure event-based rebuild needs; both are confirmed by a direct `getOwners()` read instead. See Live verification above.
-- 174 protocols is a growing survey, not a finished one (see What's checked next). A protocol not listed here hasn't been checked, not confirmed clean.
+- 175 protocols is a growing survey, not a finished one (see What's checked next). A protocol not listed here hasn't been checked, not confirmed clean.
 - Three of the eight identified signers (Egorov, c2tp, Kazemian) sit together on Prisma Finance's multisig by Prisma's own deliberate, publicly disclosed design choice to recruit established founders for credibility, not a hidden concentration; treating that case the same as the other five would overstate how coordinated the overlap actually is.
 - One candidate address needed a correction from a sibling project in this research program. Ethena's `Owner_Multisig_3of11` is a real, confirmed 10-signer Safe, but an independent check in a sibling research project found it does not match the actual `owner()` of either EthenaMinting V2 or the USDe token (both a 24-hour Timelock instead), nor EthenaMinting V1's actual owner (a separate 5-of-10 Safe). The Safe is real; what it currently controls at Ethena, if anything, is unconfirmed.
 
@@ -190,7 +192,7 @@ Every case below is one of the seven findings detailed further down, sorted by h
 | 2 | `0x8f02b4a4...` (Pablo Veyrat) | 2 protocols (Morpho Blue, Angle), 6 Superchain Safes, plus both protocols' Ethereum mainnet Safes | Cross-protocol individual |
 | 3 | Optimism Foundation / Security Council Safe | 5 of 13 Superchain chains share the identical ProxyAdminOwner Safe | Chain governance |
 | 4 | Conduit (RaaS operator) | Signers recur across at least 4 nominally independent chains' own governance Safes | Chain governance |
-| 5 | `aavechan.eth` | 2 protocols (QiDao/Mai Finance, Aave), 3 Safe deployments | Cross-protocol individual |
+| 5 | `aavechan.eth` | 3 protocols (QiDao/Mai Finance, Aave, plus Gnosis Chain's canonical bridges on Ethereum mainnet), 4 Safe deployments | Cross-protocol individual |
 | 6 | `0x9A73D57B...` | 2 protocols (Compound III, Resolv), 3 Safe deployments | Cross-protocol individual |
 | 7 | `0xb291232F...` | 1 protocol (Aave), 7 Safe deployments across 5 chains (Protocol Guardian on Optimism, Base, Soneium, and Celo; AFC, Budget Incentive, Ahab, and Alc Safes on Ink and Celo) | Single-protocol concentration |
 
@@ -204,7 +206,7 @@ Every case below is one of the seven findings detailed further down, sorted by h
 2. **Matthew Graham / TokenLogic**, already named in Part 1 as an owner of both Gearbox's Technical Multisig and TokenLogic's own Safe on Ethereum, is now also confirmed as an owner of three of Aave's role-specific Safes (Merkl rewards distribution, a "Robot Guardian" automation role, and TokenLogic's own execution Safe), deployed at the identical addresses on both Ink and Celo. A second TokenLogic team member from that same Ethereum Safe is confirmed alongside him on both chains. This is the widest documented footprint of any named individual across this research: three protocols, three chains, five Safes.
    *What this means in practice: this is the single widest blast radius identified across this research. A key held by one small team now touches Gearbox, TokenLogic, and Aave at once.*
 
-3. **aavechan.eth**, an ENS-verified, Basescan-labeled Aave ecosystem operator, is confirmed as an owner of both QiDao/Mai Finance's Base and Fraxtal Guardian Safes and Aave's Celo "Masiv" Safe: three separate Safe deployments across two independently-run protocols with no institutional relationship, caught by the script's own cross-reference logic rather than assumed.
+3. **aavechan.eth**, an ENS-verified, Basescan-labeled Aave ecosystem operator, is confirmed as an owner of both QiDao/Mai Finance's Base and Fraxtal Guardian Safes and Aave's Celo "Masiv" Safe: three separate Safe deployments across two independently-run protocols with no institutional relationship, caught by the script's own cross-reference logic rather than assumed. A 2026-09-13 mainnet round found the same address as one of the 15 owners of the 8-of-15 Bridge Governor Safe that owns both of Gnosis Chain's canonical bridges on Ethereum (xDai Bridge and OmniBridge), a third unrelated protocol; Gnosis Chain's own docs list the Aave-Chan Initiative as one of the 15 governor organizations, so the seat is disclosed, the cross-protocol aggregation is what's new.
    *What this means in practice: an independent Aave-ecosystem operator, not Aave itself, also holds a guardian key on an unrelated lending protocol.*
 
 4. `0x9A73D57BB1fB280C5672A13f655675De25F13b70` is an owner of both Compound III's Base Pause Guardian Safe and Resolv's Base and Soneium Token Owner Safes. Compound III and Resolv have no institutional relationship. Found by the same cross-reference logic once Resolv's Safes were added to the registry, not assumed in advance.
