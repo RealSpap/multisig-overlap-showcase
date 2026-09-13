@@ -108,7 +108,7 @@ This report presents an independent, factual analysis of publicly available on-c
 |---|---|---|---|---|
 | 1 | **Michael Egorov** | Abracadabra + Yearn + Prisma + Threshold Network + Usual Money | 5 protocols | Founder of Curve Finance |
 | 1 | **c2tp.eth** | Convex (his own protocol) + Prisma + Votium + Curve Finance's own Emergency DAO + Resupply | 5 protocols | Pseudonymous creator of Convex Finance |
-| 3 | **Sam Kazemian** (high confidence, not independently name-confirmed) | Frax (his own protocol) + Prisma + Fraxtal's L1 chain-governance Safe | 3 protocols | Founder of Frax Finance |
+| 3 | **Sam Kazemian** | Frax (his own protocol) + Prisma + Fraxtal's L1 chain-governance Safe | 3 protocols | Founder of Frax Finance |
 | 3 | **Matthew Graham** | Gearbox + TokenLogic (his own service, incl. 2 of GHO Stablecoin's role Safes) | 3 protocols | Founder of TokenLogic |
 | 5 | **Ernesto Boado** (BGD Labs) | Lido + Balancer | 2 protocols | Infrastructure/security provider working with multiple protocols |
 | 5 | **Pablo Veyrat** | Angle (his own protocol) + Morpho | 2 protocols | Founder of Angle Protocol |
@@ -119,7 +119,7 @@ Egorov's and c2tp.eth's keys now each touch 5 independent protocols at once, tie
 
 This 2026-09-11 resync (scope grew 132→171 protocols) surfaced two reach increases among the original 8, both newly-tracked protocols rather than a change in who holds which key: Sam Kazemian's Frax-founder address is also a signer on Fraxtal's own L1 chain-governance Safe (ProxyAdminOwner), and Matthew Graham/TokenLogic's address now also sits on two of GHO Stablecoin's role-specific Safes (its RiskCouncil Safe and its own TokenLogic entity Safe).
 
-Three of the eight (Egorov, c2tp, Kazemian) sit together on Prisma Finance's emergency multisig, a deliberate, publicly disclosed design choice by Prisma to recruit established protocol founders for credibility, not a hidden concentration. The other five are more organic: independent protocols with no obvious institutional link to each other.
+Three of the eight (Egorov, c2tp, Kazemian) sit together on Prisma Finance's emergency multisig, a deliberate, publicly disclosed design choice by Prisma to recruit established protocol founders for credibility, not a hidden concentration. The other five are more organic: independent protocols with no obvious institutional link to each other. Sam Kazemian's identity was originally flagged as role-inference only; Prisma Finance's own docs (docs.prismafinance.com/governance/admin-functions/emergency-multisig, read 2026-09-13 via an archived snapshot after the live domain returned a DNS failure) name "Sam Kazemian - Frax Finance" explicitly among the multisig's 9 named members, and this address is the only Frax-affiliated signer among the Safe's on-chain owners, corroborating the identity with a primary-source name citation rather than role-inference alone.
 
 Matthew Graham and TokenLogic reappear in Part 2: the same address also sits on three of Aave's Superchain Safes across Ink and Celo. See Part 2 below for the full cross-chain picture.
 
@@ -159,7 +159,7 @@ The live query's own result table is queryable directly through [Dune's Query AP
 
 ### Verification
 
-Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. The mainnet registry holds 57 rows: the 8 identities, 1 correction (see Caveats below), and 48 shared-infrastructure or signer-overlap cases. Of the 9 hand-researched rows (the 8 identities plus the correction), 8 are at High confidence and 1 (Sam Kazemian's link to Frax, role-inference rather than a direct name-to-address citation) is at Medium confidence; the 48 shared-infrastructure cases are all independently sourced and at High confidence too, and are mechanically re-confirmed against the live on-chain query.
+Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. The mainnet registry holds 57 rows: the 8 identities, 1 correction (see Caveats below), and 48 shared-infrastructure or signer-overlap cases. Of the 9 hand-researched rows (the 8 identities plus the correction), all 9 are at High confidence (Sam Kazemian's link to Frax was upgraded from Medium on 2026-09-13, once Prisma's own docs corroborated it, see above); the 48 shared-infrastructure cases are all independently sourced and at High confidence too, and are mechanically re-confirmed against the live on-chain query.
 
 ### Status
 
