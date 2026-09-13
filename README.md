@@ -27,6 +27,7 @@ Live dashboard, click through for the interactive version.
 
 - [Methodology at a glance](#methodology-at-a-glance)
 - [Who this is for](#who-this-is-for)
+- [Get notified](#get-notified)
 - [At a glance](#at-a-glance)
 - [Part 1: Mainnet](#part-1-mainnet-175-protocols-8-named-identities)
 - [Part 2: Superchain](#part-2-superchain-80-protocols-7-signer-sharing-cases)
@@ -62,6 +63,10 @@ Each Part's own Method section below states only what's specific to that Part: h
 
 Protocol governance teams sizing up their own key concentration against comparable projects. Depositors, insurers, and risk desks pricing counterparty and key-compromise risk across a portfolio of protocols. Auditors and due-diligence teams who need a starting map of shared signers before their own engagement. Teams evaluating whether to license this method for their own protocol or portfolio. Every finding below cites its own primary source so it can be independently re-checked, not taken on faith.
 
+## Get notified
+
+No account needed on this repo: click Watch, then Custom, then Releases only, on this repo's GitHub page. Every research pass gets tagged as a release, title and body taken straight from that pass's own commit message, for a per-pass update feed. On Dune, star the dashboard to keep it in your own list, or set a scheduled alert on the query for a ping the moment a tracked Safe's owner set actually changes on-chain, not just when this repo gets updated.
+
 ## At a glance
 
 | | Part 1: Mainnet | Part 2: Superchain | Part 3: Other L2s | Total |
@@ -71,8 +76,6 @@ Protocol governance teams sizing up their own key concentration against comparab
 | Chains covered | Ethereum mainnet | 13 | 11 | 25 |
 | Shared-key findings | 8 named identities on 2+ protocols, plus 48 more shared-infrastructure cases | 7 documented cross-protocol/cross-chain cases, plus 30+ identical-signer-set chains | 64 of 87 protocols extend a pattern already found in Part 1 or Part 2 | |
 | Live event replay | Yes, on-chain | Yes, on-chain (9 of 13 chains) | Yes, on-chain (11 of 11 chains) | |
-
-Every major DeFi protocol discloses its own emergency and governance multisig signers, usually in its own docs. Nobody aggregates that across protocols or chains, so nobody could previously answer: if one person's key, or one shared signer set, were compromised, how many independent protocols or chains would be affected at the same time? This research answers that at three scales: first across 175 major protocols on Ethereum mainnet, then across Optimism's Superchain specifically, where the same protocol is often deployed on a dozen chains at once, then a third time on Arbitrum and 10 more L2s and sidechains deliberately outside the Superchain family.
 
 **Protocols referenced include:** Aave, Curve Finance, Compound III, Lido, Balancer, Yearn, Convex, Morpho Blue, Frax Finance, Chainlink Data Feeds, 1inch, and Beefy Finance.
 
@@ -92,7 +95,9 @@ The verification method behind this research is available under a commercial lic
 
 ## Disclaimer
 
-This report presents an independent, factual analysis of publicly available on-chain data (smart contract code, multisig signer sets, governance transactions) as of the date noted in the Status/Method sections below. Statements about which addresses or individuals hold administrative, multisig, or governance keys are based solely on on-chain records and publicly disclosed information cited inline; they are not allegations of wrongdoing, and no claim of illegal conduct, fraud, or misconduct is made or implied. Concentration of control or key-holder identity is reported as an observed structural fact, not as a moral or legal judgment on the individuals named. Findings reflect a snapshot in time; on-chain configurations, signer sets, and governance parameters can and do change after publication, and this report is not updated automatically to reflect such changes. This is independent research, not commissioned or audited by any protocol discussed, and it does not constitute legal, financial, or investment advice. Any individual or entity named in this report who believes information about them is inaccurate or outdated is invited to contact the author via [X](https://x.com/RealSpap) with supporting evidence; corrections will be issued promptly and transparently. Readers should independently verify all cited addresses, transactions, and figures before relying on them.
+This report presents an independent, factual analysis of publicly available on-chain data (smart contract code, multisig signer sets, governance transactions) as of the date noted in each Part's own Status/Method section above; it is not updated automatically as those signer sets and configurations change after publication.
+
+Full disclaimer, licensing, and program-wide notes: [methodology](https://realspap.github.io/methodology.html).
 
 ## Part 1: Mainnet (175 protocols, 8 named identities)
 
@@ -123,13 +128,15 @@ Three of the eight (Egorov, c2tp, Kazemian) sit together on Prisma Finance's eme
 
 Matthew Graham and TokenLogic reappear in Part 2: the same address also sits on three of Aave's Superchain Safes across Ink and Celo. See Part 2 below for the full cross-chain picture.
 
-A 2026-09-11 same-day follow-up round (round 28, scope grew 171→174 protocols) added three new mainnet protocols. None adds a new named identity, but each adds a new pseudonymous signer-overlap case:
+A 2026-09-11 same-day follow-up added three new mainnet protocols, none with a new named identity but each with a new pseudonymous signer-overlap case:
 
-A 2026-09-13 round (round 29, scope grew 174→175 protocols) added Gnosis Chain's canonical bridges: the 8-of-15 Bridge Governor Safe that is both the upgrade owner and the admin owner of the xDai Bridge and the OmniBridge on Ethereum (~$271M TVL). No new mainnet-internal overlap, but one of its 15 owners is aavechan.eth, already tracked below on QiDao/Mai Finance and Aave Safes, now confirmed on a third unrelated protocol; Gnosis Chain's own docs list the Aave-Chan Initiative as one of the 15 governor organizations, so the seat is disclosed, the cross-protocol aggregation is what's new.
+| Protocol | What was found |
+|---|---|
+| **Spiko** (RWA tokenized money-market funds) | New protocol added to scope, no overlap case yet attached |
+| **DeFiSaver** (DeFi position automation) | Its admin signer is also one of Aave's own official Governance Guardian signers |
+| **Veda** (fka Se7en Seas, the BoringVault infrastructure operator behind ether.fi's Liquid vaults and others) | Two vault-governance signers are also EtherFi and LombardFinance signers respectively, 2 of 5 signers shared on the Lombard case |
 
-- **Spiko** (RWA tokenized money-market funds).
-- **DeFiSaver** (DeFi position automation): its admin signer is also one of Aave's own official Governance Guardian signers.
-- **Veda** (fka Se7en Seas, the BoringVault infrastructure operator behind ether.fi's Liquid vaults and others): two vault-governance signers are also EtherFi and LombardFinance signers respectively, 2 of 5 signers shared on the Lombard case.
+A 2026-09-13 addition covers Gnosis Chain's canonical bridges: the 8-of-15 Bridge Governor Safe that is both the upgrade owner and the admin owner of the xDai Bridge and the OmniBridge on Ethereum (~$271M TVL). No new mainnet-internal overlap, but one of its 15 owners is aavechan.eth, already tracked below on QiDao/Mai Finance and Aave Safes, now confirmed on a third unrelated protocol; Gnosis Chain's own docs list the Aave-Chan Initiative as one of the 15 governor organizations, so the seat is disclosed, the cross-protocol aggregation is what's new.
 
 Aave's own Governance Guardian Safe, already tracked cross-chain in Part 2 and Part 3, was added to this mainnet scope for the first time this round specifically so the DeFiSaver overlap shows up in the live query below, not just in the hand-curated registry.
 
@@ -145,7 +152,7 @@ The table above replays the actual on-chain event history of every Safe contract
 
 Live query: [dune.com/s_pap/multisig-overlap](https://dune.com/s_pap/multisig-overlap).
 
-**Get notified**, no account needed on this repo: click Watch, then Custom, then Releases only, on this repo's GitHub page for a per-pass update feed. On Dune, star the dashboard to keep it in your own list, or set a scheduled alert on the query for a ping the moment a tracked Safe's owner set actually changes on-chain, not just when this repo gets updated.
+**Get notified**: see [Get notified](#get-notified) above.
 
 ### Open data (Mainnet)
 
@@ -201,25 +208,20 @@ Every case below is one of the seven findings detailed further down, sorted by h
 **Four separate cases of one signer holding real power across genuinely unrelated protocols:**
 
 1. `0x8f02b4a44Eacd9b8eE7739aa0BA58833DD45d002` is an owner of both Morpho Blue's governance Safe (**Base, World Chain, and Fraxtal**) and Angle Protocol's Guardian Safe (**Optimism, Base, and Celo**), six separate Safe deployments in total. Morpho and Angle have no institutional relationship. The same address also sits on both protocols' Ethereum mainnet Safes (already on record in Part 1 for Angle), so a single compromised key here threatens Morpho and Angle simultaneously, across mainnet and six Superchain deployments. It's identified with **high confidence as Pablo Veyrat, co-founder of Angle Protocol and Merkl**, named explicitly with this exact address by Morpho Association's own governance forum post proposing him as a multisig signer.
-   *What this means in practice: a depositor treating Morpho Blue and Angle as independent risk exposures is wrong. One compromised key ends both at once, on six chains simultaneously.*
 
 2. **Matthew Graham / TokenLogic**, already named in Part 1 as an owner of both Gearbox's Technical Multisig and TokenLogic's own Safe on Ethereum, is now also confirmed as an owner of three of Aave's role-specific Safes (Merkl rewards distribution, a "Robot Guardian" automation role, and TokenLogic's own execution Safe), deployed at the identical addresses on both Ink and Celo. A second TokenLogic team member from that same Ethereum Safe is confirmed alongside him on both chains. This is the widest documented footprint of any named individual across this research: three protocols, three chains, five Safes.
    *What this means in practice: this is the single widest blast radius identified across this research. A key held by one small team now touches Gearbox, TokenLogic, and Aave at once.*
 
 3. **aavechan.eth**, an ENS-verified, Basescan-labeled Aave ecosystem operator, is confirmed as an owner of both QiDao/Mai Finance's Base and Fraxtal Guardian Safes and Aave's Celo "Masiv" Safe: three separate Safe deployments across two independently-run protocols with no institutional relationship, caught by the script's own cross-reference logic rather than assumed. A 2026-09-13 mainnet round found the same address as one of the 15 owners of the 8-of-15 Bridge Governor Safe that owns both of Gnosis Chain's canonical bridges on Ethereum (xDai Bridge and OmniBridge), a third unrelated protocol; Gnosis Chain's own docs list the Aave-Chan Initiative as one of the 15 governor organizations, so the seat is disclosed, the cross-protocol aggregation is what's new.
-   *What this means in practice: an independent Aave-ecosystem operator, not Aave itself, also holds a guardian key on an unrelated lending protocol.*
 
 4. `0x9A73D57BB1fB280C5672A13f655675De25F13b70` is an owner of both Compound III's Base Pause Guardian Safe and Resolv's Base and Soneium Token Owner Safes. Compound III and Resolv have no institutional relationship. Found by the same cross-reference logic once Resolv's Safes were added to the registry, not assumed in advance.
-   *What this means in practice: a pause-guardian key for one blue-chip lending protocol doubles as a token-owner key for an unrelated stablecoin issuer.*
 
 5. **5 of the 13 tracked chains (Optimism, Mode, Ink, Soneium, Zora) delegate their entire L1 chain-governance authority, the ProxyAdminOwner role able to upgrade nearly any part of that chain's L1 bridge/rollup contracts, to the identical Gnosis Safe**: a nested 2-of-2 between the Optimism Foundation and the Security Council. Unichain's own separate Safe shares 2 of its 3 signers with that same pair. This isn't one protocol deployed six times: these are six independently branded chains, several run day-to-day by entirely separate companies, that have each chosen to hand core upgrade rights to the same small, centrally Optimism-Foundation-operated group.
    *What this means in practice: this is the single largest concentration in the dataset. One Safe's signers can upgrade the core L1 contracts of 6 of the 13 chains this project tracks.*
 
 6. **Conduit**, the Rollup-as-a-Service operator behind Mode and Derive Chain, controls both chains' core chain-governance role through the identical Safe. Four of that Safe's 11 signers individually also sit on Zora Network's and/or BOB's own separate chain-governance Safes: the same infrastructure-provider personnel holding upgrade rights across at least four nominally independent chains at once.
-   *What this means in practice: several chains presented to users as independently operated share upgrade-key personnel with a common infrastructure vendor, not just with each other.*
 
 7. `0xb291232F480F41c75802C4a60F1D2AC03404Afef` is a pseudonymous signer confirmed on Aave's own core Protocol Guardian Safe on four chains (Optimism, Base, Soneium, and Celo) and also on a separate 3-person cluster controlling four of Aave's Ink and Celo role-specific Safes (AFC_Safe, Budget_Incentive_Safe, Ahab_Safe, and Alc_Safe): seven distinct Safe formations across five chains, all within Aave alone. Unlike the four cross-protocol cases above, this one never leaves a single protocol: it's one Aave ecosystem operator trusted with keys across nearly every layer of Aave's own Superchain footprint at once.
-   *What this means in practice: a single pseudonymous key now touches seven of Aave's own Superchain Safes across five chains. Even a signer confined to one protocol can still be that protocol's own single point of failure everywhere it's deployed.*
 
 Beyond those cases, the sample also confirms a **Superchain-specific pattern**: several protocols run the exact same signer set across multiple chains at once.
 
@@ -268,8 +270,6 @@ Beyond those cases, the sample also confirms a **Superchain-specific pattern**: 
 
 </details>
 
-The practical read: a user spreading exposure across a protocol's deployments on different Superchain chains to "diversify" isn't actually diversifying against key compromise if it's the same multisig signing off everywhere. One compromised key set can hit every chain simultaneously. That's a different risk shape than Part 1's "unrelated founders sharing keys" story, but the Morpho/Angle, Matthew Graham/TokenLogic, aavechan.eth, and Compound III/Resolv cases show both risk shapes combine in practice.
-
 This dataset has grown through 32 research passes so far, each one adding a new protocol category, a new chain, or re-checking an existing finding.
 
 ### Dashboard
@@ -278,7 +278,7 @@ This Part is covered in the [main Multisig Overlap Dune dashboard](https://dune.
 
 A live on-chain event-replay query now also exists for this part: [query 8678613](https://dune.com/queries/8678613), covering 9 of the 13 Superchain-family chains that currently have a raw-logs schema on Dune (Base, BOB, Celo, Ink, Mode, Optimism, Unichain, and World Chain, plus Ethereum mainnet separately for L1 chain-governance). The other 5 (Derive, Fraxtal, Lisk, Soneium, Zora) have no indexed logs table on Dune yet and aren't event-replayed.
 
-**Get notified of new passes**, no account needed on this repo: click Watch, then Custom, then Releases only, on this repo's GitHub page. Every research pass gets tagged as a release, title and body taken straight from that pass's own commit message. On Dune, star the dashboard to have it in your own list, or set a scheduled alert on the query for a ping when a tracked Safe's owner set changes.
+**Get notified**: see [Get notified](#get-notified) above.
 
 ### Open data (Superchain)
 
@@ -288,17 +288,17 @@ The dashboard's own table above is queryable directly through [Dune's Query API]
 
 ### What's checked next (Superchain)
 
-Not a finished survey by design (see Status below). Open a GitHub Issue on this repo to suggest the next protocol or chain to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run under the same licensed method, not opened to contributors).
+Same process as Part 1.
 
 ### Verification
 
-Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. On the Superchain side, 93 of 93 hypotheses currently in the registry pass clean at High confidence.
+93 of 93 hypotheses currently in the registry pass clean at High confidence, same discipline as Part 1.
 
 ### Status
 
 Last verified: 2026-09-11.
 
-202 Safes across 168 deployments and 80 protocols, not a finished survey. The most recent pass turned to who controls the 13 tracked chains themselves rather than the dapps on them: a real Gnosis Safe confirmed as ProxyAdminOwner on all 13, 5 of them sharing the identical Optimism Foundation/Security Council Safe and 2 more (Mode, Derive) sharing an identical Safe operated by Conduit whose signers recur on Zora's and BOB's own chain-governance Safes too. A second thread into centralized stablecoin issuers (USDC, USDT, PYUSD) found a complete negative: none of the three is controlled by a Gnosis Safe on any tracked chain.
+202 Safes across 168 deployments and 80 protocols, not a finished survey. The most recent pass turned to who controls the 13 tracked chains themselves rather than the dapps on them: a real Gnosis Safe confirmed as ProxyAdminOwner on all 13, 5 of them sharing the identical Optimism Foundation/Security Council Safe and 2 more (Mode, Derive) sharing an identical Safe operated by Conduit whose signers recur on Zora's and BOB's own chain-governance Safes too.
 
 ### Caveats (Superchain)
 
@@ -307,7 +307,7 @@ Last verified: 2026-09-11.
 - Several same-signer-set findings above are expected, not new institutional links, when the same team knowingly operates multiple deployments (for example Zora Inc. operating both Zora the protocol and Zora Network the chain, or Frax operating Fraxtal), each such case is labeled inline as "expected" rather than presented as a surprising finding.
 - A negative result was also checked and is reported here for completeness: none of the three centralized stablecoin issuers checked (USDC, USDT, PYUSD) is controlled by a Gnosis Safe on any tracked chain.
 
-This is independent research, not commissioned, audited, or endorsed by any protocol, chain, or individual named above. Everything stated is held to the confidence level the on-chain data actually supports.
+Everything stated is held to the confidence level the on-chain data actually supports.
 
 ## Part 3: Arbitrum and other L2s (87 protocols, 64 pattern matches)
 
@@ -315,7 +315,7 @@ An extension of the same method beyond the Superchain family covered in Part 2, 
 
 - **Arbitrum** (Nitro, the Arbitrum DAO and Security Council): first, as a pilot pass.
 - **Seven more chains**, chosen for real TVL and a real governance or emergency multisig: Polygon PoS, BNB Chain, Avalanche C-Chain, zkSync Era, Linea, Scroll, and Berachain.
-- **Three more, explicitly second-tier, chains**: Mantle, Blast, and Sonic, added in a follow-up pass.
+- **Three more, explicitly second-tier, chains**: Mantle, Blast, and Sonic, added in a follow-up pass. Deliberately chosen unlike the first 8, which were picked for real TVL: on these three, real DeFi TVL is thinner and less stable.
 
 Parts 1 and 2 both ask whether the same signer or Safe holds trusted power across multiple unrelated protocols or chains at once; this part asks the identical question a third time, on a third terrain, and every signer recovered here is cross-referenced against the full combined roster of Part 1 and Part 2, not just one or the other.
 
@@ -479,7 +479,7 @@ Two new real Safes never seen before in this research were also confirmed on Ber
 
 #### Mantle
 
-Mantle, Blast, and Sonic were deliberately chosen as second-tier chains, unlike the first 8: real DeFi TVL is thinner and less stable on all three. Mantle (about $95M chain-level TVL at research time) produced a respectable haul of real, disclosed multisigs.
+Mantle (about $95M chain-level TVL at research time; see above for why Mantle, Blast, and Sonic are second-tier chains) produced a respectable haul of real, disclosed multisigs.
 
 <details>
 <summary>Show all 4 cases</summary>
@@ -497,7 +497,7 @@ Two new real Safes never seen before in this research were also confirmed on Man
 
 - **New Safes**: **Merchant Moe** (its Liquidity Book and legacy factories share one 5-owner Safe owner) and **INIT Capital** (its AccessControlManager owner, 7 signers).
 - **Admin-recovery call reverts outright**: Pendle Finance's governanceProxy, Lendle's PoolAddressesProvider owner.
-- **No deployed bytecode at all**, meaning a single externally-owned key rather than a multisig controls the role: Silo Finance's SiloFactory owner (despite Silo using a real Safe for this exact role on every other chain this research tracks it on), Agni Finance's factory owner, and Lendle's separate emergency-admin address.
+- **No deployed bytecode at all**, meaning a single externally-owned key rather than a multisig controls the role: Silo Finance's SiloFactory owner (a bare EOA here and on Sonic below, though Silo uses a real Safe for this same role on mainnet, Optimism, Base, Ink, Arbitrum, BNB Chain, and Avalanche), Agni Finance's factory owner, and Lendle's separate emergency-admin address.
 - **Claimed by third-party listings but no bytecode on this specific chain**: 1inch's Aggregation Router V6, genuinely absent on Mantle though real and Safe-owned on Sonic.
 
 #### Blast
@@ -545,13 +545,13 @@ Two new real Safes never seen before in this research were also confirmed on Son
 - A live on-chain event-replay query now exists for Part 3: [query 8679972](https://dune.com/queries/8679972), covering all 11 of Part 3's tracked chains (full raw-logs coverage, unlike Part 2's partial coverage). It confirms 0 rows (no signer holds keys on 2+ different protocols within Part 3 alone), matching the original manual research findings above.
 - Radiant Capital's BNB Chain PoolAdmin finding is a partial signer match (7 of 11), not a full identical set: read it as "shares most of its signers with," not "is the same Safe as."
 - API3's manager multisig address is chain-invariant and was tested directly via `getOwners()` on zkSync Era, Berachain, and Blast specifically, since API3's own deployment registry does not list a folder for any of the three; the address still resolves to a real, matching Safe (fully on Berachain and Blast, partially on zkSync Era), a slightly different sourcing standard than the other chains, where an explicit per-chain deployment file exists.
-- Mantle, Blast, and Sonic were deliberately chosen as second-tier chains, unlike the first 8: real DeFi TVL is thinner and less stable on all three, and Blast in particular is reported as a genuinely weak, low-signal result (2 of 6 protocols tested resolved to a real multisig) rather than forced to look comparable to Mantle or Sonic.
-- Silo Finance's SiloFactory owner resolving to a bare externally-owned address, not a Safe, on both Mantle and Sonic is a genuine finding about that specific role on those two chains, not a claim about Silo Finance's security posture generally: Silo uses a real multisig for this same role on every other chain this research tracks it on (mainnet, Optimism, Base, Ink, Arbitrum, BNB Chain, Avalanche).
+- Mantle, Blast, and Sonic are second-tier chains (see above for why); Blast in particular is a genuinely weak, low-signal result (see Blast section) rather than forced to look comparable to Mantle or Sonic.
+- Silo Finance's SiloFactory owner resolving to a bare externally-owned address on Mantle and Sonic is a genuine per-chain finding, not a claim about Silo's security posture generally (see Mantle section above).
 - Several of the Safe addresses used across Part 3 were derived by a second on-chain call (`owner()`, or a role-specific getter) rather than read directly from a published multisig list; each derivation is individually logged and cross-checked before use.
 
 ### Verification
 
-Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. 66 hypotheses across the 11 chain-scoped registries (8 for Arbitrum, 58 across the other 10 chains), all at High confidence.
+66 hypotheses across the 11 chain-scoped registries (8 for Arbitrum, 58 across the other 10 chains), all at High confidence, same discipline as Part 1.
 
 ### Status
 
@@ -559,14 +559,16 @@ Last verified: 2026-09-12.
 
 87 protocols across 11 chains, four passes deep: a pilot on Arbitrum (12 protocols), a same-day pass across seven more chains (48 protocols), a follow-up pass across three more second-tier chains (26 protocols), then an automated-loop round adding one more protocol on Arbitrum (Morpho Blue). Not a finished survey on any of the 11; live event-replay verification now exists for this part (see Caveats above).
 
-This is independent research, not commissioned, audited, or endorsed by any protocol, chain, or individual named above. Everything stated is held to the confidence level the on-chain data actually supports.
+Everything stated is held to the confidence level the on-chain data actually supports.
 
 ## About
 
-This is part of a small, ongoing program of independent on-chain research, same discipline throughout: primary-source anchors, on-chain reconstruction, corrections issued openly when something's found wrong. The sibling project [onchain-postmortems](https://github.com/RealSpap/onchain-postmortems) applies the same discipline to DeFi security incidents; see that repo's own at-a-glance table for the current incident count, recomputed loss total, and corrections made, rather than duplicating fast-moving figures here that would only go stale again. Ongoing work and dashboards: [Dune](https://dune.com/s_pap), [X](https://x.com/RealSpap).
+About this research program: see [methodology](https://realspap.github.io/methodology.html).
+
+Related work: the sibling project [onchain-postmortems](https://github.com/RealSpap/onchain-postmortems) applies the same discipline to DeFi security incidents; see that repo's own at-a-glance table for the current incident count, recomputed loss total, and corrections made, rather than duplicating fast-moving figures here that would only go stale again.
 
 Interested in this method for your own protocol or portfolio? DM [@RealSpap](https://x.com/RealSpap) on X.
 
 ## License
 
-All rights reserved. This repository documents the results; the tool itself is available under a commercial license, see above.
+All rights reserved for this repository's own findings and documentation. Program-wide licensing notes: [methodology](https://realspap.github.io/methodology.html).
