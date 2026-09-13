@@ -20,6 +20,9 @@ The same question, checked at three scales:
 
 Separately, 30+ protocols reuse the identical Gnosis Safe signer set on multiple chains at once, so spreading exposure across a protocol's chain deployments doesn't actually diversify against key compromise.
 
+[![Dashboard preview](assets/dashboard-preview.png)](https://dune.com/s_pap/multisig-overlap)
+Live dashboard, click through for the interactive version.
+
 ## Contents
 
 - [Methodology at a glance](#methodology-at-a-glance)
