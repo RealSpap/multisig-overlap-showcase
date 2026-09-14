@@ -75,7 +75,7 @@ No account needed on this repo: click Watch, then Custom, then Releases only, on
 | Safes checked | 332 signer slots tested, 266 confirmed real Safes | 215 Safes across 172 deployments | 121 candidates tested, 89 confirmed real Safes | 570 confirmed Safe contracts |
 | Chains covered | Ethereum mainnet | 13 | 11 | 25 |
 | Shared-key findings | 8 named identities on 2+ protocols, plus 48 more shared-infrastructure cases | 7 documented cross-protocol/cross-chain cases, plus 30+ identical-signer-set chains | 64 of 87 protocols extend a pattern already found in Part 1 or Part 2 | |
-| Live event replay | Yes, on-chain | Yes, on-chain (9 of 13 chains) | Yes, on-chain (11 of 11 chains) | |
+| Live event replay | Yes, on-chain | Yes, on-chain (8 of 13 chains, plus Ethereum mainnet for L1 governance) | Yes, on-chain (11 of 11 chains) | |
 
 **Protocols referenced include:** Aave, Curve Finance, Compound III, Lido, Balancer, Yearn, Convex, Morpho Blue, Frax Finance, Chainlink Data Feeds, 1inch, and Beefy Finance.
 
@@ -91,11 +91,11 @@ No account needed on this repo: click Watch, then Custom, then Releases only, on
 
 ## Access to the tool
 
-The verification method behind this research is available under a commercial license, not published in this repository. The findings below were produced with it and are independently reproducible by anyone with the same access; this repo documents the results, not the mechanism. Want a free preview first? [Check your Safe](https://realspap.github.io/tools/check-your-safe.html) reads any Safe's owners live from chain, in your browser, and checks them against the three identities already named in this research, no account needed. Reach out via [RealSpap on X](https://x.com/RealSpap) for licensing.
+The verification method behind this research is available under a commercial license, not published in this repository. The findings below were produced with it and are independently reproducible by anyone with the same access; this repo documents the results, not the mechanism. Want a free preview first? [Check your Safe](https://realspap.github.io/tools/check-your-safe.html) reads any Safe's owners live from chain, in your browser, and checks them against the nine identities already named in this research, no account needed. Reach out via [RealSpap on X](https://x.com/RealSpap) for licensing.
 
 ## Disclaimer
 
-This report presents an independent, factual analysis of publicly available on-chain data (smart contract code, multisig signer sets, governance transactions) as of the date noted in each Part's own Status/Method section above; it is not updated automatically as those signer sets and configurations change after publication.
+This report presents an independent, factual analysis of publicly available on-chain data (smart contract code, multisig signer sets, governance transactions) as of the date noted in each Part's own Status/Method section below; it is not updated automatically as those signer sets and configurations change after publication.
 
 Full disclaimer, licensing, and program-wide notes: [methodology](https://realspap.github.io/methodology.html).
 
@@ -216,8 +216,10 @@ Every case below is one of the seven findings detailed further down, sorted by h
 
 4. `0x9A73D57BB1fB280C5672A13f655675De25F13b70` is an owner of both Compound III's Base Pause Guardian Safe and Resolv's Base and Soneium Token Owner Safes. Compound III and Resolv have no institutional relationship. Found by the same cross-reference logic once Resolv's Safes were added to the registry, not assumed in advance.
 
-5. **5 of the 13 tracked chains (Optimism, Mode, Ink, Soneium, Zora) delegate their entire L1 chain-governance authority, the ProxyAdminOwner role able to upgrade nearly any part of that chain's L1 bridge/rollup contracts, to the identical Gnosis Safe**: a nested 2-of-2 between the Optimism Foundation and the Security Council. Unichain's own separate Safe shares 2 of its 3 signers with that same pair. This isn't one protocol deployed six times: these are six independently branded chains, several run day-to-day by entirely separate companies, that have each chosen to hand core upgrade rights to the same small, centrally Optimism-Foundation-operated group.
-   *What this means in practice: this is the single largest concentration in the dataset. One Safe's signers can upgrade the core L1 contracts of 6 of the 13 chains this project tracks.*
+**Three more cases of concentrated control, but of a different kind: chain-level governance concentration (cases 5 and 6) and single-protocol concentration (case 7), rather than one signer spanning unrelated protocols:**
+
+5. **5 of the 13 tracked chains (Optimism, Mode, Ink, Soneium, Zora) delegate their entire L1 chain-governance authority, the ProxyAdminOwner role able to upgrade nearly any part of that chain's L1 bridge/rollup contracts, to the identical Gnosis Safe**: a nested 2-of-2 between the Optimism Foundation and the Security Council. Unichain's own separate Safe shares 2 of its 3 signers with that same pair, but it is a distinct Safe, not the identical one. This isn't one protocol deployed five times: these are five independently branded chains, several run day-to-day by entirely separate companies, that have each chosen to hand core upgrade rights to the same small, centrally Optimism-Foundation-operated group.
+   *What this means in practice: this is the single largest concentration in the dataset. One Safe's signers can upgrade the core L1 contracts of 5 of the 13 chains this project tracks, with Unichain's own separate Safe sharing most of the same signers on top of that.*
 
 6. **Conduit**, the Rollup-as-a-Service operator behind Mode and Derive Chain, controls both chains' core chain-governance role through the identical Safe. Four of that Safe's 11 signers individually also sit on Zora Network's and/or BOB's own separate chain-governance Safes: the same infrastructure-provider personnel holding upgrade rights across at least four nominally independent chains at once.
 
@@ -254,7 +256,7 @@ Beyond those cases, the sample also confirms a **Superchain-specific pattern**: 
 | **API3** | Its "manager multisig" is deployed at the literal same contract address with the identical 8 owners on seven chains (Optimism, Base, Mode, Unichain, Soneium, World Chain, and Fraxtal), the widest spread in the dataset, ahead of Renzo Protocol |
 | **deBridge** | Its admin multisig (holding `DEFAULT_ADMIN_ROLE` on its core contracts) returns the identical 8 owners at a 5-of-8 threshold on both Optimism and Base, at two different Safe addresses |
 | **Chainlink Data Feeds** | Its ETH/USD feed owner Safe returns the identical 9 owners at a 4-of-9 threshold on four chains (Optimism, Unichain, Soneium, and Celo), at four different Safe addresses per chain; the same feed's owner on Base and Ink is not a Safe at all |
-| **Curve Finance** | Its Emergency DAO Safe is deployed at the literal same contract address with the identical 9 owners at a 5-of-9 threshold on six chains at once (Base, Celo, Fraxtal, Ink, Optimism, and Unichain), the widest same-address propagation in this dataset |
+| **Curve Finance** | Its Emergency DAO Safe is deployed at the literal same contract address with the identical 9 owners at a 5-of-9 threshold on six chains at once (Base, Celo, Fraxtal, Ink, Optimism, and Unichain), among the widest same-address propagations in this dataset |
 | **Ethena** | Its multisig returns the identical 10 owners at a 5-of-10 threshold on four chains (Optimism, Base, Mode, and Fraxtal), with Optimism and Fraxtal at the literal same contract address |
 | **Frax Finance** | Its OFT-owner Safes return an identical 6-signer, 3-of-6 committee on six chains (Base, Mode, Ink, Unichain, World Chain, and Optimism), distinct from its own Comptroller-role Safes on Fraxtal and Optimism, which share only a partial subset of that committee |
 | **Resolv** | Its Base and Soneium Safes share 4 of their respective 6 owners: a partial overlap, not a full-identical-set one |
@@ -277,7 +279,7 @@ This dataset has grown through 33 research passes so far, each one adding a new 
 
 This Part is covered in the [main Multisig Overlap Dune dashboard](https://dune.com/s_pap/multisig-overlap), alongside Parts 1 and 3.
 
-A live on-chain event-replay query now also exists for this part: [query 8678613](https://dune.com/queries/8678613), covering 9 of the 13 Superchain-family chains that currently have a raw-logs schema on Dune (Base, BOB, Celo, Ink, Mode, Optimism, Unichain, and World Chain, plus Ethereum mainnet separately for L1 chain-governance). The other 5 (Derive, Fraxtal, Lisk, Soneium, Zora) have no indexed logs table on Dune yet and aren't event-replayed.
+A live on-chain event-replay query now also exists for this part: [query 8678613](https://dune.com/queries/8678613), covering 8 of the 13 Superchain-family chains that currently have a raw-logs schema on Dune (Base, BOB, Celo, Ink, Mode, Optimism, Unichain, and World Chain), plus Ethereum mainnet separately for L1 chain-governance. The other 5 (Derive, Fraxtal, Lisk, Soneium, Zora) have no indexed logs table on Dune yet and aren't event-replayed.
 
 **Get notified**: see [Get notified](#get-notified) above.
 
