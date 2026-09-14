@@ -301,7 +301,9 @@ Same process as Part 1.
 
 Last verified: 2026-09-14.
 
-215 Safes across 172 deployments and 81 protocols, not a finished survey. The most recent pass (33rd) added Balancer, tracked on mainnet since the first pass but never checked here: 13 governance Safes across Optimism, Base, Mode and Fraxtal with identical DAO and Emergency signer sets on all 4 chains, and no new cross-protocol overlap inside this part. Its own TVL on these chains is small (about $1.8M); what these Safes control is the shared Vault's permission system. An earlier pass turned to who controls the 13 tracked chains themselves rather than the dapps on them: a real Gnosis Safe confirmed as ProxyAdminOwner on all 13, 5 of them sharing the identical Optimism Foundation/Security Council Safe and 2 more (Mode, Derive) sharing an identical Safe operated by Conduit whose signers recur on Zora's and BOB's own chain-governance Safes too.
+215 Safes across 172 deployments and 81 protocols, not a finished survey. The most recent pass (33rd) added Balancer, tracked on mainnet since the first pass but never checked here: 13 governance Safes across Optimism, Base, Mode and Fraxtal with identical DAO and Emergency signer sets on all 4 chains, and no new cross-protocol overlap inside this part. Its own TVL on these chains is small (about $1.8M); what these Safes control is the shared Vault's permission system.
+
+An earlier pass turned to who controls the 13 tracked chains themselves rather than the dapps on them: a real Gnosis Safe confirmed as ProxyAdminOwner on all 13, 5 of them sharing the identical Optimism Foundation/Security Council Safe and 2 more (Mode, Derive) sharing an identical Safe operated by Conduit whose signers recur on Zora's and BOB's own chain-governance Safes too.
 
 ### Caveats (Superchain)
 
