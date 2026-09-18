@@ -15,8 +15,8 @@
 The same question, checked at three scales:
 
 - **Ethereum mainnet**: 8 named individuals hold multisig signer keys across 2 or more unrelated DeFi protocols at once, identified across 175 protocols checked directly on-chain. Two of them, Michael Egorov and c2tp.eth, are now tied at 5 protocols each.
-- **Optimism's Superchain**: the same pattern recurs 7 more times, with one named individual (aavechan.eth), two of the original 8 turning up again on new chains, two chain-operator entities concentrating upgrade keys across multiple chains at once, and two more pseudonymous signers, one linking Compound III to Resolv and the other holding keys across seven of Aave's own Superchain Safes.
-- **Arbitrum and 10 more L2s and sidechains**: an already-tracked signer set or Safe address reappears on 65 of 88 further protocols checked, including c2tp.eth now confirmed on 4 of these 11 chains.
+- **Optimism's Superchain**: the same pattern recurs 8 more times, with one named individual (aavechan.eth), two of the original 8 turning up again on new chains, two chain-operator entities concentrating upgrade keys across multiple chains at once, two more pseudonymous signers, one linking Compound III to Resolv and the other holding keys across seven of Aave's own Superchain Safes, plus a newly-confirmed case linking Kelp DAO and Stader Labs (shared founders, expected).
+- **Arbitrum and 10 more L2s and sidechains**: an already-tracked signer set or Safe address reappears on 66 of 94 further protocols checked, including c2tp.eth now confirmed on 4 of these 11 chains.
 
 Separately, 30+ protocols reuse the identical Gnosis Safe signer set on multiple chains at once, so spreading exposure across a protocol's chain deployments doesn't actually diversify against key compromise.
 
@@ -30,8 +30,8 @@ Live dashboard, click through for the interactive version.
 - [Get notified](#get-notified)
 - [At a glance](#at-a-glance)
 - [Part 1: Mainnet](#part-1-mainnet-175-protocols-8-named-identities)
-- [Part 2: Superchain](#part-2-superchain-81-protocols-7-signer-sharing-cases)
-- [Part 3: Arbitrum and other L2s](#part-3-arbitrum-and-other-l2s-88-protocols-65-pattern-matches)
+- [Part 2: Superchain](#part-2-superchain-85-protocols-8-signer-sharing-cases)
+- [Part 3: Arbitrum and other L2s](#part-3-arbitrum-and-other-l2s-94-protocols-65-pattern-matches)
   - [Arbitrum](#arbitrum)
   - [Polygon](#polygon)
   - [BNB Chain](#bnb-chain)
@@ -71,10 +71,10 @@ No account needed on this repo: click Watch, then Custom, then Releases only, on
 
 | | Part 1: Mainnet | Part 2: Superchain | Part 3: Other L2s | Total |
 |---|---|---|---|---|
-| Protocols checked | 175 | 81 | 88 (across 11 chains) | 344 |
-| Safes checked | 332 signer slots tested, 266 confirmed real Safes | 215 Safes across 172 deployments | 122 candidates tested, 90 confirmed real Safes | 571 confirmed Safe contracts |
+| Protocols checked | 175 | 85 | 94 (across 11 chains) | 354 |
+| Safes checked | 332 signer slots tested, 266 confirmed real Safes | 264 Safes across 214 deployments | 169 candidates tested, 159 confirmed real Safes | 689 confirmed Safe contracts |
 | Chains covered | Ethereum mainnet | 13 | 11 | 25 |
-| Shared-key findings | 8 named identities on 2+ protocols, plus 48 more shared-infrastructure cases | 7 documented cross-protocol/cross-chain cases, plus 30+ identical-signer-set chains | 65 of 88 protocols extend a pattern already found in Part 1 or Part 2 | |
+| Shared-key findings | 8 named identities on 2+ protocols, plus 48 more shared-infrastructure cases | 8 documented cross-protocol/cross-chain cases, plus 34+ identical-signer-set chains | 66 of 94 protocols extend a pattern already found in Part 1 or Part 2 | |
 | Live event replay | Yes, on-chain | Yes, on-chain (8 of 13 chains, plus Ethereum mainnet for L1 governance) | Yes, on-chain (11 of 11 chains) | |
 
 **Protocols referenced include:** Aave, Curve Finance, Compound III, Lido, Balancer, Yearn, Convex, Morpho Blue, Frax Finance, Chainlink Data Feeds, 1inch, and Beefy Finance.
@@ -181,13 +181,15 @@ Last verified: 2026-09-13.
 - Three of the eight identified signers (Egorov, c2tp, Kazemian) sit together on Prisma Finance's multisig by Prisma's own deliberate, publicly disclosed design choice to recruit established founders for credibility, not a hidden concentration; treating that case the same as the other five would overstate how coordinated the overlap actually is.
 - One candidate address needed a correction from a sibling project in this research program. Ethena's `Owner_Multisig_3of11` is a real, confirmed 10-signer Safe, but an independent check in a sibling research project found it does not match the actual `owner()` of either EthenaMinting V2 or the USDe token (both a 24-hour Timelock instead), nor EthenaMinting V1's actual owner (a separate 5-of-10 Safe). The Safe is real; what it currently controls at Ethena, if anything, is unconfirmed.
 
-## Part 2: Superchain (81 protocols, 7 signer-sharing cases)
+## Part 2: Superchain (85 protocols, 8 signer-sharing cases)
 
 Extension of Part 1 to Optimism's Superchain (OP Mainnet, Base, Mode, Unichain, Ink, Soneium, Lisk, Celo, Zora Network, World Chain, Fraxtal, Derive Chain, and BOB so far). Part 1 asks "does the same person hold emergency keys on multiple, unrelated protocols at once?" This part asks a Superchain-specific variant: "does the same signer set control a protocol's admin multisig on multiple chains at once, and does anyone share keys across genuinely different Superchain protocols?"
 
 ### Method
 
-215 Gnosis Safe multisig contracts across 172 protocol/chain deployments, checked directly on-chain (see [Methodology at a glance](#methodology-at-a-glance) above). This also covers who controls the 13 tracked chains themselves at the L1 (Ethereum mainnet) level, not just the dapps deployed on them: a real Gnosis Safe was confirmed as the ProxyAdminOwner on all 13, with World Chain's separate SystemConfigOwner the sole exception, a bare EOA rather than a Safe.
+264 Gnosis Safe multisig contracts across 214 protocol/chain deployments, checked directly on-chain (see [Methodology at a glance](#methodology-at-a-glance) above). This also covers who controls the 13 tracked chains themselves at the L1 (Ethereum mainnet) level, not just the dapps deployed on them: a real Gnosis Safe was confirmed as the ProxyAdminOwner on all 13, with World Chain's separate SystemConfigOwner the sole exception, a bare EOA rather than a Safe.
+
+**Pass 35 (2026-09-17) added 4 new protocols** (LI.FI, Threshold Network/tBTC, Kelp DAO rsETH, Coinbase cbETH) plus extensions of 5 already-tracked protocols (Velodrome Superchain, Compound III, Morpho Blue, Lido Emergency Brakes) onto more chains, and Pass 34 (2026-09-16) caught up Pendle's governance/dev/treasury Safes, previously missing from live execution. See Findings below for the one new cross-protocol case this pass surfaced (Kelp DAO / Stader Labs).
 
 ### The exposure leaderboard
 
@@ -205,16 +207,18 @@ Every case below is one of the seven findings detailed further down, sorted by h
 
 ### Findings
 
-**Four separate cases of one signer holding real power across genuinely unrelated protocols:**
+**Five separate cases of one signer holding real power across genuinely unrelated protocols:**
 
-1. `0x8f02b4a44Eacd9b8eE7739aa0BA58833DD45d002` is an owner of both Morpho Blue's governance Safe (**Base, World Chain, and Fraxtal**) and Angle Protocol's Guardian Safe (**Optimism, Base, and Celo**), six separate Safe deployments in total. Morpho and Angle have no institutional relationship. The same address also sits on both protocols' Ethereum mainnet Safes (already on record in Part 1 for Angle), so a single compromised key here threatens Morpho and Angle simultaneously, across mainnet and six Superchain deployments. It's identified with **high confidence as Pablo Veyrat, co-founder of Angle Protocol and Merkl**, named explicitly with this exact address by Morpho Association's own governance forum post proposing him as a multisig signer.
+1. `0x8f02b4a44Eacd9b8eE7739aa0BA58833DD45d002` is an owner of both Morpho Blue's governance Safe (now on **Base, World Chain, Fraxtal, Optimism, Ink, Unichain, Mode, and Lisk, 8 chains**, up from 3) and Angle Protocol's Guardian Safe (**Optimism, Base, and Celo**), eleven separate Superchain Safe deployments in total. Morpho and Angle have no institutional relationship. The same address also sits on both protocols' Ethereum mainnet Safes (already on record in Part 1 for Angle), so a single compromised key here threatens Morpho and Angle simultaneously, across mainnet and eleven Superchain deployments. It's identified with **high confidence as Pablo Veyrat, co-founder of Angle Protocol and Merkl**, named explicitly with this exact address by Morpho Association's own governance forum post proposing him as a multisig signer.
+
+1bis. **Kelp DAO rsETH and Stader Labs** (new, 2026-09-17) share 2 signers on their respective Base and Optimism Admin/ETHx Safes. Context found before presenting this as notable: Kelp and Stader share the same founding team, a link already documented on mainnet and elsewhere in this project's Superchain data, so this extends an expected relationship rather than surfacing a new institutional link.
 
 2. **Matthew Graham / TokenLogic**, already named in Part 1 as an owner of both Gearbox's Technical Multisig and TokenLogic's own Safe on Ethereum, is now also confirmed as an owner of three of Aave's role-specific Safes (Merkl rewards distribution, a "Robot Guardian" automation role, and TokenLogic's own execution Safe), deployed at the identical addresses on both Ink and Celo. A second TokenLogic team member from that same Ethereum Safe is confirmed alongside him on both chains. Combined with the GHO Stablecoin Safe confirmed directly in Part 1 above, this is the widest documented footprint of any named individual across this research: four protocols, three chains, six Safes.
    *What this means in practice: this is the single widest blast radius identified across this research. A key held by one small team now touches Gearbox, TokenLogic, Aave, and GHO Stablecoin at once.*
 
 3. **aavechan.eth**, an ENS-verified, Basescan-labeled Aave ecosystem operator, is confirmed as an owner of both QiDao/Mai Finance's Base and Fraxtal Guardian Safes and Aave's Celo "Masiv" Safe: three separate Safe deployments across two independently-run protocols with no institutional relationship, caught by the script's own cross-reference logic rather than assumed. A 2026-09-13 mainnet round found the same address as one of the 15 owners of the 8-of-15 Bridge Governor Safe that owns both of Gnosis Chain's canonical bridges on Ethereum (xDai Bridge and OmniBridge), a third unrelated protocol; Gnosis Chain's own docs list the Aave-Chan Initiative as one of the 15 governor organizations, so the seat is disclosed, the cross-protocol aggregation is what's new.
 
-4. `0x9A73D57BB1fB280C5672A13f655675De25F13b70` is an owner of both Compound III's Base Pause Guardian Safe and Resolv's Base and Soneium Token Owner Safes. Compound III and Resolv have no institutional relationship. Found by the same cross-reference logic once Resolv's Safes were added to the registry, not assumed in advance.
+4. `0x9A73D57BB1fB280C5672A13f655675De25F13b70` is an owner of both Compound III's Pause Guardian Safe, now confirmed on **Base, Optimism, and Unichain** (up from Base alone), and Resolv's Base and Soneium Token Owner Safes. Compound III and Resolv have no institutional relationship. Found by the same cross-reference logic once Resolv's Safes were added to the registry, not assumed in advance.
 
 **Three more cases of concentrated control, but of a different kind: chain-level governance concentration (cases 5 and 6) and single-protocol concentration (case 7), rather than one signer spanning unrelated protocols:**
 
@@ -228,10 +232,14 @@ Every case below is one of the seven findings detailed further down, sorted by h
 Beyond those cases, the sample also confirms a **Superchain-specific pattern**: several protocols run the exact same signer set across multiple chains at once.
 
 <details>
-<summary>Show all 38 cases</summary>
+<summary>Show all 42 cases</summary>
 
 | Protocol | What was found |
 |---|---|
+| **LI.FI** (new) | Its Timelock Proposer/Admin Safe (3-of-6) is deployed with the identical 6 signers on 11 of the 13 tracked Superchain chains (all but Zora and Derive), owner of the LiFiDiamond behind a 3-hour timelock; the same trousseau also covers all 11 of Part 3's chains, 22 chains total |
+| **Velodrome Superchain** (extended) | Its Pool_Admin/Pauser role, already tracked on Optimism and Base as Aerodrome, is now confirmed with the identical trousseau on Mode, Celo, Ink, and Unichain too |
+| **Threshold Network (tBTC)** (new) | Its Threshold Council Safe (6-of-9) is deployed with the identical 9 signers on Optimism and Base, the same Council already tracked on Ethereum mainnet |
+| **Coinbase cbETH** (new) | Its EIP-1967 proxy admin slot on Base resolves to a 3-of-6 Safe whose 5 signers match Base's own L1 chain-governance Safe already tracked above; an expected link, Coinbase operates Base itself |
 | **Silo Finance** | Literally the same Safe contract address deployed on Optimism, Base, and Ink; the Ink instance has one extra owner beyond the 5 shared with the other two |
 | **Lido** | Its Emergency Brakes / CircuitBreaker Committee Safe is the identical 5-signer, 3-of-5 set on both Optimism and Base (different Safe address per chain), holding `DEPOSITS_DISABLER_ROLE` and `WITHDRAWALS_DISABLER_ROLE` on each chain's wstETH bridge, confirmed live on-chain rather than assumed from docs |
 | **Balancer** | Its L2 DAO Multisig (6-of-11) and Emergency SubDAO (3-of-7) return the identical signer sets on Optimism, Base, Mode, and Fraxtal, each Safe's power confirmed on-chain against Balancer's actual Authorizer; the Authorizer's sole admin on all 4 chains is a 1-of-2 Safe whose two owners are themselves 3-of-5 and 3-of-4 Balancer Safes. The 11 DAO signers are exactly Balancer's Ethereum mainnet DAO Multisig signers, including two addresses already tracked in Part 1 |
@@ -273,7 +281,7 @@ Beyond those cases, the sample also confirms a **Superchain-specific pattern**: 
 
 </details>
 
-This dataset has grown through 33 research passes so far, each one adding a new protocol category, a new chain, or re-checking an existing finding.
+This dataset has grown through 35 research passes so far, each one adding a new protocol category, a new chain, or re-checking an existing finding.
 
 ### Dashboard
 
@@ -295,42 +303,43 @@ Same process as Part 1.
 
 ### Verification
 
-94 of 94 hypotheses currently in the registry pass clean at High confidence, same discipline as Part 1.
+104 of 104 hypotheses currently in the registry pass clean at High confidence, same discipline as Part 1.
 
 ### Status
 
-Last verified: 2026-09-14.
+Last verified: 2026-09-17.
 
-215 Safes across 172 deployments and 81 protocols, not a finished survey. The most recent pass (33rd) added Balancer, tracked on mainnet since the first pass but never checked here: 13 governance Safes across Optimism, Base, Mode and Fraxtal with identical DAO and Emergency signer sets on all 4 chains, and no new cross-protocol overlap inside this part. Its own TVL on these chains is small (about $1.8M); what these Safes control is the shared Vault's permission system.
+264 Safes across 214 deployments and 85 protocols, not a finished survey. The most recent pass (35th) added LI.FI, Threshold Network/tBTC, Kelp DAO rsETH, and Coinbase cbETH as new protocols, plus new-chain extensions for Velodrome Superchain, Compound III, Morpho Blue, and Lido Emergency Brakes; one new cross-protocol overlap surfaced (Kelp DAO / Stader Labs, expected given shared founders). Pass 34 added Balancer, tracked on mainnet since the first pass but never checked here: 13 governance Safes across Optimism, Base, Mode and Fraxtal with identical DAO and Emergency signer sets on all 4 chains, and no new cross-protocol overlap inside this part. Its own TVL on these chains is small (about $1.8M); what these Safes control is the shared Vault's permission system.
 
 An earlier pass turned to who controls the 13 tracked chains themselves rather than the dapps on them: a real Gnosis Safe confirmed as ProxyAdminOwner on all 13, 5 of them sharing the identical Optimism Foundation/Security Council Safe and 2 more (Mode, Derive) sharing an identical Safe operated by Conduit whose signers recur on Zora's and BOB's own chain-governance Safes too.
 
 ### Caveats (Superchain)
 
 - Point-in-time snapshot across all findings; Safe owner sets, thresholds, and operator-set status can change after this was checked.
-- 215 Safes across 172 deployments and 81 protocols is not a finished survey (see What's checked next); a protocol or chain not listed here hasn't been checked, not confirmed clean.
+- 264 Safes across 214 deployments and 85 protocols is not a finished survey (see What's checked next); a protocol or chain not listed here hasn't been checked, not confirmed clean.
 - Several same-signer-set findings above are expected, not new institutional links, when the same team knowingly operates multiple deployments (for example Zora Inc. operating both Zora the protocol and Zora Network the chain, or Frax operating Fraxtal), each such case is labeled inline as "expected" rather than presented as a surprising finding.
 - A negative result was also checked and is reported here for completeness: none of the three centralized stablecoin issuers checked (USDC, USDT, PYUSD) is controlled by a Gnosis Safe on any tracked chain.
 
 Everything stated is held to the confidence level the on-chain data actually supports.
 
-## Part 3: Arbitrum and other L2s (88 protocols, 65 pattern matches)
+## Part 3: Arbitrum and other L2s (94 protocols, 66 pattern matches)
 
-An extension of the same method beyond the Superchain family covered in Part 2, onto major L2s and sidechains that each run their own separate architecture and governance, added in three passes:
+An extension of the same method beyond the Superchain family covered in Part 2, onto major L2s and sidechains that each run their own separate architecture and governance, added in four passes:
 
 - **Arbitrum** (Nitro, the Arbitrum DAO and Security Council): first, as a pilot pass.
 - **Seven more chains**, chosen for real TVL and a real governance or emergency multisig: Polygon PoS, BNB Chain, Avalanche C-Chain, zkSync Era, Linea, Scroll, and Berachain.
 - **Three more, explicitly second-tier, chains**: Mantle, Blast, and Sonic, added in a follow-up pass. Deliberately chosen unlike the first 8, which were picked for real TVL: on these three, real DeFi TVL is thinner and less stable.
+- **A fourth pass (2026-09-18)** added 47 more candidate entries across the same 11 chains: 6 new protocols (LI.FI, Kelp DAO rsETH, Stader Labs, Euler V2, Balancer, Threshold Network/tBTC), plus one new cross-protocol overlap (Kelp DAO / Stader Labs, sharing founders, same expected-link reasoning as the equivalent case in Part 2), and a correction: two previously-tracked Pendle entries (`governanceProxy`, `devProxyAdmin`) turned out not to be Safe contracts (`getOwners()` reverts) and were replaced with Pendle's real Governance and Dev Multisig Safes.
 
 Parts 1 and 2 both ask whether the same signer or Safe holds trusted power across multiple unrelated protocols or chains at once; this part asks the identical question a third time, on a third terrain, and every signer recovered here is cross-referenced against the full combined roster of Part 1 and Part 2, not just one or the other.
 
 ### Method
 
-122 candidate addresses tested across the 11 chains (see [Methodology at a glance](#methodology-at-a-glance) above): 90 resolved to confirmed Gnosis Safe contracts. Several sources publish a factory, provider, or router contract rather than the multisig directly, so the actual Safe address was obtained by calling `owner()` or a role-specific getter on that contract first, then re-verified with its own `getOwners()` call. Each chain's own internal cross-check (does any signer repeat across two different protocols on that one chain) comes back clean on all 11; the signal is entirely cross-part and cross-chain.
+169 candidate addresses tested across the 11 chains (see [Methodology at a glance](#methodology-at-a-glance) above): 159 resolved to confirmed Gnosis Safe contracts (up from 90, after the fourth pass above). Several sources publish a factory, provider, or router contract rather than the multisig directly, so the actual Safe address was obtained by calling `owner()` or a role-specific getter on that contract first, then re-verified with its own `getOwners()` call. Each chain's own internal cross-check (does any signer repeat across two different protocols on that one chain) comes back clean on all 11; the signal is entirely cross-part and cross-chain, with the sole exception of the new Kelp DAO / Stader Labs case noted above.
 
 ### Findings
 
-65 of the 88 protocols checked across Part 3 extend a pattern this research had already documented elsewhere, sometimes at the literal same Safe address and sometimes at a different address with an identical or overlapping signer list:
+66 of the 94 protocols checked across Part 3 extend a pattern this research had already documented elsewhere, sometimes at the literal same Safe address and sometimes at a different address with an identical or overlapping signer list:
 
 - **2 named identities** recur: c2tp.eth, via Curve Finance's Emergency DAO Safe, now confirmed on 4 of these 11 chains; and Pablo Veyrat, via Morpho Blue's DAO Safe on Arbitrum.
 - **Same-address, same-owner patterns** now reach 9 or 10 of these 11 chains at once: Aave's GOVERNANCE_GUARDIAN on 9, Beefy Finance's dev/treasury multisigs on 10, API3's manager multisig on 10.
@@ -543,11 +552,11 @@ Two new real Safes never seen before in this research were also confirmed on Son
 
 ### Open data (Part 3)
 
-**Full scope manifest**: [`data/full-scope-manifest-part3.csv`](data/full-scope-manifest-part3.csv) lists every one of the 122 candidate addresses actually checked across Arbitrum and the 10 other L2s and sidechains, not just the pattern matches and new Safes flagged as findings above, so anyone can confirm the findings are the complete result of the screen rather than a cherry-picked subset.
+**Full scope manifest**: [`data/full-scope-manifest-part3.csv`](data/full-scope-manifest-part3.csv) lists every one of the 169 candidate addresses actually checked across Arbitrum and the 10 other L2s and sidechains, not just the pattern matches and new Safes flagged as findings above, so anyone can confirm the findings are the complete result of the screen rather than a cherry-picked subset.
 
 ### Caveats
 
-- This is a first, wide pass sized to cover ground quickly rather than to be exhaustive on any single chain: 4 to 14 protocols per chain, against Part 2's 80. The high hit rate (65 of 88) is concentrated in protocols this research already had reason to check closely, since they were chosen partly because a prior overlap made a repeat plausible; a broader, protocol-agnostic pass on any one of these chains might find a different ratio.
+- This is a first, wide pass sized to cover ground quickly rather than to be exhaustive on any single chain: 4 to 20 protocols per chain, against Part 2's 85. The high hit rate (66 of 94) is concentrated in protocols this research already had reason to check closely, since they were chosen partly because a prior overlap made a repeat plausible; a broader, protocol-agnostic pass on any one of these chains might find a different ratio.
 - A live on-chain event-replay query now exists for Part 3: [query 8679972](https://dune.com/queries/8679972), covering all 11 of Part 3's tracked chains (full raw-logs coverage, unlike Part 2's partial coverage). It confirms 0 rows (no signer holds keys on 2+ different protocols within Part 3 alone), matching the original manual research findings above.
 - Radiant Capital's BNB Chain PoolAdmin finding is a partial signer match (7 of 11), not a full identical set: read it as "shares most of its signers with," not "is the same Safe as."
 - API3's manager multisig address is chain-invariant and was tested directly via `getOwners()` on zkSync Era, Berachain, and Blast specifically, since API3's own deployment registry does not list a folder for any of the three; the address still resolves to a real, matching Safe (fully on Berachain and Blast, partially on zkSync Era), a slightly different sourcing standard than the other chains, where an explicit per-chain deployment file exists.
@@ -557,13 +566,13 @@ Two new real Safes never seen before in this research were also confirmed on Son
 
 ### Verification
 
-66 hypotheses across the 11 chain-scoped registries (8 for Arbitrum, 58 across the other 10 chains), all at High confidence, same discipline as Part 1.
+119 hypotheses across the 11 chain-scoped registries, all at High confidence, same discipline as Part 1.
 
 ### Status
 
-Last verified: 2026-09-12.
+Last verified: 2026-09-18.
 
-88 protocols across 11 chains, four passes deep: a pilot on Arbitrum (12 protocols), a same-day pass across seven more chains (48 protocols), a follow-up pass across three more second-tier chains (26 protocols), then two automated-loop rounds each adding one more protocol on Arbitrum (Morpho Blue, then Lido's Emergency Brakes). Not a finished survey on any of the 11; live event-replay verification now exists for this part (see Caveats above).
+94 protocols across 11 chains, five passes deep: a pilot on Arbitrum (12 protocols), a same-day pass across seven more chains (48 protocols), a follow-up pass across three more second-tier chains (26 protocols), two automated-loop rounds each adding one more protocol on Arbitrum (Morpho Blue, then Lido's Emergency Brakes), then a fourth automated-loop pass (2026-09-18) adding 6 new protocols across all 11 chains (LI.FI, Kelp DAO rsETH, Stader Labs, Euler V2, Balancer, Threshold Network/tBTC) plus a Pendle correction. Not a finished survey on any of the 11; live event-replay verification now exists for this part (see Caveats above).
 
 Everything stated is held to the confidence level the on-chain data actually supports.
 
