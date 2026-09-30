@@ -5,7 +5,7 @@ badge-data-superchain.json, badge-data-part3.json (when present), and
 badge-data-total.json (when present) against the numbers that README.md
 itself actually states, so the shields.io badges never silently go stale.
 
-Deterministic, no LLM, no external API. Pure text parsing + JSON rewrite
+Deterministic, no external API. Pure text parsing + JSON rewrite
 + optional git commit/push.
 
 Source of truth in README.md:
