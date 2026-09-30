@@ -31,7 +31,7 @@ Live dashboard, click through for the interactive version.
 - [At a glance](#at-a-glance)
 - [Part 1: Mainnet](#part-1-mainnet-194-protocols-8-named-identities)
 - [Part 2: Superchain](#part-2-superchain-99-protocols-9-signer-sharing-cases)
-- [Part 3: Arbitrum and other L2s](#part-3-arbitrum-and-other-l2s-94-protocols-65-pattern-matches)
+- [Part 3: Arbitrum and other L2s](#part-3-arbitrum-and-other-l2s-98-protocols-66-pattern-matches)
   - [Arbitrum](#arbitrum)
   - [Polygon](#polygon)
   - [BNB Chain](#bnb-chain)
@@ -71,10 +71,10 @@ No account needed on this repo: click Watch, then Custom, then Releases only, on
 
 | | Part 1: Mainnet | Part 2: Superchain | Part 3: Other L2s | Total |
 |---|---|---|---|---|
-| Protocols checked | 194 | 99 | 94 (across 11 chains) | 387 |
-| Safes checked | 332 signer slots tested, 266 confirmed real Safes | 254 distinct addresses across 242 deployments, 295 Gnosis Safe readings plus 11 custom-multisig readings | 169 candidates tested, 159 confirmed real Safes | 729 confirmed multisig contracts |
+| Protocols checked | 194 | 99 | 98 (across 11 chains) | 391 |
+| Safes checked | 332 signer slots tested, 266 confirmed real Safes | 254 distinct addresses across 242 deployments, 295 Gnosis Safe readings plus 11 custom-multisig readings | 177 candidates tested, 167 confirmed real Safes | 737 confirmed multisig contracts |
 | Chains covered | Ethereum mainnet | 13 | 11 | 25 |
-| Shared-key findings | 8 named identities on 2+ protocols, plus 48 more shared-infrastructure cases | 9 documented cross-protocol/cross-chain cases, plus 41+ identical-signer-set chains | 66 of 94 protocols extend a pattern already found in Part 1 or Part 2 | |
+| Shared-key findings | 8 named identities on 2+ protocols, plus 48 more shared-infrastructure cases | 9 documented cross-protocol/cross-chain cases, plus 41+ identical-signer-set chains | 66 of 98 protocols extend a pattern already found in Part 1 or Part 2 | |
 | Live event replay | Yes, on-chain | Yes, on-chain (8 of 13 chains, plus Ethereum mainnet for L1 governance); the three custom multisigs found in pass 36 are deliberately outside it, see Part 2 | Yes, on-chain (11 of 11 chains) | |
 
 **Protocols referenced include:** Aave, Curve Finance, Compound III, Lido, Balancer, Yearn, Convex, Morpho Blue, Frax Finance, Chainlink Data Feeds, 1inch, and Beefy Finance.
@@ -357,7 +357,7 @@ An earlier pass turned to who controls the 13 tracked chains themselves rather t
 
 Everything stated is held to the confidence level the on-chain data actually supports.
 
-## Part 3: Arbitrum and other L2s (94 protocols, 66 pattern matches)
+## Part 3: Arbitrum and other L2s (98 protocols, 66 pattern matches)
 
 An extension of the same method beyond the Superchain family covered in Part 2, onto major L2s and sidechains that each run their own separate architecture and governance, added in four passes:
 
@@ -370,11 +370,11 @@ Parts 1 and 2 both ask whether the same signer or Safe holds trusted power acros
 
 ### Method
 
-169 candidate addresses tested across the 11 chains (see [Methodology at a glance](#methodology-at-a-glance) above): 159 resolved to confirmed Gnosis Safe contracts (up from 90, after the fourth pass above). Several sources publish a factory, provider, or router contract rather than the multisig directly, so the actual Safe address was obtained by calling `owner()` or a role-specific getter on that contract first, then re-verified with its own `getOwners()` call. Each chain's own internal cross-check (does any signer repeat across two different protocols on that one chain) comes back clean on all 11; the signal is entirely cross-part and cross-chain, with the sole exception of the new Kelp DAO / Stader Labs case noted above.
+177 candidate addresses tested across the 11 chains (see [Methodology at a glance](#methodology-at-a-glance) above): 167 resolved to confirmed Gnosis Safe contracts (up from 159 after the fifth pass on 2026-09-30, which added the Arbitrum Security Council, Frax Finance, Yearn and Ethena on Arbitrum). Several sources publish a factory, provider, or router contract rather than the multisig directly, so the actual Safe address was obtained by calling `owner()` or a role-specific getter on that contract first, then re-verified with its own `getOwners()` call. Each chain's own internal cross-check (does any signer repeat across two different protocols on that one chain) comes back clean on all 11; the signal is entirely cross-part and cross-chain, with the sole exception of the new Kelp DAO / Stader Labs case noted above.
 
 ### Findings
 
-66 of the 94 protocols checked across Part 3 extend a pattern this research had already documented elsewhere, sometimes at the literal same Safe address and sometimes at a different address with an identical or overlapping signer list:
+66 of the 98 protocols checked across Part 3 extend a pattern this research had already documented elsewhere, sometimes at the literal same Safe address and sometimes at a different address with an identical or overlapping signer list:
 
 - **2 named identities** recur: c2tp.eth, via Curve Finance's Emergency DAO Safe, now confirmed on 4 of these 11 chains; and Pablo Veyrat, via Morpho Blue's DAO Safe on Arbitrum.
 - **Same-address, same-owner patterns** now reach 9 or 10 of these 11 chains at once: Aave's GOVERNANCE_GUARDIAN on 9, Beefy Finance's dev/treasury multisigs on 10, API3's manager multisig on 10.
