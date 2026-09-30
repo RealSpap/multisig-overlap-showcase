@@ -91,7 +91,7 @@ No account needed on this repo: click Watch, then Custom, then Releases only, on
 
 ## Access to the tool
 
-The verification method behind this research is available under a commercial license, not published in this repository. The findings below were produced with it and are independently reproducible by anyone with the same access; this repo documents the results, not the mechanism. Want a free preview first? [Check your Safe](https://realspap.github.io/tools/check-your-safe.html) reads any Safe's owners live from chain, in your browser, and checks them against the nine identities already named in this research, no account needed. Reach out via [RealSpap on X](https://x.com/RealSpap) for licensing.
+The verification method behind this research is available under a commercial license, not published in this repository. The findings below were produced with it and are independently reproducible by anyone with the same access; this repo documents the results, not the mechanism. Want a free preview first? [Check your Safe](https://realspap.github.io/tools/check-your-safe.html) reads any Safe's owners live from chain, in your browser, and checks them against the nine identities already named in this research, no account needed. Reach out via [Spap on X](https://x.com/RealSpap) for licensing.
 
 ## Disclaimer
 
