@@ -10,11 +10,11 @@
 ![Cross-protocol signers (mainnet)](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FRealSpap%2Fmultisig-overlap-showcase%2Fmain%2Fbadge-data-mainnet.json&cachebust=20260930)
 ![Follow](https://img.shields.io/badge/follow-%40RealSpap-000000?logo=x)
 
-**The headline finding:** the widest single signer key found sits on 5 independent protocols at once, and one Safe governs the core L1 contracts of 5 Superchain chains. Measured across 391 protocol entries on 25 chains (Ethereum mainnet plus 24 others), each checked directly on-chain.
+**The headline finding:** the widest single signer key found sits on 5 independent protocols at once, and one Safe governs the core L1 contracts of 5 Superchain chains. Measured across 401 protocol entries on 25 chains (Ethereum mainnet plus 24 others), each checked directly on-chain.
 
 The same question, checked at three scales:
 
-- **Ethereum mainnet**: 8 signers hold multisig keys on 2 or more independent DeFi protocols at once, identified across 194 protocols checked directly on-chain; 7 of them match the protocols' own public signer disclosures. Two of them are tied at 5 protocols each. Some of these links are expected rather than hidden: Prisma seated signers from other established protocols on its emergency multisig on purpose, and Convex and Votium are built around Curve.
+- **Ethereum mainnet**: 8 signers hold multisig keys on 2 or more independent DeFi protocols at once, identified across 204 protocols checked directly on-chain; 7 of them match the protocols' own public signer disclosures. Two of them are tied at 5 protocols each. Some of these links are expected rather than hidden: Prisma seated signers from other established protocols on its emergency multisig on purpose, and Convex and Votium are built around Curve.
 - **Optimism's Superchain**: the same pattern recurs 9 more times, with one ENS-identified operator (aavechan.eth, whose Gnosis bridge seat the [Gnosis Chain docs](https://docs.gnosischain.com/bridges/management) attribute to the Aave-Chan Initiative), two of the 8 mainnet signers turning up again on new chains, two chain-operator entities concentrating upgrade keys across multiple chains at once, two more pseudonymous signers, one linking Compound III to Resolv and the other holding keys across seven of Aave's own Superchain Safes, plus a newly-confirmed case linking Kelp DAO and Stader Labs (shared founders, expected) and, from 2026-09-21, the keys that govern the Celo chain itself also holding a liquid-staking token deployed on it.
 - **Arbitrum and 10 more L2s and sidechains**: an already-tracked signer set or Safe address reappears on 66 of the first 94 further protocols checked (98 so far), including one of the two 5-protocol mainnet keys, now confirmed on 4 of these 11 chains.
 
@@ -68,8 +68,8 @@ Each research update that changes this README is published as a dated release. S
 
 | | Part 1: Mainnet | Part 2: Superchain | Part 3: Other L2s | Total |
 |---|---|---|---|---|
-| Protocols checked | 194 | 99 | 98 (across 11 chains) | 391 (sum of the three Parts; a protocol present in several Parts counts once per Part) |
-| Multisigs checked | 375 candidate addresses tested, 308 confirmed real Safes | 254 distinct multisig addresses across 242 deployments (295 Gnosis Safe readings plus 11 custom-multisig readings) | 177 candidates tested, 167 confirmed real Safes | 729 confirmed multisig addresses (308 + 254 + 167, summed per Part) |
+| Protocols checked | 204 | 99 | 98 (across 11 chains) | 401 (sum of the three Parts; a protocol present in several Parts counts once per Part) |
+| Multisigs checked | 385 candidate addresses tested, 318 confirmed real Safes | 254 distinct multisig addresses across 242 deployments (295 Gnosis Safe readings plus 11 custom-multisig readings) | 177 candidates tested, 167 confirmed real Safes | 739 confirmed multisig addresses (318 + 254 + 167, summed per Part) |
 | Chains covered | Ethereum mainnet | 13 | 11 | 25 |
 | Shared-key findings | 8 cross-protocol signers (7 matched to public signer disclosures), plus 48 more shared-infrastructure cases | 9 documented cross-protocol/cross-chain cases, plus 51 multi-chain signer-set cases | 66 of the first 94 protocols extend a pattern already found in Part 1 or Part 2; the 4 added on 2026-09-30 are not yet assessed for this | |
 | Live event replay | Yes, on-chain | Yes, on-chain (8 of 13 chains, plus Ethereum mainnet for L1 governance); the three custom (non-Safe) multisigs added on 2026-09-21 are outside it, see Part 2 | Yes, on-chain (11 of 11 chains; not yet re-run for the 8 Safes added on 2026-09-30) | |
@@ -103,7 +103,7 @@ Full disclaimer, licensing, and program-wide notes: [methodology](https://realsp
 
 ### Method
 
-194 protocols' multisig contracts (Gnosis Safe) checked directly on-chain: 375 candidate addresses tested, 308 confirmed as real Safe contracts. Scope grew from an original 41-protocol pilot to 194 protocols across 31 research updates, each adding several more protocols and re-running the full cross-reference against every signer already on record.
+204 protocols' multisig contracts (Gnosis Safe) checked directly on-chain: 385 candidate addresses tested, 318 confirmed as real Safe contracts. Scope grew from an original 41-protocol pilot to 204 protocols across 32 research updates, each adding several more protocols and re-running the full cross-reference against every signer already on record.
 
 ### Findings
 
@@ -152,34 +152,45 @@ The 2026-09-19 update added 18 protocols, mostly the teams that curate lending v
 
 The L1 governance Safes of World Chain, Celo, BOB, Soneium, Mode and Zora were checked in the same pass but are already covered in Part 2, so they are not counted twice here.
 
+The 2026-10-01 update added 10 protocols outside lending: token issuers, bridges and shared infrastructure. Each Safe was read on two independent public RPCs, and each role was confirmed by calling the protocol contract's own `owner()` or `admin()` getter.
+
+| Protocol | What was found |
+|---|---|
+| **Safe** (issuer of the SAFE governance token) | The SAFE token owner is a 3-of-5 Safe. One of its signers is also a signer of Balancer's DAO Multisig (6-of-11). No public disclosure linking the two seats was found yet, so the overlap is recorded, not qualified |
+| **Succinct** (SP1 proof verifier gateways, PLONK and Groth16) | Both gateways are owned by a 2-of-3 Safe. One of its 3 signers also sits on Aave's Community Multisig and EigenLayer's Community Multisig, so this key now reaches 3 protocols. Context not yet established |
+| **Sablier** (token streaming) | The admin of the V2 LockupLinear contract is a Safe at threshold 1 of 4: any one of its four signers can act as admin alone. No signer shared with another tracked protocol |
+| **Function FBTC, pumpBTC, Stables Labs USDX, Ronin Bridge (Ethereum side), LooksRare, ApeCoin staking, Sonic Gateway** | Real multisigs from 2-of-3 up to 5-of-8, no signer shared with any other tracked protocol. The Ronin Bridge gateway is upgraded through a two-level proxy chain that ends at a 3-of-5 Safe |
+
+The same update re-read 5 protocols already in scope (Balancer, Puffer, Ethena, SushiSwap, Stargate). All published overlaps reproduced unchanged. One note was added for Ethena: its USDe distributor Safe (4-of-10) shares 6 of its 10 signers with the two Ethena Safes that already carry an identical 10-signer set. This is a link inside one team, not a cross-protocol one.
+
 Aave's own Governance Guardian Safe, already tracked cross-chain in Part 2 and Part 3, was added to this mainnet scope for the first time in that update, so the DeFiSaver overlap is covered by the on-chain event replay, not only by the hand-documented registry.
 
 Beyond the 8 cross-protocol signers, this research has surfaced 48 more shared-infrastructure or signer-overlap cases on mainnet, each individually documented in the registry, most of which turn out to be Safes already tracked in Part 2 or Part 3 resolving identically on Ethereum too.
 
 ### Live verification
 
-An on-chain event replay rebuilds the current owner set of every Safe tracked in the 194-protocol scope from its event history, independently of the direct `getOwners()` reads. Two seats (Key G's second seat and Key B's Convex seat) don't reproduce through live event replay, because they sit on Safe versions old enough their creation transactions don't log the data a pure event-based rebuild needs; both are confirmed instead by a direct `getOwners()` read, independently cross-checked against the relevant transaction logs on Etherscan.
+An on-chain event replay rebuilds the current owner set of every Safe tracked in the 194-protocol scope from its event history, independently of the direct `getOwners()` reads. It has not yet been re-run for the 10 Safes added on 2026-10-01, which rest on direct reads from two RPCs for now. Two seats (Key G's second seat and Key B's Convex seat) don't reproduce through live event replay, because they sit on Safe versions old enough their creation transactions don't log the data a pure event-based rebuild needs; both are confirmed instead by a direct `getOwners()` read, independently cross-checked against the relevant transaction logs on Etherscan.
 
 **Get notified**: see [Get notified](#get-notified) above.
 
 ### What's checked next (Mainnet)
 
-194 protocols is a growing survey, not a finished one. Open a GitHub Issue on this repo to suggest the next protocol to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run under the same licensed method, not opened to contributors). The Superchain-specific follow-up covers 99 more protocols, and a third extension covers 98 more across Arbitrum and 10 other L2s and sidechains: see Part 2 and Part 3 below.
+204 protocols is a growing survey, not a finished one. Open a GitHub Issue on this repo to suggest the next protocol to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run under the same licensed method, not opened to contributors). The Superchain-specific follow-up covers 99 more protocols, and a third extension covers 98 more across Arbitrum and 10 other L2s and sidechains: see Part 2 and Part 3 below.
 
 ### Verification
 
-Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. The mainnet registry holds 57 finding rows: the 8 cross-protocol signers, 1 correction (see Caveats below), and 48 shared-infrastructure or signer-overlap cases. Of the 9 hand-researched rows (the 8 signers plus the correction), all 9 are at High confidence (one of them was upgraded from Medium on 2026-09-13, once a primary source corroborated it); the 48 shared-infrastructure cases are all independently sourced and at High confidence too, and are re-confirmed by the on-chain event replay. Since 2026-09-19 the registry also carries one verification row per newly added protocol (18 rows, 75 rows in total), each at High confidence and each pointing to its on-chain evidence.
+Every claim in this research follows the same verification discipline described in [Methodology at a glance](#methodology-at-a-glance) above. The mainnet registry holds 57 finding rows: the 8 cross-protocol signers, 1 correction (see Caveats below), and 48 shared-infrastructure or signer-overlap cases. Of the 9 hand-researched rows (the 8 signers plus the correction), all 9 are at High confidence (one of them was upgraded from Medium on 2026-09-13, once a primary source corroborated it); the 48 shared-infrastructure cases are all independently sourced and at High confidence too, and are re-confirmed by the on-chain event replay. Since 2026-09-19 the registry also carries one verification row per newly added protocol (18 rows on 2026-09-19, 10 on 2026-10-01), plus one note from the 2026-10-01 re-read (86 rows in total). Each points to its on-chain evidence; two of the 2026-10-01 rows are at Medium confidence because the contract address comes from a block-explorer label rather than the protocol's own documentation.
 
 ### Status
 
-Last verified: 2026-09-19.
+Last verified: 2026-10-01.
 
-194 protocols checked, not a finished survey. Scope has grown from an original 41-protocol pilot across 31 research updates, each one adding new protocols, resolving a previously parked case, or re-running the full cross-reference against every signer already on record.
+204 protocols checked, not a finished survey. Scope has grown from an original 41-protocol pilot across 32 research updates, each one adding new protocols, resolving a previously parked case, or re-running the full cross-reference against every signer already on record.
 
 ### Caveats (Mainnet)
 
 - Two seats (Key G's second seat and Key B's Convex seat) don't reproduce through live event replay, because they sit on Safe versions old enough that their creation transactions don't log the data a pure event-based rebuild needs; both are confirmed by a direct `getOwners()` read instead. See Live verification above.
-- 194 protocols is a growing survey, not a finished one (see What's checked next). A protocol not listed here hasn't been checked, not confirmed clean.
+- 204 protocols is a growing survey, not a finished one (see What's checked next). A protocol not listed here hasn't been checked, not confirmed clean.
 - Three of the eight cross-protocol signers (Keys A, B and C) sit together on Prisma Finance's multisig by Prisma's own deliberate, publicly disclosed design choice to seat signers from other established protocols for credibility, not a hidden concentration; treating that case the same as the other five (one of which, Key H on Votium and Convex, is also an expected link) would overstate how coordinated the overlap actually is.
 - One candidate address needed a correction after a separate on-chain check. Ethena's `Owner_Multisig_3of11` is a real, confirmed 10-signer Safe, but that check found it does not match the actual `owner()` of either EthenaMinting V2 or the USDe token (both a 24-hour Timelock instead), nor EthenaMinting V1's actual owner (a separate 5-of-10 Safe). The Safe is real; what it currently controls at Ethena, if anything, is unconfirmed.
 
