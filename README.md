@@ -1,6 +1,6 @@
 # multisig-overlap
 
-![License](https://img.shields.io/badge/license-all%20rights%20reserved-blue)
+![License: CC BY 4.0](https://img.shields.io/badge/license-CC%20BY%204.0-blue) ![Code: MIT](https://img.shields.io/badge/code-MIT-blue)
 ![Status](https://img.shields.io/badge/status-active%20research-brightgreen)
 [![Check your Safe: free tool](https://img.shields.io/badge/check%20your%20safe-free%20tool-orange)](https://realspap.github.io/tools/check-your-safe.html)
 ![Protocols tracked (Mainnet)](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FRealSpap%2Fmultisig-overlap-showcase%2Fmain%2Fbadge-data-mainnet-protocols.json&cachebust=20260930)
@@ -58,7 +58,7 @@ Each Part's own Method section below states only what's specific to that Part: h
 
 ## Who this is for
 
-Protocol governance teams sizing up their own key concentration against comparable projects. Depositors, insurers, and risk desks pricing counterparty and key-compromise risk across a portfolio of protocols. Auditors and due-diligence teams who need a starting map of shared signers before their own engagement. Teams evaluating whether to license this method for their own protocol or portfolio. Every seat was checked against the protocols' own public signer disclosures; the named mapping is not published here. Every address-level finding can be re-checked on-chain, not taken on faith.
+Protocol governance teams sizing up their own key concentration against comparable projects. Depositors, insurers, and risk desks pricing counterparty and key-compromise risk across a portfolio of protocols. Auditors and due-diligence teams who need a starting map of shared signers before their own engagement. Teams who want the same check run on their own protocol or portfolio. Every seat was checked against the protocols' own public signer disclosures; the named mapping is not published here. Every address-level finding can be re-checked on-chain, not taken on faith.
 
 ## Get notified
 
@@ -85,11 +85,11 @@ Each research update that changes this README is published as a dated release. S
 - **Same literal Safe address**: the identical contract address is deployed and live on more than one chain.
 - **Partial overlap**: only some signers are shared between two Safes, not the full set.
 
-**Want this method run on your protocol, or a custom research pass? License it: DM [@RealSpap](https://x.com/RealSpap) on X.**
+**Want this check run on your protocol, or a custom research pass? DM [@RealSpap](https://x.com/RealSpap) on X.**
 
 ## Access to the tool
 
-Findings and on-chain sources are always public; the verification method is available under license. It is not published in this repository: this repo documents the results, not the mechanism. Want a free preview first? [Check your Safe](https://realspap.github.io/tools/check-your-safe.html) reads any Safe's owners live from chain, in your browser, and checks them against the signers already documented in this research, no account needed. Reach out via [Spap on X](https://x.com/RealSpap) for licensing.
+Findings and on-chain sources are always public, and free to reuse with credit ([CC BY 4.0](LICENSE)). The tooling that runs the checks is private: this repo documents the results, not the mechanism. Want a free preview first? [Check your Safe](https://realspap.github.io/tools/check-your-safe.html) reads any Safe's owners live from chain, in your browser, and checks them against the signers already documented in this research, no account needed. To have the full check run on your own protocol, reach out via [Spap on X](https://x.com/RealSpap).
 
 ## Disclaimer
 
@@ -175,7 +175,7 @@ An on-chain event replay rebuilds the current owner set of every Safe tracked in
 
 ### What's checked next (Mainnet)
 
-204 protocols is a growing survey, not a finished one. Open a GitHub Issue on this repo to suggest the next protocol to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run under the same licensed method, not opened to contributors). The Superchain-specific follow-up covers 99 more protocols, and a third extension covers 98 more across Arbitrum and 10 other L2s and sidechains: see Part 2 and Part 3 below.
+204 protocols is a growing survey, not a finished one. Open a GitHub Issue on this repo to suggest the next protocol to check; a thumbs-up on an existing suggestion counts as a vote (this sets research priority only; checks are still run with the same private tooling, not opened to contributors). The Superchain-specific follow-up covers 99 more protocols, and a third extension covers 98 more across Arbitrum and 10 other L2s and sidechains: see Part 2 and Part 3 below.
 
 ### Verification
 
@@ -240,7 +240,7 @@ The cases below are the findings detailed further down, gathered in one place fi
 
 4. **aavechan.eth**, an ENS-verified, Basescan-labeled Aave ecosystem operator, is confirmed as an owner of both QiDao/Mai Finance's Base and Fraxtal Guardian Safes and Aave's Celo "Masiv" Safe: three separate Safe deployments across two independently-run protocols with no institutional relationship, caught by cross-referencing signers rather than assumed. A 2026-09-13 mainnet round found the same address as one of the 15 owners of the 8-of-15 Bridge Governor Safe that owns both of Gnosis Chain's canonical bridges on Ethereum (xDai Bridge and OmniBridge), a third independent protocol; [Gnosis Chain's own docs](https://docs.gnosischain.com/bridges/management) list the Aave-Chan Initiative as one of the 15 governor organizations, so the seat is disclosed, the cross-protocol aggregation is what's new.
 
-5. `0x9A73D57BB1fB280C5672A13f655675De25F13b70` is an owner of both Compound III's Pause Guardian Safe, now confirmed on **Base, Optimism, and Unichain** (up from Base alone), and Resolv's Base and Soneium Token Owner Safes. Compound III and Resolv have no institutional relationship. Found by the same signer cross-reference once Resolv's Safes were added, not assumed in advance.
+5. `0x9A73D57BB1fB280C5672A13f655675De25F13b70` is an owner of both Compound III's Pause Guardian Safe, now confirmed on **Base, Optimism, and Unichain** (up from Base alone), and Resolv's Base and Soneium Token Owner Safes. It is also one of the 6 owners of Resolv's Ethereum Safe `0xd6889f307be1b83bb355d5da7d4478fb0d2af547` (threshold 4-of-6, read on 2026-10-05). Compound III and Resolv have no institutional relationship. Found by the same signer cross-reference once Resolv's Safes were added, not assumed in advance.
 
 6. **StakedCelo and the Celo chain's own governance** (new, 2026-09-21). The 6 keys of StakedCelo's owner multisig on Celo are, all six of them, inside the 8-key Safe `0x9Eb44Da23433b5cAA1c87e35594D15FcEb08D34d` that owns Celo's own `SystemConfig` on Ethereum L1, a Safe already tracked here next to case 7. Context searched for before calling this notable, and found: cLabs is Celo's core development company and operates both, so the link is institutionally expected rather than a hidden relationship. What is not symmetric is the cost of using those keys. Moving Celo's L1 chain parameter needs 6 signatures out of 8. Moving StakedCelo needs 3 out of the same people, behind a 4-day delay. The project's documentation describes that multisig as 3-of-5; read live on-chain it is 3-of-6.
    *Why this only surfaces now: StakedCelo's owner is not a Gnosis Safe, so before the 2026-09-21 update the check never read its signers at all.*
@@ -609,4 +609,4 @@ Interested in this method for your own protocol or portfolio? DM [@RealSpap](htt
 
 ## License
 
-All rights reserved for this repository's own findings and documentation. Findings and on-chain sources are always public; the verification method is available under license. Program-wide licensing notes: [methodology](https://realspap.github.io/methodology.html).
+Findings, data and documentation: [CC BY 4.0](LICENSE). Reuse them freely, including commercially, with credit to Spap and a link to this repository. Scripts and workflows (`scripts/`, `.github/`): [MIT](LICENSE-CODE). The private tooling that produces the findings is not part of this repository. Program-wide notes: [methodology](https://realspap.github.io/methodology.html).
