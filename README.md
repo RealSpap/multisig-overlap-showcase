@@ -221,7 +221,7 @@ The cases below are the findings detailed further down, gathered in one place fi
 | 3 | Optimism Foundation / Security Council Safe | 5 of 13 Superchain chains share the identical ProxyAdminOwner Safe | Chain governance |
 | 4 | Conduit (RaaS operator) | Signers recur across at least 4 nominally independent chains' own governance Safes | Chain governance |
 | 5 | `aavechan.eth` | 3 protocols (QiDao/Mai Finance, Aave, plus Gnosis Chain's canonical bridges on Ethereum mainnet), 4 Safe deployments | Cross-protocol operator |
-| 6 | `0x9A73D57B...` | 2 protocols (Compound III, Resolv), 3 Safe deployments | Cross-protocol individual |
+| 6 | `0x9A73D57B...` | 2 protocols (Compound III, Resolv), 12 Safe deployments on 10 chains (Compound III's Pause Guardian on 9 chains, Resolv's Token Owner Safe on 3), read on 2026-10-14 | Cross-protocol individual |
 | 7 | `0xb291232F...` | 1 protocol (Aave), 7 Safe deployments across 5 chains (Protocol Guardian on Optimism, Base, Soneium, and Celo; AFC, Budget Incentive, Ahab, and Alc Safes on Ink and Celo) | Single-protocol concentration |
 | 8 | cLabs signer set | 8 keys that own Celo's own L1 SystemConfig also make up, in full, the 6-key multisig that owns StakedCelo on Celo | Chain governance meets dapp |
 | 9 | `0x52a8305F...` (Spark) | 1 protocol (Spark), signer on 6 of its 7 Safes across Base, Optimism, Unichain and World Chain, including a 1-of-2 | Single-protocol concentration |
