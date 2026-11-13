@@ -1,0 +1,327 @@
+{
+ "schema": "multisig-overlap-facts/1",
+ "read_utc": "2026-11-13T16:08:58Z",
+ "facts": [
+  {
+   "id": "curve-emergency-dao-ethereum",
+   "claim": "Curve Finance Emergency DAO Safe (the address listed in Part 1) on Ethereum mainnet: threshold 5 of 9 owners.",
+   "network": "ethereum",
+   "chain_id": 1,
+   "address": "0x467947ee34af926cf1dcac093870f613c96b1e0c",
+   "block": {
+    "number": 26407129,
+    "hash": "0x1b2102bc30cd68103d334c09717776110fd1cea19305b4dcd55a85b0628e9d97",
+    "time_utc": "2026-11-13T16:06:35Z"
+   },
+   "threshold": 5,
+   "owners": [
+    "0x2b47c57a4c9fc1649b43500f4c0cda6cf29be278",
+    "0x4046b37ffc36b0c723d7fc64e0c763b698d81934",
+    "0x7a1057e6e9093da9c1d4c1d049609b6889fc4c67",
+    "0x8a7dbc2824acac4d272289a33b255c3f1f3cdf32",
+    "0xaac0aa431c237c2c0b5f041c8e59b3f1a43ac78f",
+    "0xaf17517acd484429fc0da2312fd1f42039592cd0",
+    "0xbd0a74e51729a4d0b92742e67183c4cbc97bca92",
+    "0xc6f3aac21d8282f166938a8b30a9ec62de30accc",
+    "0xdaa094a0ed166fedf8a0a4310f3f74a1e96f9195"
+   ],
+   "replay": "python3 scripts/prove.py --fact curve-emergency-dao-ethereum",
+   "cast": "cast call 0x467947ee34af926cf1dcac093870f613c96b1e0c \"getThreshold()(uint256)\" --rpc-url https://ethereum-rpc.publicnode.com --block 26407129 ; cast call 0x467947ee34af926cf1dcac093870f613c96b1e0c \"getOwners()(address[])\" --rpc-url https://ethereum-rpc.publicnode.com --block 26407129",
+   "expires_utc": "2026-11-27",
+   "read": "read",
+   "read_by": "2 public RPC endpoints, identical answers, read 2026-11-13T16:08:58Z"
+  },
+  {
+   "id": "curve-emergency-dao-same-address-ethereum",
+   "claim": "Curve Finance Emergency DAO Safe at the address it has on the other chains on Ethereum mainnet: threshold 5 of 9 owners.",
+   "network": "ethereum",
+   "chain_id": 1,
+   "address": "0x6d447e544d01a59cb0774763bf15526574cfffed",
+   "block": {
+    "number": 26407129,
+    "hash": "0x1b2102bc30cd68103d334c09717776110fd1cea19305b4dcd55a85b0628e9d97",
+    "time_utc": "2026-11-13T16:06:35Z"
+   },
+   "threshold": 5,
+   "owners": [
+    "0x2b47c57a4c9fc1649b43500f4c0cda6cf29be278",
+    "0x4046b37ffc36b0c723d7fc64e0c763b698d81934",
+    "0x7a1057e6e9093da9c1d4c1d049609b6889fc4c67",
+    "0x8a7dbc2824acac4d272289a33b255c3f1f3cdf32",
+    "0xaac0aa431c237c2c0b5f041c8e59b3f1a43ac78f",
+    "0xaf17517acd484429fc0da2312fd1f42039592cd0",
+    "0xbd0a74e51729a4d0b92742e67183c4cbc97bca92",
+    "0xc6f3aac21d8282f166938a8b30a9ec62de30accc",
+    "0xdaa094a0ed166fedf8a0a4310f3f74a1e96f9195"
+   ],
+   "replay": "python3 scripts/prove.py --fact curve-emergency-dao-same-address-ethereum",
+   "cast": "cast call 0x6d447e544d01a59cb0774763bf15526574cfffed \"getThreshold()(uint256)\" --rpc-url https://ethereum-rpc.publicnode.com --block 26407129 ; cast call 0x6d447e544d01a59cb0774763bf15526574cfffed \"getOwners()(address[])\" --rpc-url https://ethereum-rpc.publicnode.com --block 26407129",
+   "expires_utc": "2026-11-27",
+   "read": "read",
+   "read_by": "2 public RPC endpoints, identical answers, read 2026-11-13T16:08:58Z"
+  },
+  {
+   "id": "convex-multisig-ethereum",
+   "claim": "Convex Finance multisig on Ethereum mainnet: threshold 3 of 5 owners.",
+   "network": "ethereum",
+   "chain_id": 1,
+   "address": "0xa3c5a1e09150b75ff251c1a7815a07182c3de2fb",
+   "block": {
+    "number": 26407129,
+    "hash": "0x1b2102bc30cd68103d334c09717776110fd1cea19305b4dcd55a85b0628e9d97",
+    "time_utc": "2026-11-13T16:06:35Z"
+   },
+   "threshold": 3,
+   "owners": [
+    "0x4d1b56274c01481c0312fca332016d83512beee3",
+    "0xaac0aa431c237c2c0b5f041c8e59b3f1a43ac78f",
+    "0xade9e51c9e23d64e538a7a38656b78ab6bcc349e",
+    "0xbd0a74e51729a4d0b92742e67183c4cbc97bca92",
+    "0xf7bd34dd44b92fb2f9c3d2e31aaad06570a853a6"
+   ],
+   "replay": "python3 scripts/prove.py --fact convex-multisig-ethereum",
+   "cast": "cast call 0xa3c5a1e09150b75ff251c1a7815a07182c3de2fb \"getThreshold()(uint256)\" --rpc-url https://ethereum-rpc.publicnode.com --block 26407129 ; cast call 0xa3c5a1e09150b75ff251c1a7815a07182c3de2fb \"getOwners()(address[])\" --rpc-url https://ethereum-rpc.publicnode.com --block 26407129",
+   "expires_utc": "2026-11-27",
+   "read": "read",
+   "read_by": "2 public RPC endpoints, identical answers, read 2026-11-13T16:08:58Z"
+  },
+  {
+   "id": "resupply-main-multisig-ethereum",
+   "claim": "Resupply main multisig on Ethereum mainnet: threshold 3 of 5 owners.",
+   "network": "ethereum",
+   "chain_id": 1,
+   "address": "0xfe11a5009f2121622271e7dd0fd470264e076af6",
+   "block": {
+    "number": 26407129,
+    "hash": "0x1b2102bc30cd68103d334c09717776110fd1cea19305b4dcd55a85b0628e9d97",
+    "time_utc": "2026-11-13T16:06:35Z"
+   },
+   "threshold": 3,
+   "owners": [
+    "0x1101c94c6001e4074ad4dbad5ad08117979ca9d4",
+    "0x1b1d2806de441eaaac7f6677bd15dfa937a5b97c",
+    "0x4d1b56274c01481c0312fca332016d83512beee3",
+    "0xaac0aa431c237c2c0b5f041c8e59b3f1a43ac78f",
+    "0xbd0a74e51729a4d0b92742e67183c4cbc97bca92"
+   ],
+   "replay": "python3 scripts/prove.py --fact resupply-main-multisig-ethereum",
+   "cast": "cast call 0xfe11a5009f2121622271e7dd0fd470264e076af6 \"getThreshold()(uint256)\" --rpc-url https://ethereum-rpc.publicnode.com --block 26407129 ; cast call 0xfe11a5009f2121622271e7dd0fd470264e076af6 \"getOwners()(address[])\" --rpc-url https://ethereum-rpc.publicnode.com --block 26407129",
+   "expires_utc": "2026-11-27",
+   "read": "read",
+   "read_by": "2 public RPC endpoints, identical answers, read 2026-11-13T16:08:58Z"
+  },
+  {
+   "id": "stakedao-treasury-ethereum",
+   "claim": "StakeDAO treasury Safe on Ethereum on Ethereum mainnet: threshold 3 of 5 owners.",
+   "network": "ethereum",
+   "chain_id": 1,
+   "address": "0xf930ebbd05ef8b25b1797b9b2109ddc9b0d43063",
+   "block": {
+    "number": 26407129,
+    "hash": "0x1b2102bc30cd68103d334c09717776110fd1cea19305b4dcd55a85b0628e9d97",
+    "time_utc": "2026-11-13T16:06:35Z"
+   },
+   "threshold": 3,
+   "owners": [
+    "0x07c2d0e24530199e2c9a15bfed4496d8e3798003",
+    "0x4046b37ffc36b0c723d7fc64e0c763b698d81934",
+    "0xe3268adb23043b3acc7083e96912aeeb4feb4df2",
+    "0xeb9f416fa098697d95e70b20439f19097eb741ed",
+    "0xf2875cb91c35e0ddc9b76b15e2aae236d393efff"
+   ],
+   "replay": "python3 scripts/prove.py --fact stakedao-treasury-ethereum",
+   "cast": "cast call 0xf930ebbd05ef8b25b1797b9b2109ddc9b0d43063 \"getThreshold()(uint256)\" --rpc-url https://ethereum-rpc.publicnode.com --block 26407129 ; cast call 0xf930ebbd05ef8b25b1797b9b2109ddc9b0d43063 \"getOwners()(address[])\" --rpc-url https://ethereum-rpc.publicnode.com --block 26407129",
+   "expires_utc": "2026-11-27",
+   "read": "read",
+   "read_by": "2 public RPC endpoints, identical answers, read 2026-11-13T16:08:58Z"
+  },
+  {
+   "id": "curve-emergency-dao-optimism",
+   "claim": "Curve Finance Emergency DAO Safe on Optimism: threshold 5 of 9 owners.",
+   "network": "optimism",
+   "chain_id": 10,
+   "address": "0x6d447e544d01a59cb0774763bf15526574cfffed",
+   "block": {
+    "number": 159493668,
+    "hash": "0xc345f224bd2ff4f1b796f21381c1c523a8af14631553a16c0a35f487c07a4ef0",
+    "time_utc": "2026-11-13T16:08:33Z"
+   },
+   "threshold": 5,
+   "owners": [
+    "0x2b47c57a4c9fc1649b43500f4c0cda6cf29be278",
+    "0x4046b37ffc36b0c723d7fc64e0c763b698d81934",
+    "0x7a1057e6e9093da9c1d4c1d049609b6889fc4c67",
+    "0x8a7dbc2824acac4d272289a33b255c3f1f3cdf32",
+    "0xaac0aa431c237c2c0b5f041c8e59b3f1a43ac78f",
+    "0xaf17517acd484429fc0da2312fd1f42039592cd0",
+    "0xbd0a74e51729a4d0b92742e67183c4cbc97bca92",
+    "0xc6f3aac21d8282f166938a8b30a9ec62de30accc",
+    "0xdaa094a0ed166fedf8a0a4310f3f74a1e96f9195"
+   ],
+   "replay": "python3 scripts/prove.py --fact curve-emergency-dao-optimism",
+   "cast": "cast call 0x6d447e544d01a59cb0774763bf15526574cfffed \"getThreshold()(uint256)\" --rpc-url https://mainnet.optimism.io --block 159493668 ; cast call 0x6d447e544d01a59cb0774763bf15526574cfffed \"getOwners()(address[])\" --rpc-url https://mainnet.optimism.io --block 159493668",
+   "expires_utc": "2026-11-27",
+   "read": "read",
+   "read_by": "2 public RPC endpoints, identical answers, read 2026-11-13T16:08:58Z"
+  },
+  {
+   "id": "sablier-comptroller-admin-optimism",
+   "claim": "Sablier Comptroller admin Safe (a single signer can act) on Optimism: threshold 1 of 4 owners.",
+   "network": "optimism",
+   "chain_id": 10,
+   "address": "0x58290bbdb51a4c6b022a81e9cded24be19ca57fd",
+   "block": {
+    "number": 159493668,
+    "hash": "0xc345f224bd2ff4f1b796f21381c1c523a8af14631553a16c0a35f487c07a4ef0",
+    "time_utc": "2026-11-13T16:08:33Z"
+   },
+   "threshold": 1,
+   "owners": [
+    "0x1f708f6ee526612ce506bff83274c3fb1590538f",
+    "0xb7ec100956daf8b02cc720a69aa95329fe3074d3",
+    "0xd427d37b5f6d33f7d42c4125979361e011ffbfd9",
+    "0xf8878b974ba5b05b499eade4112e13832e21eb19"
+   ],
+   "replay": "python3 scripts/prove.py --fact sablier-comptroller-admin-optimism",
+   "cast": "cast call 0x58290bbdb51a4c6b022a81e9cded24be19ca57fd \"getThreshold()(uint256)\" --rpc-url https://mainnet.optimism.io --block 159493668 ; cast call 0x58290bbdb51a4c6b022a81e9cded24be19ca57fd \"getOwners()(address[])\" --rpc-url https://mainnet.optimism.io --block 159493668",
+   "expires_utc": "2026-11-27",
+   "read": "read",
+   "read_by": "2 public RPC endpoints, identical answers, read 2026-11-13T16:08:58Z"
+  },
+  {
+   "id": "curve-emergency-dao-base",
+   "claim": "Curve Finance Emergency DAO Safe on Base: threshold 5 of 9 owners.",
+   "network": "base",
+   "chain_id": 8453,
+   "address": "0x6d447e544d01a59cb0774763bf15526574cfffed",
+   "block": {
+    "number": 56978784,
+    "hash": "0xc0c60ff34e28fffeaa47077eb838e27677e8119f80f1fe6ef2291b735f8571c3",
+    "time_utc": "2026-11-13T16:08:52Z"
+   },
+   "threshold": 5,
+   "owners": [
+    "0x2b47c57a4c9fc1649b43500f4c0cda6cf29be278",
+    "0x4046b37ffc36b0c723d7fc64e0c763b698d81934",
+    "0x7a1057e6e9093da9c1d4c1d049609b6889fc4c67",
+    "0x8a7dbc2824acac4d272289a33b255c3f1f3cdf32",
+    "0xaac0aa431c237c2c0b5f041c8e59b3f1a43ac78f",
+    "0xaf17517acd484429fc0da2312fd1f42039592cd0",
+    "0xbd0a74e51729a4d0b92742e67183c4cbc97bca92",
+    "0xc6f3aac21d8282f166938a8b30a9ec62de30accc",
+    "0xdaa094a0ed166fedf8a0a4310f3f74a1e96f9195"
+   ],
+   "replay": "python3 scripts/prove.py --fact curve-emergency-dao-base",
+   "cast": "cast call 0x6d447e544d01a59cb0774763bf15526574cfffed \"getThreshold()(uint256)\" --rpc-url https://mainnet.base.org --block 56978784 ; cast call 0x6d447e544d01a59cb0774763bf15526574cfffed \"getOwners()(address[])\" --rpc-url https://mainnet.base.org --block 56978784",
+   "expires_utc": "2026-11-27",
+   "read": "read",
+   "read_by": "2 public RPC endpoints, identical answers, read 2026-11-13T16:08:58Z"
+  },
+  {
+   "id": "sablier-comptroller-admin-base",
+   "claim": "Sablier Comptroller admin Safe on Base: threshold 2 of 4 owners.",
+   "network": "base",
+   "chain_id": 8453,
+   "address": "0x58290bbdb51a4c6b022a81e9cded24be19ca57fd",
+   "block": {
+    "number": 56978784,
+    "hash": "0xc0c60ff34e28fffeaa47077eb838e27677e8119f80f1fe6ef2291b735f8571c3",
+    "time_utc": "2026-11-13T16:08:52Z"
+   },
+   "threshold": 2,
+   "owners": [
+    "0x1f708f6ee526612ce506bff83274c3fb1590538f",
+    "0xb7ec100956daf8b02cc720a69aa95329fe3074d3",
+    "0xd427d37b5f6d33f7d42c4125979361e011ffbfd9",
+    "0xf8878b974ba5b05b499eade4112e13832e21eb19"
+   ],
+   "replay": "python3 scripts/prove.py --fact sablier-comptroller-admin-base",
+   "cast": "cast call 0x58290bbdb51a4c6b022a81e9cded24be19ca57fd \"getThreshold()(uint256)\" --rpc-url https://mainnet.base.org --block 56978784 ; cast call 0x58290bbdb51a4c6b022a81e9cded24be19ca57fd \"getOwners()(address[])\" --rpc-url https://mainnet.base.org --block 56978784",
+   "expires_utc": "2026-11-27",
+   "read": "read",
+   "read_by": "2 public RPC endpoints, identical answers, read 2026-11-13T16:08:58Z"
+  },
+  {
+   "id": "curve-emergency-dao-arbitrum",
+   "claim": "Curve Finance Emergency DAO Safe on Arbitrum One: threshold 5 of 9 owners.",
+   "network": "arbitrum",
+   "chain_id": 42161,
+   "address": "0x6d447e544d01a59cb0774763bf15526574cfffed",
+   "block": {
+    "number": 523911969,
+    "hash": "0x131faf937f3d89eec2fe3811ab8c6eb6fbe87d482f4ab234c4cae296de9c5ab4",
+    "time_utc": "2026-11-13T16:08:52Z"
+   },
+   "threshold": 5,
+   "owners": [
+    "0x2b47c57a4c9fc1649b43500f4c0cda6cf29be278",
+    "0x4046b37ffc36b0c723d7fc64e0c763b698d81934",
+    "0x7a1057e6e9093da9c1d4c1d049609b6889fc4c67",
+    "0x8a7dbc2824acac4d272289a33b255c3f1f3cdf32",
+    "0xaac0aa431c237c2c0b5f041c8e59b3f1a43ac78f",
+    "0xaf17517acd484429fc0da2312fd1f42039592cd0",
+    "0xbd0a74e51729a4d0b92742e67183c4cbc97bca92",
+    "0xc6f3aac21d8282f166938a8b30a9ec62de30accc",
+    "0xdaa094a0ed166fedf8a0a4310f3f74a1e96f9195"
+   ],
+   "replay": "python3 scripts/prove.py --fact curve-emergency-dao-arbitrum",
+   "cast": "cast call 0x6d447e544d01a59cb0774763bf15526574cfffed \"getThreshold()(uint256)\" --rpc-url https://arb1.arbitrum.io/rpc --block 523911969 ; cast call 0x6d447e544d01a59cb0774763bf15526574cfffed \"getOwners()(address[])\" --rpc-url https://arb1.arbitrum.io/rpc --block 523911969",
+   "expires_utc": "2026-11-27",
+   "read": "read",
+   "read_by": "2 public RPC endpoints, identical answers, read 2026-11-13T16:08:58Z"
+  },
+  {
+   "id": "odos-router-owner-arbitrum",
+   "claim": "Odos Router V3 owner Safe (a single signer acts alone) on Arbitrum One: threshold 1 of 6 owners.",
+   "network": "arbitrum",
+   "chain_id": 42161,
+   "address": "0x498292dc123f19bdbc109081f6cf1d0e849a9daf",
+   "block": {
+    "number": 523911969,
+    "hash": "0x131faf937f3d89eec2fe3811ab8c6eb6fbe87d482f4ab234c4cae296de9c5ab4",
+    "time_utc": "2026-11-13T16:08:52Z"
+   },
+   "threshold": 1,
+   "owners": [
+    "0x16b324da3a40b4124c6a8f2955bedde8af74af3e",
+    "0x45e9bc8ff5907b0e775804ebefca6893aaf1fc23",
+    "0x5a855bcadf602b7a3862a4042bee8eb79b9a70c3",
+    "0x5d66afb9f275f569c28f5e0c958898ee2bce05cc",
+    "0x890596232714af68c9d0b632dbfe53e4f4d4a431",
+    "0xfc087ccba6fc95a3d60356f664ee29f3458472cd"
+   ],
+   "replay": "python3 scripts/prove.py --fact odos-router-owner-arbitrum",
+   "cast": "cast call 0x498292dc123f19bdbc109081f6cf1d0e849a9daf \"getThreshold()(uint256)\" --rpc-url https://arb1.arbitrum.io/rpc --block 523911969 ; cast call 0x498292dc123f19bdbc109081f6cf1d0e849a9daf \"getOwners()(address[])\" --rpc-url https://arb1.arbitrum.io/rpc --block 523911969",
+   "expires_utc": "2026-11-27",
+   "read": "read",
+   "read_by": "2 public RPC endpoints, identical answers, read 2026-11-13T16:08:58Z"
+  }
+ ],
+ "overlaps": [
+  {
+   "id": "signer-0xbd0a74e5-curve-convex-resupply",
+   "network": "ethereum",
+   "chain_id": 1,
+   "signer": "0xbd0a74e51729a4d0b92742e67183c4cbc97bca92",
+   "signer_is_eoa": true,
+   "safes": [
+    "curve-emergency-dao-ethereum",
+    "convex-multisig-ethereum",
+    "resupply-main-multisig-ethereum"
+   ],
+   "claim": "One externally owned address is an owner of the Curve Emergency DAO Safe, the Convex multisig and the Resupply main multisig on Ethereum mainnet"
+  },
+  {
+   "id": "signer-0x4046b37f-curve-stakedao",
+   "network": "ethereum",
+   "chain_id": 1,
+   "signer": "0x4046b37ffc36b0c723d7fc64e0c763b698d81934",
+   "signer_is_eoa": true,
+   "safes": [
+    "curve-emergency-dao-ethereum",
+    "stakedao-treasury-ethereum"
+   ],
+   "claim": "One externally owned address is an owner of the Curve Emergency DAO Safe and of the StakeDAO treasury Safe on Ethereum mainnet"
+  }
+ ]
+}

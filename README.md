@@ -27,6 +27,7 @@ Separately, dozens of protocols (51 documented cases in Part 2 alone) reuse the 
 - [Get notified](#get-notified)
 - [At a glance](#at-a-glance)
 - [Access to the tool](#access-to-the-tool)
+- [Check it yourself](#check-it-yourself)
 - [Disclaimer](#disclaimer)
 - [Part 1: Mainnet](#part-1-mainnet)
 - [Part 2: Superchain](#part-2-superchain)
@@ -90,6 +91,16 @@ Each research update that changes this README is published as a dated release. S
 ## Access to the tool
 
 Findings and on-chain sources are always public, and free to reuse with credit ([CC BY 4.0](LICENSE)). The tooling that runs the checks is private: this repo documents the results, not the mechanism. Want a free preview first? [Check your Safe](https://realspap.github.io/tools/check-your-safe.html) reads any Safe's owners live from chain, in your browser, and checks them against the signers already documented in this research, no account needed. To have the full check run on your own protocol, reach out via [RealSpap on X](https://x.com/RealSpap).
+
+## Check it yourself
+
+One command replays part of what this repository publishes, with no key and no account, using public RPC endpoints and the files of this clone only:
+
+`python3 scripts/prove.py`
+
+It checks that the "At a glance" table, the headline sentence and the four protocol badges agree with each other, then re-reads the Safes listed in [FACTS.md](FACTS.md) (network and chain id, a named block, owners and threshold now and at that block, signers shared by several Safes) on two public endpoints each. Every line says OK, DIFFERENCE or UNREAD; an endpoint that does not answer is UNREAD, never a pass. A DIFFERENCE on a Safe means that its owners or threshold have changed since the named block, so the published line has expired, or that the published line did not match the Safe at its own block. `python3 scripts/prove.py --selftest` runs offline and plants false values to show that each one is caught.
+
+It proves that these published facts match the chain at the moment you run it. It does not prove who holds a key, and it replays the facts listed in FACTS.md, not every reading in this README. If the project stops being updated, [CONTINUE.md](CONTINUE.md) says how to carry on.
 
 ## Disclaimer
 
