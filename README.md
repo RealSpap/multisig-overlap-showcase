@@ -169,7 +169,7 @@ Beyond the 8 cross-protocol signers, this research has surfaced 48 more shared-i
 
 **The 2026-10-06 update added 10 chain-governance Safes.** These are the Ethereum-side owners (ProxyAdminOwner) of ten more OP Stack chains, taken from the Optimism Superchain registry and read directly on-chain on three public RPCs: HashKey (3-of-5), Mint (2-of-3), Xterio (3-of-4), Silent Data (2-of-5), Redstone (2-of-3), Cyber (3-of-4), Automata (3-of-4), Swan (3-of-4), Funki (3-of-4) and RACE (3-of-5). Chains already covered in Part 2 were not added again. One new overlap came out of the cross-reference between these ten entries themselves: the Safes of Xterio, Cyber, Automata and Funki (3-of-4 each) have three signers in common. Who operates those keys is not established; a rollup provider serving the four chains is plausible but not confirmed. These are chain governances rather than independent protocols, which is why the three signers are not counted in the figure of 8 above.
 
-**Two more overlaps came from the Curve Emergency DAO rotation (read on 2026-11-02).** Between 15 and 31 October 2026 two of the nine owners of Curve's Emergency DAO Safe were replaced. Both signers who joined are already signers of other tracked protocols: one sits on two of Resupply's Safes, the other on one StakeDAO treasury Safe. That one address signing for two protocols is one person is not established here, no primary source ties either address to a holder, and no key label is assigned. Neither is counted in the figure of 8 above, because the primary-source check and the falsification step of the method have not been run on them.
+**Two more overlaps came from the Curve Emergency DAO rotation (first read on 2026-11-02, read at 16:15Z on 13 November 2026).** Between 15 and 31 October 2026 two of the nine owners of Curve's Emergency DAO Safe were replaced. Both signers who joined already sign for other tracked protocols, and both are externally owned addresses (no contract code on Ethereum mainnet, chain id 1): `0xBd0a74e5...` is also an owner of the Convex multisig and of the Resupply main multisig, and `0x4046B37F...` is also an owner of the StakeDAO treasury Safe on Ethereum. An address does not say who holds it, so whether one person holds either key cannot be read from the chain, and no key label is assigned. Neither signer is counted in the figure of 8 above, which counts the signers found before this rotation. Both overlaps are replayable: see [FACTS.md](FACTS.md) and `python3 scripts/prove.py`.
 
 ### Live verification
 
@@ -187,7 +187,7 @@ Every claim in this research follows the same verification discipline described 
 
 ### Status
 
-Last verified: 2026-10-01, except the Steakhouse Financial + Waterline overlap and signer `0x9A73D57B...` (read on 2026-10-14) and the count of 214 entries (2026-10-06).
+Last verified: 2026-10-01, except the Steakhouse Financial + Waterline overlap and signer `0x9A73D57B...` (read on 2026-10-14), the count of 214 entries (2026-10-06) and every line marked "re-read on 2026-11-02" (read on that date).
 
 214 protocols checked, not a finished survey. Scope has grown from an original 41-protocol pilot across 33 research updates, each one adding new protocols, resolving a previously parked case, or re-running the full cross-reference against every signer already on record.
 
@@ -341,7 +341,7 @@ Same process as Part 1.
 
 ### Status
 
-Last verified: 2026-09-21, except case 5 (read again on 2026-10-14), case 9 (read on 2026-10-01) and the entries added on 2026-10-04 and 2026-10-23 (read on those dates).
+Last verified: 2026-09-21, except case 5 (read again on 2026-10-14), case 9 (read on 2026-10-01), the entries added on 2026-10-04 and 2026-10-23 (read on those dates) and every line marked "re-read on 2026-11-02" (read on that date).
 
 105 protocols, 265 distinct multisig addresses across 255 protocol/chain deployments, not a finished survey. The most recent updates (2026-10-04 and 2026-10-23) added the 6 protocols described in Method above. The one before (2026-09-21) added the non-Safe multisig families and the protocols listed in Method above. The one before it (2026-09-17) added LI.FI, Threshold Network/tBTC, Kelp DAO rsETH, and Coinbase cbETH as new protocols, plus new-chain extensions for Velodrome Superchain, Compound III, Morpho Blue, and Lido Emergency Brakes; one new cross-protocol overlap surfaced (Kelp DAO / Stader Labs, expected given shared founders). An earlier update added Balancer, tracked on mainnet since the first pass but never checked here: 13 governance Safes across Optimism, Base, Mode and Fraxtal with identical DAO and Emergency signer sets on all 4 chains, and no new cross-protocol overlap inside this part. Its own TVL on these chains is small (about $1.8M); what these Safes control is the shared Vault's permission system.
 
@@ -623,7 +623,7 @@ Two new real Safes never seen before in this research were also confirmed on Son
 
 ### Status
 
-Last verified: 2026-09-30, except the 11 protocols added on 2026-10-05 (read on that date).
+Last verified: 2026-09-30, except the 11 protocols added on 2026-10-05 (read on that date) and every line marked "re-read on 2026-11-02" (read on that date).
 
 109 protocols across 11 chains: a pilot on Arbitrum (12 protocols), a same-day pass across seven more chains (48 protocols), a follow-up pass across three more second-tier chains (26 protocols), two follow-up rounds each adding one more protocol on Arbitrum (Morpho Blue, then Lido's Emergency Brakes), a 2026-09-18 pass adding 6 new protocols across all 11 chains (LI.FI, Kelp DAO rsETH, Stader Labs, Euler V2, Balancer, Threshold Network/tBTC) plus a Pendle correction, a 2026-09-30 pass adding 4 protocols on Arbitrum (Arbitrum Security Council, Frax Finance, Yearn, Ethena), and a 2026-10-05 pass adding 11 protocols on Arbitrum (dHEDGE, CoW Protocol, API3, Hyperlane, Puffer, Synapse, Spark Liquidity Layer, USDT0, Odos, Premia, deBridge). Not a finished survey on any of the 11; live event-replay verification now exists for this part (see Caveats above).
 
