@@ -1,0 +1,25 @@
+name: A reading is wrong
+description: A signer set, a threshold, a count or a statement in a Part or in FACTS.md looks wrong.
+title: "Reading: "
+body:
+  - type: input
+    id: entry
+    attributes:
+      label: The entry
+      description: The Part and the protocol, or the fact id.
+    validations:
+      required: true
+  - type: textarea
+    id: statement
+    attributes:
+      label: The statement you dispute
+      description: Quote it as written.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: What supports your reading
+      description: A transaction hash, a block number, an address with the call to make, or a public document. Never paste a private key or private data.
+    validations:
+      required: true

@@ -1,0 +1,25 @@
+name: A Safe changed its signers
+description: A Safe listed here has different owners or a different threshold than published.
+title: "Signers: "
+body:
+  - type: input
+    id: safe
+    attributes:
+      label: The Safe and its network
+      description: The address, the network and the chain ID, as an explorer shows them.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: What changed
+      description: Owners added or removed, threshold changed; the block where you read it.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: How anyone can re-read it
+      description: The two cast commands you ran, or a transaction hash.
+    validations:
+      required: true
