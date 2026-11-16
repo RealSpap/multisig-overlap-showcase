@@ -129,7 +129,7 @@ This dataset has grown through successive research updates, each one adding a ne
 
 An on-chain event replay also covers this Part on 8 of the 13 Superchain-family chains (Base, BOB, Celo, Ink, Mode, Optimism, Unichain, and World Chain), plus Ethereum mainnet separately for L1 chain governance. The other 5 (Derive, Fraxtal, Lisk, Soneium, Zora) have no indexed raw-logs source for it yet and are covered by direct reads only.
 
-**Get notified**: see [Get notified](../README.md#get-notified) above.
+**Get notified**: see [Get notified](about.md#get-notified).
 
 ### What's checked next (Superchain)
 

@@ -24,7 +24,7 @@ No key, no account, public RPC endpoints, Python 3 only. It checks that the tabl
 | Multisigs checked | 395 candidate addresses tested, 328 confirmed real Safes | 265 distinct multisig addresses across 255 deployments (311 Gnosis Safe readings plus 11 custom-multisig readings) | 185 confirmed real Safes | 778 confirmed multisig addresses (328 + 265 + 185, summed per Part) |
 | Chains covered | Ethereum mainnet | 13 | 11 | 25 |
 
-The counting rule and the full table are in [docs/method.md](docs/method.md). `scripts/prove.py` fails if this table, the headline and the badges disagree.
+The counting rule and the full table are in [docs/method.md](docs/method.md). `scripts/prove.py` fails if the protocol and multisig counts, the headline and the badges disagree. Each update is a dated release: [how to be notified](docs/about.md#get-notified).
 
 ## What is inside
 
