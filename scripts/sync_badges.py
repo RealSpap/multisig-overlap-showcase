@@ -8,9 +8,11 @@ itself actually states, so the shields.io badges never silently go stale.
 Deterministic, no external API. Pure text parsing + JSON rewrite
 + optional git commit/push.
 
-Source of truth in README.md:
+Source of truth in README.md and docs/part-1-mainnet.md:
   - Mainnet identity count: the "N addresses hold signer power on 2+
-    independent protocols" sentence.
+    independent protocols" sentence. It lives in docs/part-1-mainnet.md
+    since the README was split; README.md is read first and the docs file
+    second, and two different numbers are an error, never a silent pick.
   - Mainnet / Superchain / Part 3 / Total protocol counts: the
     "Protocols checked" row of the "At a glance" markdown table,
     1st/2nd/3rd/4th data columns respectively. Each column only needs
@@ -23,7 +25,7 @@ Usage:
 
 Exit codes:
   0  ran successfully (whether or not a change was made)
-  1  could not parse one of the expected values out of README.md
+  1  could not parse one of the expected values out of README.md or docs/part-1-mainnet.md
   2  git commit/push failed
 """
 
@@ -36,6 +38,7 @@ from pathlib import Path
 from typing import NamedTuple, Optional
 
 README_NAME = "README.md"
+PART1_DOC = "docs/part-1-mainnet.md"  # where the mainnet sentence lives since the README was split
 MAINNET_BADGE = "badge-data-mainnet.json"
 MAINNET_PROTOCOLS_BADGE = "badge-data-mainnet-protocols.json"
 SUPERCHAIN_BADGE = "badge-data-superchain.json"
@@ -74,7 +77,23 @@ class ParsedCounts(NamedTuple):
     total_protocols: Optional[str]
 
 
-def parse_readme(readme_text: str) -> ParsedCounts:
+def find_mainnet_identities(*texts: str) -> str:
+    """The N of the mainnet sentence, searched in each text in order. Different numbers in two places are an error."""
+    found = {m.group(1) for t in texts for m in MAINNET_PATTERN.finditer(t)}
+    if not found:
+        raise ValueError(
+            "Could not find the 'N addresses hold signer power on 2+ "
+            "independent protocols' sentence in README.md or docs/part-1-mainnet.md"
+        )
+    if len(found) > 1:
+        raise ValueError(
+            "The 'addresses hold signer power' sentence gives different "
+            f"numbers ({', '.join(sorted(found))}) in README.md and docs/part-1-mainnet.md"
+        )
+    return found.pop()
+
+
+def parse_readme(readme_text: str, part1_text: str = "") -> ParsedCounts:
     """Return the counts the badges should reflect.
 
     part3_protocols is None when the table doesn't have a 3rd data
@@ -82,13 +101,7 @@ def parse_readme(readme_text: str) -> ParsedCounts:
     is None when the table doesn't have a 4th (Total) data column yet,
     likewise not an error.
     """
-    mainnet_match = MAINNET_PATTERN.search(readme_text)
-    if not mainnet_match:
-        raise ValueError(
-            "Could not find the 'N addresses hold signer power on 2+ "
-            "independent protocols' sentence in README.md"
-        )
-    mainnet_identities = mainnet_match.group(1)
+    mainnet_identities = find_mainnet_identities(readme_text, part1_text)
 
     row_match = ROW_PATTERN.search(readme_text)
     if not row_match:
@@ -172,6 +185,7 @@ def main() -> int:
 
     repo_root = Path(args.repo_root).resolve()
     readme_path = repo_root / README_NAME
+    part1_path = repo_root / PART1_DOC
     mainnet_path = repo_root / MAINNET_BADGE
     mainnet_protocols_path = repo_root / MAINNET_PROTOCOLS_BADGE
     superchain_path = repo_root / SUPERCHAIN_BADGE
@@ -184,9 +198,10 @@ def main() -> int:
             return 1
 
     readme_text = readme_path.read_text(encoding="utf-8")
+    part1_text = part1_path.read_text(encoding="utf-8") if part1_path.is_file() else ""
 
     try:
-        counts = parse_readme(readme_text)
+        counts = parse_readme(readme_text, part1_text)
     except ValueError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
