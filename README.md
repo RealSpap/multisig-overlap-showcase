@@ -34,6 +34,8 @@ The counting rule and the full table are in [docs/method.md](docs/method.md). `s
 | [docs/method.md](docs/method.md), [docs/limits.md](docs/limits.md) | Method, confidence vocabulary, what is not shown |
 | [docs/about.md](docs/about.md) | Access to the tool, about this research, licence details |
 | [FACTS.md](FACTS.md), [facts](facts) | Replayable facts, each with network, chain ID, block and expiry |
+| [docs/tracked-safes-modules.md](docs/tracked-safes-modules.md), [facts/tracked-safes.tsv](facts/tracked-safes.tsv) | How many of the Safes I follow have a module, with the list and a script that recounts them |
+| [docs/same-keys-other-threshold.md](docs/same-keys-other-threshold.md) | One Safe address with the same four owners and two thresholds, with the commands that read it |
 | [CONTINUE.md](CONTINUE.md) | How to carry on if I stop |
 
 ## Limits
